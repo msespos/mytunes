@@ -5,8 +5,10 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :followers, foreign_key: :follower_id, class_name: 'Friendship'
-  has_many :followed, through: :followers
-  has_many :followed, foreign_key: :followed_id, class_name: 'Friendship'
-  has_many :followers, through: :followed
+  has_many :user1_friendships, class_name: 'Friendship', foreign_key: :user1_id
+  has_many :user2_friendships, class_name: 'Friendship', foreign_key: :user2_id
+
+  def friendships
+    Friendship.where("user1_id = ? OR user2_id = ?", self.id, self.id)
+  end
 end
