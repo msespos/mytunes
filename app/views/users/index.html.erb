@@ -1,3 +1,7 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>Users</h1>
+<% @users.each do |u| %>
+  <%= u.name %> -
+  <%= u.project_name %> -
+  <%= link_to 'Add Friend', root_path %><br>
+<% end %>
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
