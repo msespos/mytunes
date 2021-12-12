@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2021_12_12_160724) do
   end
 
   add_foreign_key "friend_requests", "users", column: "requested_user_id"
+  add_foreign_key "friend_requests", "users", column: "requesting_user_id"
   add_foreign_key "friendships", "users", column: "user1_id"
   add_foreign_key "friendships", "users", column: "user2_id"
 end
