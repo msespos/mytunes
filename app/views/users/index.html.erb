@@ -2,6 +2,6 @@
 <% @users.each do |u| %>
   <%= u.name %> -
   <%= u.project_name %> -
-  <%= link_to 'Add Friend', root_path %><br>
+  <%= link_to 'Request Friend', root_path %><br>
 <% end %>
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
