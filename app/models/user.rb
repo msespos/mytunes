@@ -11,4 +11,12 @@ class User < ApplicationRecord
   def friendships
     Friendship.where("user1_id = ? OR user2_id = ?", self.id, self.id)
   end
+
+  def requested_friends
+    FriendRequest.where("requesting_user_id = ?", self.id)
+  end
+
+  def requesting_friends
+    FriendRequest.where("requested_user_id = ?", self.id)
+  end
 end
