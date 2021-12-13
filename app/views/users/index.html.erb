@@ -1,7 +1,12 @@
 <h1>Users</h1>
 <% @users.each do |u| %>
-  <%= u.name %> -
-  <%= u.project_name %> -
-  <%= link_to 'Request Friend', root_path %><br>
+  <% unless u == current_user %>
+    <%= u.name %> -
+    <%= u.project_name %> -
+    <%= link_to 'Make Friend Request',
+        friendships_path(requesting_user_id: current_user.id,
+                         requested_user_id: u.id),
+        method: :post %><br>
+  <% end %>
 <% end %>
 <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
