@@ -3,9 +3,9 @@ class FriendshipsController < ApplicationController
     @friend_request = FriendRequest.new(friend_request_params)
     if @friend_request.save
       redirect_to users_index_path
-      flash[:notice] = "Friend Request Created!"
+      flash[:notice] = "Friend request created!"
     else
-      flash.now[:error] = "Could not save client"
+      flash.now[:error] = "Could not create request"
       render action: "new"
     end
   end
@@ -13,6 +13,6 @@ class FriendshipsController < ApplicationController
   private
 
   def friend_request_params
-    params.permit(:requesting_user_id, :requested_user_id)
+    params.require(:friend_request).permit(:requesting_user_id, :requested_user_id)
   end
 end
