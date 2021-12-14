@@ -4,8 +4,8 @@
     <%= u.name %> -
     <%= u.project_name %> -
     <%= link_to 'Make Friend Request',
-        friendships_path(requesting_user_id: current_user.id,
-                         requested_user_id: u.id),
+        friendships_path(friend_request: { requesting_user_id: current_user.id,
+                                           requested_user_id: u.id }),
         method: :post %><br>
   <% end %>
 <% end %>
