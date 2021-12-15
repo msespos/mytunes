@@ -7,6 +7,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :user1_friendships, class_name: 'Friendship', foreign_key: :user1_id
   has_many :user2_friendships, class_name: 'Friendship', foreign_key: :user2_id
+  has_many :requesting_user_friend_requests, class_name: 'FriendRequest',
+           foreign_key: :requesting_user_id
+  has_many :requested_user_friend_requests, class_name: 'FriendRequest',
+           foreign_key: :requested_user_id
 
   def friendships
     Friendship.where("user1_id = ? OR user2_id = ?", self.id, self.id)
