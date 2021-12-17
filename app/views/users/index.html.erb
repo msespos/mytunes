@@ -32,9 +32,9 @@
             </svg>
             <% requester = fr.requesting_user %>
             <%= link_to requester.name,
-                friendships_path(friend_request: {
-                  requesting_user_id: @users.find(fr.requesting_user_id),
-                  requested_user_id: current_user.id }),
+                friendships_path(friendship: {
+                  user1_id: @users.find(fr.requesting_user_id),
+                  user2_id: current_user.id }),
                 method: :post %><br>
           <% end %>
         </div>
@@ -55,11 +55,12 @@
         <%= u.name %> -
         <%= u.project_name %> -
         <%= link_to 'Make Friend Request',
-            friendships_path(friend_request: { requesting_user_id: current_user.id,
-                                               requested_user_id: u.id }),
+            create_friend_request_friendships_path(
+              friend_request: { requesting_user_id: current_user.id,
+                                requested_user_id: u.id }),
             method: :post %><br>
       <% end %>
-    <% end %>
+    <% end %><br>
     <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
   </p>
 </div>
