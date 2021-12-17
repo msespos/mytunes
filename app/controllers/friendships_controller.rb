@@ -13,7 +13,19 @@ class FriendshipsController < ApplicationController
 
   def create_friend_request
     @friend_request = FriendRequest.new(friend_request_params)
-    if @friend_request.save
+    @duplicate_request = FriendRequest.all.where(
+      requesting_user_id: friend_request_params[:requesting_user_id],
+      requested_user_id: friend_request_params[:requested_user_id])
+    @opposite_request = FriendRequest.all.where(
+      requesting_user_id: friend_request_params[:requested_user_id],
+      requested_user_id: friend_request_params[:requesting_user_id])
+    if @duplicate_request.first
+      redirect_to users_index_path
+      flash[:notice] = "You've already made a friend request to them!"
+    elsif @opposite_request.first
+      redirect_to users_index_path
+      flash[:notice] = "They've already made a friend request to you!"
+    elsif @friend_request.save
       redirect_to users_index_path
       flash[:notice] = "Friend request created!"
     else
