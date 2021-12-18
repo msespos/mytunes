@@ -53,12 +53,14 @@
     <% @users.each do |u| %>
       <% unless u == current_user %>
         <%= u.name %> -
-        <%= u.project_name %> -
-        <%= link_to 'Make Friend Request',
-            create_friend_request_friendships_path(
-              friend_request: { requesting_user_id: current_user.id,
-                                requested_user_id: u.id }),
-            method: :post %><br>
+        <%= u.project_name %>
+        <% unless current_user.friends.include? u %>
+          <%= link_to '- Make Friend Request',
+              create_friend_request_friendships_path(
+                friend_request: { requesting_user_id: current_user.id,
+                                  requested_user_id: u.id }),
+              method: :post %>
+        <% end %><br>
       <% end %>
     <% end %><br>
     <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
