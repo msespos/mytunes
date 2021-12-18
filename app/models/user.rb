@@ -16,11 +16,16 @@ class User < ApplicationRecord
     Friendship.where("user1_id = ? OR user2_id = ?", self.id, self.id)
   end
 
-  def requested_friends
-    FriendRequest.where("requesting_user_id = ?", self.id)
-  end
-
-  def requesting_friends
-    FriendRequest.where("requested_user_id = ?", self.id)
+  def friends
+    friends = []
+    user1_friends = Friendship.where("user2_id = ?", self.id)
+    user1_friends.each do |f|
+      friends << User.find(f.user1_id)
+    end
+    user2_friends = Friendship.where("user1_id = ?", self.id)
+    user2_friends.each do |f|
+      friends << User.find(f.user2_id)
+    end
+    friends
   end
 end
