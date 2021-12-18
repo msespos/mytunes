@@ -44,7 +44,8 @@
 
 <div class="py-32">
   <p class="font-extrabold text-6xl">
-    Users<br><br>
+    Logged in as <%= current_user.name %><br><br>
+    Users<br>
     <% @users.each do |u| %>
       <% unless u == current_user %>
         <%= u.name %> -
