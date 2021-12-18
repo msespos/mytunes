@@ -18,7 +18,7 @@ class User < ApplicationRecord
   end
 
   def pending_friend_requests
-    FriendRequest.where('requesting_user_id = ?', id)
+    FriendRequest.where('requested_user_id = ?', id)
   end
 
   # NEED TO REFACTOR THIS?
