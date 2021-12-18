@@ -1,0 +1,8 @@
+<% @friend_requests.each do |fr| %>
+  <% requester = fr.requesting_user %>
+  <%= link_to requester.name,
+      friendships_path(friendship: {
+        user1_id: @users.find(fr.requesting_user_id),
+        user2_id: current_user.id }),
+      method: :post %><br>
+<% end %>
