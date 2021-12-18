@@ -17,6 +17,11 @@ class User < ApplicationRecord
     Friendship.where('user1_id = ? OR user2_id = ?', id, id)
   end
 
+  def pending_friend_requests
+    FriendRequest.where('requesting_user_id = ?', id)
+  end
+
+  # NEED TO REFACTOR THIS?
   def friends
     friends = []
     user1_friends = Friendship.where('user2_id = ?', id)
