@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :friendships do
     collection do
       post 'create_friend_request'
+      delete 'destroy_friend_request'
     end
   end
 
