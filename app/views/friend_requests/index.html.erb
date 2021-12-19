@@ -1,8 +1,19 @@
-<% @friend_requests.each do |fr| %>
-  <% requester = fr.requesting_user %>
-  <%= link_to requester.name,
-      friendships_path(friendship: {
-        user1_id: @users.find(fr.requesting_user_id),
-        user2_id: current_user.id }),
-      method: :post %><br>
-<% end %>
+<div class="py-8">
+  <p class="font-extrabold text-6xl">
+    Pending Friend Requests<br><br>
+    <% @friend_requests.each do |fr| %>
+      <% requester = fr.requesting_user %>
+      <%= requester.name %> -
+      <%= link_to 'Accept',
+          friendships_path(friendship: {
+            user1_id: @users.find(fr.requesting_user_id),
+            user2_id: current_user.id }),
+          method: :post %> -
+      <%= link_to 'Deny',
+          destroy_friend_request_friendships_path(friendship: {
+            user1_id: @users.find(fr.requesting_user_id),
+            user2_id: current_user.id }),
+          method: :delete %><br>
+    <% end %>
+  </p>
+</div>
