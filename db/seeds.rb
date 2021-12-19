@@ -51,4 +51,3 @@ User.create!([{ name: 'm:ke', project_name: 'blanket forts',
                 location: 'England', favorite_artist: 'Xena',
                 birthday: '1978-29-05', email: 'alice@example.com',
                 password: '123456', password_confirmation: '123456' }])
-                    

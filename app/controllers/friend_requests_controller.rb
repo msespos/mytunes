@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriendRequestsController < ApplicationController
   def index
     # IS CREATING @USERS AND @FRIEND_REQUESTS IN TWO DIFFERENT CONTROLLERS OK?
