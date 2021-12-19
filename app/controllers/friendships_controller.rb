@@ -17,6 +17,7 @@ class FriendshipsController < ApplicationController
     end
   end
 
+  # SHOULD SOME OF THIS BE MADE MODEL CODE?
   def create_friend_request
     @friend_request = FriendRequest.new(friend_request_params)
     # DOES THIS NEED TO BE DONE WITH "?"s?
@@ -49,12 +50,23 @@ class FriendshipsController < ApplicationController
   def destroy_friend_request
     # DOES THIS NEED TO BE DONE WITH "?"s?
     # ALSO IS IT A PROBLEM THAT USER1 AND USER2 HAVE SPECIFIC ROLES NOW?
+    # ALSO WHAT ABOUT USING FRIENDSHIP_PARAMS TO DEAL WITH FRIEND_REQUEST?
+    # ALSO WhAT ABOUT GRABBING FIRST FRIEND_REQUEST?
     @friend_request = FriendRequest.all.where(
       requesting_user_id: friendship_params[:user1_id],
       requested_user_id: friendship_params[:user2_id]
     )
+    Rails.logger.debug "@FRIEND_REQUEST: #{@friend_request}"
     id = @friend_request.first.id
-    @friend_request.destroy(id)
+    if @friend_request.destroy(id)
+      redirect_to users_index_path
+      flash[:notice] = 'Friend request denied!'
+    else
+      flash.now[:error] = 'Could not deny request'
+      # POSSIBLY NOT RENDERING CORRECTLY - POSSIBLE NOMETHODERROR
+      # NEED TO CHECK THIS - HOW?
+      render 'users/index'
+    end
   end
 
   private
