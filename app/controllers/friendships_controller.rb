@@ -7,7 +7,7 @@ class FriendshipsController < ApplicationController
     if @friendship.save
       redirect_to users_index_path
       # IS CALLING DESTROY_FRIEND_REQUEST HERE A GOOD IDEA???
-      destroy_friend_request
+      # destroy_friend_request
       flash[:notice] = 'Friendship created!'
     else
       flash.now[:error] = 'Could not create friendship'
@@ -71,11 +71,12 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.require(:friendship).permit(:requesting_user_id, :requested_user_id)
+    params.require(:friendship).permit(:requesting_user_id, :requested_user_id,
+                                       :confirmed)
   end
 
-  def friend_request_params
-    params.require(:friend_request).permit(:requesting_user_id,
-                                           :requested_user_id, :id)
-  end
+  #def friend_request_params
+  #  params.require(:friend_request).permit(:requesting_user_id,
+  #                                         :requested_user_id, :id)
+  #end
 end
