@@ -1,7 +1,7 @@
 <div class="py-8">
   <p class="font-extrabold text-6xl">
     Pending Friend Requests<br><br>
-    <% @friend_requests.each do |fr| %>
+    <% @friendships.each do |fr| %>
       <% requester = fr.requesting_user %>
       <%= requester.name %> -
       <%= link_to 'Accept',
