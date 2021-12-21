@@ -19,9 +19,9 @@ class User < ApplicationRecord
     Friendship.where('requesting_user_id = ? OR requested_user_id = ?', id, id)
   end
 
-  #def pending_friend_requests
-  #  FriendRequest.where('requested_user_id = ?', id)
-  #end
+  def pending_friend_requests
+    Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
+  end
 
   # NEED TO REFACTOR THIS?
   def friends
