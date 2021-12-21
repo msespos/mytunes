@@ -49,12 +49,11 @@ class FriendshipsController < ApplicationController
 
   def destroy_friend_request
     # DOES THIS NEED TO BE DONE WITH "?"s?
-    # ALSO IS IT A PROBLEM THAT USER1 AND USER2 HAVE SPECIFIC ROLES NOW?
     # ALSO WHAT ABOUT USING FRIENDSHIP_PARAMS TO DEAL WITH FRIEND_REQUEST?
     # ALSO WhAT ABOUT GRABBING FIRST FRIEND_REQUEST?
     @friend_request = FriendRequest.all.where(
-      requesting_user_id: friendship_params[:user1_id],
-      requested_user_id: friendship_params[:user2_id]
+      requesting_user_id: friendship_params[:requesting_user_id],
+      requested_user_id: friendship_params[:requested_user_id]
     )
     Rails.logger.debug "@FRIEND_REQUEST: #{@friend_request}"
     id = @friend_request.first.id
@@ -72,7 +71,7 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.require(:friendship).permit(:user1_id, :user2_id)
+    params.require(:friendship).permit(:requesting_user_id, :requested_user_id)
   end
 
   def friend_request_params

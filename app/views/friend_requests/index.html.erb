@@ -6,13 +6,13 @@
       <%= requester.name %> -
       <%= link_to 'Accept',
           friendships_path(friendship: {
-            user1_id: @users.find(fr.requesting_user_id),
-            user2_id: current_user.id }),
+            requesting_user_id: @users.find(fr.requesting_user_id),
+            requested_user_id: current_user.id }),
           method: :post %> -
       <%= link_to 'Deny',
           destroy_friend_request_friendships_path(friendship: {
-            user1_id: @users.find(fr.requesting_user_id),
-            user2_id: current_user.id }),
+            requesting_user_id: @users.find(fr.requesting_user_id),
+            requested_user_id: current_user.id }),
           method: :delete %><br>
     <% end %>
   </p>
