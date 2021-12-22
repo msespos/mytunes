@@ -8,6 +8,5 @@ Rails.application.routes.draw do
     root to: 'devise/sessions#new'
   end
 
-  # WHAT ABOUT DESTROY_FRIEND_REQUEST? IT'S WORKING BUT NOT HERE
   resources :friendships, only: [:index, :create, :destroy]
 end
