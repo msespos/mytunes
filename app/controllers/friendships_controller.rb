@@ -7,6 +7,10 @@ class FriendshipsController < ApplicationController
     @friendships = Friendship.where('requested_user_id = ?', current_user.id)
   end
 
+  def show
+    @friendships = current_user.friends
+  end
+
   def create
     @friendship = Friendship.new(friendship_params)
     if @friendship.save
