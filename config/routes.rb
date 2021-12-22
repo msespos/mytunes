@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     root to: 'devise/sessions#new'
   end
 
-  resources :friendships, only: [:index, :create, :destroy] do
+  resources :friendships, only: [:index, :show, :create, :destroy] do
     collection do
       post 'confirm'
     end
