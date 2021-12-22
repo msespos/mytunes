@@ -15,13 +15,6 @@ ActiveRecord::Schema.define(version: 2021_12_20_205022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "friend_requests", force: :cascade do |t|
-    t.bigint "requesting_user_id"
-    t.bigint "requested_user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "friendships", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -47,8 +40,6 @@ ActiveRecord::Schema.define(version: 2021_12_20_205022) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friend_requests", "users", column: "requested_user_id"
-  add_foreign_key "friend_requests", "users", column: "requesting_user_id"
   add_foreign_key "friendships", "users", column: "requested_user_id"
   add_foreign_key "friendships", "users", column: "requesting_user_id"
 end
