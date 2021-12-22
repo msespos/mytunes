@@ -4,15 +4,13 @@
     <% @friendships.each do |fr| %>
       <% requester = fr.requesting_user %>
       <%= requester.name %> -
-      <%= link_to 'Accept',
+      <%#= link_to 'Accept',
           friendships_path(friendship: {
             requesting_user_id: @users.find(fr.requesting_user_id),
             requested_user_id: current_user.id }),
           method: :post %> -
       <%= link_to 'Deny',
-          destroy_friend_request_friendships_path(friendship: {
-            requesting_user_id: @users.find(fr.requesting_user_id),
-            requested_user_id: current_user.id }),
+          friendship_path(id: fr.id),
           method: :delete %><br>
     <% end %>
   </p>
