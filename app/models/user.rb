@@ -19,11 +19,11 @@ class User < ApplicationRecord
     Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
   end
 
-  # NEED TO RENAME THIS?
-  def self.dont_show_friend_request_link?(current_user, u)
-    current_user.friends.include?(u) ||
-      u.pending_friends.include?(current_user) ||
-      current_user.pending_friends.include?(u)
+  # NEED TO RENAME THIS AND VARIABLES?
+  def self.dont_show_friend_request_link?(current_user, user)
+    current_user.friends.include?(user) ||
+      user.pending_friends.include?(current_user) ||
+      current_user.pending_friends.include?(user)
   end
 
   # NEED TO REFACTOR THIS?
