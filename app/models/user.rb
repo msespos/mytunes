@@ -19,12 +19,14 @@ class User < ApplicationRecord
     Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
   end
 
-  def self.dont_show(current_user, u)
+  # NEED TO RENAME THIS?
+  def self.dont_show_friend_request_link?(current_user, u)
     current_user.friends.include?(u) ||
       u.pending_friends.include?(current_user) ||
       current_user.pending_friends.include?(u)
   end
 
+  # NEED TO REFACTOR THIS?
   def pending_friends
     pending_friends = []
     requesting_user_friends = Friendship.where('requested_user_id = ?
