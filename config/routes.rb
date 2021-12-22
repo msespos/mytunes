@@ -9,12 +9,5 @@ Rails.application.routes.draw do
   end
 
   # WHAT ABOUT DESTROY_FRIEND_REQUEST? IT'S WORKING BUT NOT HERE
-  resources :friendships do
-    collection do
-      post 'create_friend_request'
-      delete 'destroy_friend_request'
-    end
-  end
-
-  resources :friend_requests, only: :index
+  resources :friendships, only: [:index, :create, :destroy]
 end
