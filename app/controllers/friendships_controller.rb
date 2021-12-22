@@ -39,7 +39,7 @@ class FriendshipsController < ApplicationController
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
     if @friendship.save
-    redirect_to users_index_path
+      redirect_to users_index_path
       flash[:notice] = 'You confirmed the friendship!'
     else
       flash.now[:error] = 'Error - could not process confirmation'
