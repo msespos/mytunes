@@ -1,11 +1,11 @@
 <div class="py-8">
   <p class="font-extrabold text-6xl">
     Pending Friend Requests<br><br>
-    <% @friendships.each do |f| %>
-      <% requester = f.requesting_user %>
+    <% current_user.pending_friend_requests.each do |p| %>
+      <% requester = p.requesting_user %>
       <%= requester.name %> -
-      <%= link_to 'Confirm', confirm_friendships_path(id: f.id), method: :post %> -
-      <%= link_to 'Deny', friendship_path(id: f.id), method: :delete %><br>
+      <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %> -
+      <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %><br>
     <% end %>
   </p>
 </div>
