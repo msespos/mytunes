@@ -17,9 +17,8 @@ class FriendshipsController < ApplicationController
       redirect_to users_index_path
       flash[:notice] = 'You made a friendship request!'
     else
-      flash.now[:error] = 'Error - could not process friend request'
-      # NEED TO TEST IF IT IS RENDERING CORRECTLY IF THERE IS AN ERROR
-      render 'users/index'
+      redirect_to users_index_path
+      flash[:notice] = 'Error - could not process friend request'
     end
   end
 
@@ -29,9 +28,8 @@ class FriendshipsController < ApplicationController
       redirect_to users_index_path
       flash[:notice] = 'You denied the friendship request!'
     else
-      flash.now[:error] = 'Error - could not process friend request'
-      # NEED TO TEST IF IT IS RENDERING CORRECTLY IF THERE IS AN ERROR
-      render 'users/index'
+      redirect_to users_index_path
+      flash[:notice] = 'Error - could not process friend denial'
     end
   end
 
@@ -42,9 +40,8 @@ class FriendshipsController < ApplicationController
       redirect_to users_index_path
       flash[:notice] = 'You confirmed the friendship!'
     else
-      flash.now[:error] = 'Error - could not process confirmation'
-      # NEED TO TEST IF IT IS RENDERING CORRECTLY IF THERE IS AN ERROR
-      render 'users/index'
+      redirect_to users_index_path
+      flash[:notice] = 'Error - could not process confirmation'
     end
   end
 
