@@ -53,7 +53,7 @@
       <% unless u == current_user %>
         <%= u.name %> -
         <%= u.project_name %>
-        <% unless current_user.friends.include? u %>
+        <% unless User.dont_show(current_user, u) %>
           <%= link_to '- Make Friend Request',
             friendships_path(
               friendship: { requesting_user_id: current_user.id,
