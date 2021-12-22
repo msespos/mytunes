@@ -1,0 +1,8 @@
+<div class="py-8">
+  <p class="font-extrabold text-6xl">
+    <%= current_user.name %>'s Friends<br><br>
+    <% @friendships.each do |f| %>
+      <%= f.name %><br>
+    <% end %>
+  </p>
+</div>
