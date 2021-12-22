@@ -46,8 +46,9 @@
 
 <div class="py-8">
   <p class="font-extrabold text-6xl">
-    Logged in as <%= current_user.name %><br><br>
-    Users<br>
+    Logged in as <%= current_user.name %>
+    <%= link_to "(Show Friends)", friendship_path(id: current_user.id) %><br><br>
+    All Users<br>
     <% @users.each do |u| %>
       <% unless u == current_user %>
         <%= u.name %> -
