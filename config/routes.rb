@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index new create]
+  resources :likes, only: :create
 end
