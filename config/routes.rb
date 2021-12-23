@@ -16,5 +16,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: [:index, :new, :create]
+  resources :posts, only: %i[index new create]
 end
