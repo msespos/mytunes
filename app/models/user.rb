@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :requested_user_friendships, class_name: 'Friendship',
                                         foreign_key: :requested_user_id
   has_many :posts
+  has_many :likes
 
   def friendships
     Friendship.where('requesting_user_id = ? OR requested_user_id = ?', id, id)
