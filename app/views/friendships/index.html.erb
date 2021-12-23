@@ -6,7 +6,7 @@
       <%= requester.name %> -
       <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %> -
       <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %><br>
-    <% end %>
+    <% end %><br>
     <%= link_to 'Back to User Index', users_index_path %>
   </p>
 </div>
