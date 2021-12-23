@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 FactoryBot.define do
   factory :user do
     email { 'mike@example.com' }
@@ -13,5 +11,3 @@ FactoryBot.define do
     birthday { '07/08/1975' }
   end
 end
-
-# rubocop:enable Metrics/BlockLength

@@ -20,9 +20,9 @@ class User < ApplicationRecord
   end
 
   def can_friend_request?(user)
-    !self.friends.include?(user) &&
+    !friends.include?(user) &&
       !user.pending_friends.include?(self) &&
-      !self.pending_friends.include?(user)
+      !pending_friends.include?(user)
   end
 
   # NEED TO REFACTOR THIS?
@@ -35,6 +35,8 @@ class User < ApplicationRecord
     end
     pending_friends
   end
+
+  # rubocop:disable Metrics/MethodLength
 
   # NEED TO REFACTOR THIS?
   def friends
@@ -51,4 +53,6 @@ class User < ApplicationRecord
     end
     friends
   end
+
+  # rubocop:enable Metrics/MethodLength
 end

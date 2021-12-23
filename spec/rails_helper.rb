@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'database_cleaner'
 require 'capybara/rspec'
@@ -35,37 +39,37 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-  #configure database cleaner
+  # configure database cleaner
   config.use_transactional_fixtures = false
-  
+
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
   end
-  
+
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
-  
-  config.before(:each, :js => true) do
+
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
-  
+
   config.before(:each) do
     DatabaseCleaner.start
   end
-  
+
   config.after(:each) do
     DatabaseCleaner.clean
   end
-  
+
   config.before(:all) do
     DatabaseCleaner.start
   end
-  
+
   config.after(:all) do
     DatabaseCleaner.clean
   end
-  
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -98,3 +102,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::ControllerHelpers, type: :controller
 end
+
+# rubocop:enable Metrics/BlockLength

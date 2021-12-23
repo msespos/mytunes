@@ -40,9 +40,9 @@ group :development, :test do
   gem 'rspec-rails'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 3.26'
+  gem 'database_cleaner'
   gem 'factory_bot_rails'
   gem 'webdrivers'
-  gem 'database_cleaner'
 end
 
 group :development do
