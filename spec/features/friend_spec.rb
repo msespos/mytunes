@@ -9,7 +9,6 @@ RSpec.describe 'Create a friendship', type: :feature do
     @mike = create(:user)
   end
 
-  # Need to deal with Validation failed: Email has already been taken error
   scenario 'log in' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
@@ -17,6 +16,6 @@ RSpec.describe 'Create a friendship', type: :feature do
     click_on 'Log in'
     expect(page).to have_content('Logged in as m:ke')
   end
+end
 
 # rubocop:enable Metrics/BlockLength
-1
