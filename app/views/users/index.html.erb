@@ -51,9 +51,9 @@
     All Users<br>
     <% @users.each do |u| %>
       <% unless u == current_user %>
-        <%= u.name %> -
+        <%= link_to u.name, user_path(u.id) %> -
         <%= u.project_name %>
-        <% unless User.dont_show_friend_request_link?(current_user, u) %>
+        <% if current_user.can_friend_request? u %>
           <%= link_to '- Make Friend Request',
             friendships_path(
               friendship: { requesting_user_id: current_user.id,
