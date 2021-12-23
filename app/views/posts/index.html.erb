@@ -3,7 +3,7 @@
     Logged in as <%= current_user.name %><br><br>
     Your Feed:<br>
     <% @posts.each do |p| %>
-      <% if p.user == current_user %>
+      <% if p.user.id == current_user.id %>
         <%= p.user.name %><br>
         <%= p.body %><br><br>
       <% end %>
