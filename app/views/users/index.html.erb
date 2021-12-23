@@ -18,8 +18,10 @@
           </a>
         </div>
         <div class="flex items-center space-x-1">
-          <a href="#" class="py-5 px-2 text-gray-700">Home</a>
-          <a href="#" class="py-5 px-2 text-gray-700">Friends</a>
+          <a class="py-5 px-2 text-gray-700">Home</a>
+          <div class="py-5 px-2 text-gray-700">
+            <%= link_to 'Friends', friendship_path(id: current_user.id) %>
+          </div>
           <svg xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 mr-1 text-blue-400" fill="none"
             viewBox="0 0 24 24" stroke="currentColor">
@@ -46,8 +48,7 @@
 
 <div class="py-8">
   <p class="font-extrabold text-6xl">
-    Logged in as <%= current_user.name %>
-    <%= link_to "(Show Friends)", friendship_path(id: current_user.id) %><br><br>
+    Logged in as <%= current_user.name %><br><br>
     All Users<br>
     <% @users.each do |u| %>
       <% unless u == current_user %>
