@@ -27,7 +27,6 @@ class User < ApplicationRecord
       !pending_friends.include?(user)
   end
 
-  # NEED TO REFACTOR THIS?
   def pending_friends
     pending_friends = []
     requesting_user_friends = Friendship.where('requested_user_id = ?
@@ -40,7 +39,6 @@ class User < ApplicationRecord
 
   # rubocop:disable Metrics/MethodLength
 
-  # NEED TO REFACTOR THIS?
   def friends
     friends = []
     requesting_user_friends = Friendship.where('requested_user_id = ?
