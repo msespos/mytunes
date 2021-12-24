@@ -3,10 +3,17 @@
     Logged in as <%= current_user.name %><br><br>
     Your Feed:<br>
     <% @posts.each do |p| %>
-      <% if p.display_post?(current_user) %>
+      <% if p.display_for?(current_user) %>
         <%= p.user.name %><br>
         <%= p.body %><br>
-        <%= p.created_at %><br><br>
+        <%= p.created_at %><br>
+        <% if p.can_be_liked_by?(current_user) %>
+          <%= link_to 'Like',
+            likes_path(
+              like: { post_id: p.id, user_id: current_user.id }),
+              method: :post %><br>
+        <% end %>
+        <%= pluralize(p.number_of_likes, 'Like') %><br><br>
       <% end %>
     <% end %>
     <%= link_to 'Back to User Index', users_index_path %><br>
