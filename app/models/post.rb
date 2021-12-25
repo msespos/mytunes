@@ -4,6 +4,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :likes
+  has_many :comments
 
   def display_for?(current_user)
     user == current_user || current_user.friends.include?(user)
