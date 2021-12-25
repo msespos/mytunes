@@ -2,7 +2,11 @@
   <p class="font-extrabold text-6xl">
     Logged in as <%= current_user.name %><br><br>
     Your Feed:<br>
-    <% @posts.each do |p| %>
+  </p>
+</div>
+<% @posts.each do |p| %>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
       <% if p.display_for?(current_user) %>
         <%= p.user.name %><br>
         <%= p.body %><br>
@@ -14,16 +18,22 @@
               method: :post %><br>
         <% end %>
         <%= pluralize(p.number_of_likes, 'Like') %><br>
-        <%= form_with model: @comment do |f| %>
+      </p>
+    </div>
+    <%= form_with model: @comment do |f| %>
+      <div class="py-8">
+        <p class="font-extrabold text-6xl">
           <%= f.hidden_field :user_id, value: current_user.id %>
           <%= f.label :comment %><br>
           <%= f.text_area :body %>
           <%= f.submit %>
-        <% end %>
-
-        <br><br>
-      <% end %>
-    <% end %>
+        </p>
+      </div>
+    <% end %><br><br>
+  <% end %>
+<% end %>
+<div class="py-8">
+  <p class="font-extrabold text-6xl">
     <%= link_to 'Back to User Index', users_index_path %><br>
     <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
   </p>
