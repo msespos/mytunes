@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: %i[index new create]
-  resources :likes, only: :create
+  resources :posts, only: %i[index new create] do
+    collection do
+      post 'like'
+    end
+  end
 end
