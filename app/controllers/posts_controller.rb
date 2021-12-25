@@ -20,9 +20,23 @@ class PostsController < ApplicationController
                      end
   end
 
+  def like
+    @like = Like.new(like_params)
+    redirect_to posts_path
+    flash[:notice] = if @like.save
+                       'You liked a post!'
+                     else
+                       'Error - could not process like'
+                     end
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:body, :user_id)
+  end
+
+  def like_params
+    params.require(:like).permit(:post_id, :user_id)
   end
 end
