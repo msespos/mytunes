@@ -1,12 +1,10 @@
 <%= form_with model: @post do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.label :post %><br>
+  <%= f.text_area :body %>
+  <%= f.submit %>
   <p>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.label :post %><br>
-    <%= f.text_area :body %>
+    <%= link_to 'Back to User Index', users_index_path %><br>
+    <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
   </p>
-  <p>
-    <%= f.submit %>
-  </p>
-  <%= link_to 'Back to User Index', users_index_path %><br>
-  <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
 <% end %>
