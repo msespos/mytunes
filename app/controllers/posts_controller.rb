@@ -30,6 +30,16 @@ class PostsController < ApplicationController
                      end
   end
 
+  def comment
+    @comment = Comment.new(comment_params)
+    redirect_to posts_path
+    flash[:notice] = if @comment.save
+                       'You commented on a post!'
+                     else
+                       'Error - could not process comment'
+                     end
+  end
+
   private
 
   def post_params
@@ -38,5 +48,9 @@ class PostsController < ApplicationController
 
   def like_params
     params.require(:like).permit(:post_id, :user_id)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:post_id, :user_id, :body)
   end
 end
