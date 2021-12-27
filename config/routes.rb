@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :posts, only: %i[index new create] do
     collection do
       post 'like'
+      post 'comment'
     end
   end
 end
