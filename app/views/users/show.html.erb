@@ -1,10 +1,16 @@
 <div class="py-8">
   <p class="font-extrabold text-6xl">
     <%= @user.name %>'s Profile<br><br>
+    <%= gravatar_for @user %><br>
     Project: <%= @user.project_name %><br>
     Location: <%= @user.location %><br>
     Favorite artist: <%= @user.favorite_artist %><br>
     Birthday: <%= @user.birthday %><br><br>
-  <%= link_to 'Back to User Index', users_index_path %>
+    Posts<br>
+    <% @user.posts.each do |p| %>
+      <%= p.body %><br>
+      <%= p.created_at %><br>
+    <% end %><br>
+    <%= link_to 'Back to User Index', users_index_path %>
   </p>
 </div>
