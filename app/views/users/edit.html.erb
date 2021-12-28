@@ -1,0 +1,12 @@
+<%= form_with model: @post do |f| %>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      <%= f.text_field :name %><br>
+      <%= f.text_field :project_name %><br>
+      <%= f.text_field :location %><br>
+      <%= f.text_field :favorite_artist %><br>
+      <%= f.date :birthday %><br>
+      <%= f.submit %>
+    </p>
+  </div>
+<% end %>
