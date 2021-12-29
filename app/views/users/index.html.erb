@@ -19,13 +19,19 @@
         </div>
         <div class="flex items-center space-x-1">
           <div class="py-5 px-2 text-gray-700">
-            <%= link_to 'Home', posts_path %>
+            <%= link_to 'Friends', friendship_path(id: current_user.id) %>
+          </div>
+          <div class="py-5 px-2 text-gray-700">
+            <%= link_to 'Feed', posts_path %>
           </div>
           <div class="py-5 px-2 text-gray-700">
             <%= link_to 'New Post', new_post_path %>
           </div>
           <div class="py-5 px-2 text-gray-700">
-            <%= link_to 'Friends', friendship_path(id: current_user.id) %>
+            <%= link_to 'Edit Profile', edit_user_path(current_user.id) %>
+          </div>
+          <div class="py-5 px-2 text-gray-700">
+            <%= link_to 'View Profile', user_path(current_user.id) %>
           </div>
           <svg xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 mr-1 text-blue-400" fill="none"
