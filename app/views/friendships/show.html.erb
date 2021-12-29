@@ -6,6 +6,5 @@
     <% @friends.each do |f| %>
       <%= link_to f.name, user_path(f.id) %><br>
     <% end %><br>
-    <%= link_to 'Back to User Index', users_index_path %>
   </p>
 </div>
