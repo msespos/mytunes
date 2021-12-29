@@ -14,10 +14,6 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
 
-  def friendships
-    Friendship.where('requesting_user_id = ? OR requested_user_id = ?', id, id)
-  end
-
   def pending_friend_requests
     Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
   end
