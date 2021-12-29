@@ -21,8 +21,8 @@ class UsersController < ApplicationController
       flash[:notice] = 'You updated your profile!'
     else
       flash[:notice] = 'Error - could not process profile update'
-      render :edit                 
-    end 
+      render :edit
+    end
   end
 
   def user_params
