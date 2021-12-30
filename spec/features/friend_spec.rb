@@ -86,6 +86,22 @@ RSpec.describe 'Create a friendship', type: :feature do
     click_on 'Deny'
     expect(page).to have_content('No Pending Friend Requests')
   end
+
+  scenario 'log in, create a friendship, log in as other user and confirm, view' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Make Friend Request'
+    click_on 'Sign out'
+    fill_in 'Email', with: 'katie@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Pending Friend Requests'
+    click_on 'Confirm'
+    click_on 'Friends'
+    expect(page).to have_content('m:ke')
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
