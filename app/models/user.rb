@@ -33,22 +33,16 @@ class User < ApplicationRecord
     pending_friends
   end
 
-  # rubocop:disable Metrics/MethodLength
-
   def friends
-    friends = []
-    requesting_user_friends = Friendship.where('requested_user_id = ?
-                                                AND confirmed = ?', id, true)
-    requesting_user_friends.each do |f|
-      friends << User.find(f.requesting_user_id)
-    end
-    requested_user_friends = Friendship.where('requesting_user_id = ?
-                                               AND confirmed = ?', id, true)
-    requested_user_friends.each do |f|
-      friends << User.find(f.requested_user_id)
-    end
-    friends
+    friendships.map { |f| User.find(friend_id(f)) }
   end
 
-  # rubocop:enable Metrics/MethodLength
+  def friendships
+    Friendship.where('(requested_user_id = ? OR requesting_user_id = ?)
+                       AND confirmed = ?', id, id, true)
+  end
+
+  def friend_id(f)
+    f.requested_user_id == id ? f.requesting_user_id : f.requested_user_id
+  end
 end
