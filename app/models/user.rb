@@ -19,9 +19,8 @@ class User < ApplicationRecord
   end
 
   def can_friend_request?(user)
-    !friends.include?(user) &&
-      !user.pending_friends.include?(self) &&
-      !pending_friends.include?(user)
+    Friendship.where('requested_user_id = ?
+                      OR requesting_user_id = ?', user.id, user.id).empty?
   end
 
   def pending_friends
