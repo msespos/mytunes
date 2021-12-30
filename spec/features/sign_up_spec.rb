@@ -8,7 +8,7 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
   before(:all) do
     @mike = create(:user)
   end
-  
+
   scenario 'sign up' do
     visit root_path
     click_on 'Sign up'
