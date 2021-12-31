@@ -23,16 +23,6 @@ class User < ApplicationRecord
                       OR requesting_user_id = ?', user.id, user.id).empty?
   end
 
-  def pending_friends
-    pending_friends = []
-    requesting_user_friends = Friendship.where('requested_user_id = ?
-                                                AND confirmed = ?', id, false)
-    requesting_user_friends.each do |f|
-      pending_friends << User.find(f.requesting_user_id)
-    end
-    pending_friends
-  end
-
   def friends
     friendships.map { |f| User.find(friend_id(f)) }
   end
