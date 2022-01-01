@@ -24,6 +24,11 @@ class User < ApplicationRecord
                       id, user.id, user.id, id).empty?
   end
 
+  def is_friend_requesting?(user)
+    Friendship.where('requested_user_id = ? AND requesting_user_id = ?
+                      AND confirmed = ?', user.id, id, false).present?
+  end
+
   def friends
     friendships.map { |f| User.find(friend_id(f)) }
   end

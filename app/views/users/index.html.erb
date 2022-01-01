@@ -14,6 +14,8 @@
               friendship: { requesting_user_id: current_user.id,
                             requested_user_id: u.id, confirmed: false }),
               method: :post %>
+        <% elsif current_user.is_friend_requesting? u %>
+          - Waiting for Friend Confirmation
         <% end %><br>
       <% end %>
     <% end %><br>
