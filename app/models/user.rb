@@ -34,7 +34,8 @@ class User < ApplicationRecord
   end
 
   def friendships
-    Friendship.includes(:requesting_user).includes(:requested_user).where('(requested_user_id = ? OR requesting_user_id = ?)
+    Friendship.includes(:requesting_user).includes(:requested_user)
+              .where('(requested_user_id = ? OR requesting_user_id = ?)
                        AND confirmed = ?', id, id, true)
   end
 
