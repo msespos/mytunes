@@ -20,17 +20,17 @@ class User < ApplicationRecord
 
   def can_friend_request?(user)
     Friendship.where('requested_user_id = ? AND requesting_user_id = ?
-                      OR requested_user_id = ? AND requesting_user_id = ?',
-                      id, user.id, user.id, id).empty?
+                     OR requested_user_id = ? AND requesting_user_id = ?',
+                     id, user.id, user.id, id).empty?
   end
 
-  def is_friend_requesting?(user)
+  def friend_requesting?(user)
     Friendship.where('requested_user_id = ? AND requesting_user_id = ?
                       AND confirmed = ?', user.id, id, false).present?
   end
 
   def friends
-    friendships.map { |f| User.find(friend_id(f)) }
+    friendships.map { |friendship| User.find(friend_id(friendship)) }
   end
 
   def friendships
@@ -38,7 +38,7 @@ class User < ApplicationRecord
                        AND confirmed = ?', id, id, true)
   end
 
-  def friend_id(f)
-    f.requested_user_id == id ? f.requesting_user_id : f.requested_user_id
+  def friend_id(friendship)
+    friendship.requested_user_id == id ? friendship.requesting_user_id : friendship.requested_user_id
   end
 end

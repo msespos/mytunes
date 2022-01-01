@@ -74,4 +74,4 @@ ActiveRecord::Schema.define(version: 20_211_224_184_538) do
   add_foreign_key 'posts', 'users'
 end
 
-# rubocop: enable Metrics/BlockLength
+# rubocop:enable Metrics/BlockLength
