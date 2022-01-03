@@ -30,6 +30,8 @@ class FriendshipsController < ApplicationController
   def confirm
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
+    return unless current_user.id == @friendship.requested_user_id
+
     if @friendship.save
       flash[:notice] = 'You confirmed the friendship!'
       redirect_to users_index_path
