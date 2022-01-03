@@ -2,11 +2,6 @@
 
 # Friendships controller
 class FriendshipsController < ApplicationController
-  def index
-    @users = User.all
-    @friendships = Friendship.where('requested_user_id = ?', current_user.id)
-  end
-
   def show
     @friends = current_user.friends
   end
