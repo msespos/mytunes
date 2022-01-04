@@ -3,7 +3,9 @@
 # Posts controller class
 class PostsController < ApplicationController
   def index
-    @posts = Post.order('created_at DESC')
+    @viewable_posts = Post.order('created_at DESC').select do |p|
+      p.viewable_by?(current_user)
+    end
   end
 
   def new

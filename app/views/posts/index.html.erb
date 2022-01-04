@@ -6,42 +6,40 @@
     Your Feed:
   </p>
 </div>
-<% @posts.each do |p| %>
-  <% if p.display_for?(current_user) %>
+<% @viewable_posts.each do |p| %>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      <%= p.user.name %><br>
+      <%= p.body %><br>
+      <%= p.created_at %><br>
+      <% if p.can_be_liked_by?(current_user) %>
+        <%= link_to 'Like',
+          like_posts_path(
+            like: { post_id: p.id, user_id: current_user.id }),
+            method: :post %><br>
+      <% end %>
+      <%= pluralize(p.number_of_likes, 'Like') %><br>
+    </p>
+  </div>
+  <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
     <div class="py-8">
       <p class="font-extrabold text-6xl">
-        <%= p.user.name %><br>
-        <%= p.body %><br>
-        <%= p.created_at %><br>
-        <% if p.can_be_liked_by?(current_user) %>
-          <%= link_to 'Like',
-            like_posts_path(
-              like: { post_id: p.id, user_id: current_user.id }),
-              method: :post %><br>
-        <% end %>
-        <%= pluralize(p.number_of_likes, 'Like') %><br>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :post_id, value: p.id %>
+        <%= f.label :comment %><br>
+        <%= f.text_area :body %>
+        <%= f.submit %>
       </p>
     </div>
-    <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
-      <div class="py-8">
-        <p class="font-extrabold text-6xl">
-          <%= f.hidden_field :user_id, value: current_user.id %>
-          <%= f.hidden_field :post_id, value: p.id %>
-          <%= f.label :comment %><br>
-          <%= f.text_area :body %>
-          <%= f.submit %>
-        </p>
-      </div>
-    <% end %><br><br>
-    <div class="py-8">
-      <p class="font-extrabold text-6xl">
-        Comments<br>
-        <% p.comments.each do |c| %>
-          <%= c.user.name %><br>
-          <%= c.body %><br>
-          <%= c.created_at %><br>
-        <% end %>
-      </p>
-    </div>
-  <% end %>
+  <% end %><br><br>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      Comments<br>
+      <% p.comments.each do |c| %>
+        <%= c.user.name %><br>
+        <%= c.body %><br>
+        <%= c.created_at %><br>
+      <% end %>
+    </p>
+  </div>
 <% end %>
