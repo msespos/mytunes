@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_many :comments
 
   def pending_friend_requests
-    Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
+    Friendship.includes(:requesting_user).where('requested_user_id = ?
+                                                AND confirmed = ?', id, false)
   end
 
   def can_friend_request?(user)
