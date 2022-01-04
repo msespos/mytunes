@@ -22,7 +22,7 @@
     </p>
   </div>
   <div class="py-8">
-    <p class="font-extrabold text-6xl">
+    <p class="font-extrabold text-4xl">
       Comments<br>
       <% p.comments.each do |c| %>
         <%= c.user.name %><br>
@@ -33,7 +33,7 @@
   </div>
   <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
     <div class="py-8">
-      <p class="font-extrabold text-6xl">
+      <p class="font-extrabold text-4xl">
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :post_id, value: p.id %>
         <%= f.label :comment %><br>
