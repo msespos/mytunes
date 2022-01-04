@@ -21,6 +21,16 @@
       <%= pluralize(p.number_of_likes, 'Like') %><br>
     </p>
   </div>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      Comments<br>
+      <% p.comments.each do |c| %>
+        <%= c.user.name %><br>
+        <%= c.body %><br>
+        <%= c.created_at %><br><br>
+      <% end %>
+    </p>
+  </div>
   <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
     <div class="py-8">
       <p class="font-extrabold text-6xl">
@@ -31,15 +41,5 @@
         <%= f.submit %>
       </p>
     </div>
-  <% end %><br><br>
-  <div class="py-8">
-    <p class="font-extrabold text-6xl">
-      Comments<br>
-      <% p.comments.each do |c| %>
-        <%= c.user.name %><br>
-        <%= c.body %><br>
-        <%= c.created_at %><br>
-      <% end %>
-    </p>
-  </div>
+  <% end %>
 <% end %>
