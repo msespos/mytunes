@@ -7,8 +7,7 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    @friendship = Friendship.new(friendship_params)
-    flash[:notice] = if @friendship.save
+    flash[:notice] = if Friendship.request_friendship(friendship_params)
                        'You made a friendship request!'
                      else
                        'Error - could not process friend request'
