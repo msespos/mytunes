@@ -24,7 +24,7 @@
   <div class="py-8">
     <p class="font-extrabold text-4xl">
       Comments<br>
-      <% p.comments.each do |c| %>
+      <% p.comments.includes(:user).each do |c| %>
         <%= c.user.name %><br>
         <%= c.body %><br>
         <%= c.created_at %><br><br>
