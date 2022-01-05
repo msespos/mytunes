@@ -9,6 +9,8 @@ gem 'devise'
 
 gem 'awesome_print', '~> 1.8'
 
+gem 'omniauth-google-oauth2'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use PostgreSQL as the database for Active Record
