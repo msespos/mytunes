@@ -304,6 +304,7 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  omniauth
   omniauth-google-oauth2
   pg
   puma (~> 5.0)
