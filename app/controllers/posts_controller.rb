@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
   def comment
     @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
     redirect_to posts_path
     flash[:notice] = if @comment.save
                        'You commented on a post!'
@@ -54,6 +55,6 @@ class PostsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:post_id, :user_id, :body)
+    params.require(:comment).permit(:post_id, :body)
   end
 end
