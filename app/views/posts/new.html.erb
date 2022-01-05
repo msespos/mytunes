@@ -3,7 +3,6 @@
 <%= form_with model: @post do |f| %>
   <div class="py-8">
     <p class="font-extrabold text-6xl">
-      <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.label :post %><br>
       <%= f.text_area :body %><br>
       <%= f.submit %>

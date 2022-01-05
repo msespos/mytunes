@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     redirect_to posts_path
     flash[:notice] = if @post.save
                        'Post created!'
@@ -45,7 +46,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body, :user_id)
+    params.require(:post).permit(:body)
   end
 
   def like_params
