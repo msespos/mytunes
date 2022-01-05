@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
   def like
     @like = Like.new(like_params)
+    @like.user_id = current_user.id
     flash[:notice] = if @like.save
                        'You liked a post!'
                      else
@@ -52,7 +53,7 @@ class PostsController < ApplicationController
   end
 
   def like_params
-    params.require(:like).permit(:post_id, :user_id)
+    params.require(:like).permit(:post_id)
   end
 
   def comment_params
