@@ -15,33 +15,34 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    redirect_to posts_path
-    flash[:notice] = if @post.save
-                       'Post created!'
-                     else
-                       'Error - could not process post creation'
-                     end
+    if @post.save
+      flash[:notice] = 'Post created!'
+      redirect_to posts_path
+    else
+      flash[:notice] = 'Error - could not process post creation'
+      render 'new'
+    end
   end
 
   def like
     @like = Like.new(like_params)
-    redirect_to posts_path
     flash[:notice] = if @like.save
                        'You liked a post!'
                      else
                        'Error - could not process like'
                      end
+    redirect_to posts_path
   end
 
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    redirect_to posts_path
     flash[:notice] = if @comment.save
                        'You commented on a post!'
                      else
                        'Error - could not process comment'
                      end
+    redirect_to posts_path
   end
 
   private
