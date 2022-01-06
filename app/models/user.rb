@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
 
+  validates :name, presence: true
+
   after_create :send_admin_mail
 
   def pending_friend_requests
