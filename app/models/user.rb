@@ -15,6 +15,8 @@ class User < ApplicationRecord
   has_many :likes
   has_many :comments
 
+  after_create :send_admin_mail
+
   def pending_friend_requests
     Friendship.includes(:requesting_user).where('requested_user_id = ?
                                                 AND confirmed = ?', id, false)
@@ -56,5 +58,9 @@ class User < ApplicationRecord
         )
     end
     user
+  end
+
+  def send_admin_mail
+    UserMailer.welcome_email(self).deliver
   end
 end
