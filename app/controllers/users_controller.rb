@@ -17,8 +17,8 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to users_index_path
       flash[:notice] = 'You updated your profile!'
+      redirect_to users_index_path
     else
       flash[:notice] = 'Error - could not process profile update'
       render 'edit'
