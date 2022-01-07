@@ -65,7 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "mytunes_production"
 
   # for devise
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { :host => 'protected-river-06788.heroku.com' }
 
   config.action_mailer.perform_caching = false
 
