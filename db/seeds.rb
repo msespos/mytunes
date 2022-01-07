@@ -7,6 +7,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Devise::Mailer.perform_deliveries = false
+
 User.create!([{ name: 'm:ke', project_name: 'blanket forts',
                 location: 'Lomita, CA', favorite_artist: 'Autechre',
                 birthday: '1975-08-07', email: 'mike@example.com',
@@ -51,3 +53,5 @@ User.create!([{ name: 'm:ke', project_name: 'blanket forts',
                 location: 'England', favorite_artist: 'Xena',
                 birthday: '1978-29-05', email: 'alice@example.com',
                 password: '123456', password_confirmation: '123456' }])
+
+Devise::Mailer.perform_deliveries = false
