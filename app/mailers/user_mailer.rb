@@ -1,3 +1,3 @@
 class UserMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: ENV['GMAIL_USER_ID']
 end
