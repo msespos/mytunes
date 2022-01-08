@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.avatar.attach(params[:avatar])
     if @user.update(user_params)
       flash[:notice] = 'You updated your profile!'
       redirect_to users_index_path
@@ -27,6 +28,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :project_name, :location,
-                                 :favorite_artist, :birthday)
+                                 :favorite_artist, :birthday, :avatar)
   end
 end

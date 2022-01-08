@@ -3,6 +3,8 @@
 <%= form_with model: @user, method: :patch do |f| %>
   <div class="py-8">
     <p class="font-extrabold text-6xl">
+      <%= f.label :profile_photo %><br>
+      <%= f.file_field :avatar %><br>
       <%= f.label :name %><br>
       <%= f.text_field :name %><br>
       <%= f.label :project_name %><br>

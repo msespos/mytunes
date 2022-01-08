@@ -3,7 +3,7 @@
 <div class="py-8">
   <p class="font-extrabold text-6xl">
     <%= @user.name %>'s Profile<br><br>
-    <%= gravatar_for @user %><br>
+    <image src="<%= url_for @user.avatar %>" width="150" height=auto><br>
     Project: <%= @user.project_name %><br>
     Location: <%= @user.location %><br>
     Favorite artist: <%= @user.favorite_artist %><br>
