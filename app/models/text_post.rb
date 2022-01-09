@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# Post class
-class Post < ApplicationRecord
+# TextPost class
+class TextPost < ApplicationRecord
   belongs_to :user
   has_many :likes
   has_many :comments
@@ -11,6 +11,6 @@ class Post < ApplicationRecord
   end
 
   def number_of_likes
-    Like.all.where(post_id: id).count
+    Like.all.where(text_post_id: id).count
   end
 end

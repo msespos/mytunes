@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_08_194729) do
+ActiveRecord::Schema.define(version: 2022_01_09_151201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2022_01_08_194729) do
     t.bigint "user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
+  create_table "text_posts", force: :cascade do |t|
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 2022_01_08_194729) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "text_posts", column: "post_id"
   add_foreign_key "comments", "users"
   add_foreign_key "friendships", "users", column: "requested_user_id"
   add_foreign_key "friendships", "users", column: "requesting_user_id"
-  add_foreign_key "likes", "posts"
+  add_foreign_key "likes", "text_posts", column: "post_id"
   add_foreign_key "likes", "users"
-  add_foreign_key "posts", "users"
+  add_foreign_key "text_posts", "users"
 end

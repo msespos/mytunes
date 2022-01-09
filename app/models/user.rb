@@ -11,7 +11,7 @@ class User < ApplicationRecord
                                          foreign_key: :requesting_user_id
   has_many :requested_user_friendships, class_name: 'Friendship',
                                         foreign_key: :requested_user_id
-  has_many :posts
+  has_many :text_posts
   has_many :likes
   has_many :comments
   has_one_attached :avatar
