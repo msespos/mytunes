@@ -3,5 +3,5 @@
 # Like class
 class Like < ApplicationRecord
   belongs_to :user
-  belongs_to :text_post
+  belongs_to :post, polymorphic: true
 end

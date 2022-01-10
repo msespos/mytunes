@@ -3,7 +3,7 @@
 # TextPost class
 class TextPost < ApplicationRecord
   belongs_to :user
-  has_many :likes
+  has_many :likes, as: :post
   has_many :comments
 
   def viewable_by?(current_user)
@@ -11,6 +11,6 @@ class TextPost < ApplicationRecord
   end
 
   def number_of_likes
-    Like.all.where(text_post_id: id).count
+    Like.all.where(post_id: id).count
   end
 end
