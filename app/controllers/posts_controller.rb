@@ -3,17 +3,17 @@
 # Posts controller class
 class PostsController < ApplicationController
   def index
-    @viewable_posts = Post.order('created_at DESC').select do |p|
+    @viewable_posts = TextPost.order('created_at DESC').select do |p|
       p.viewable_by?(current_user)
     end
   end
 
   def new
-    @post = Post.new
+    @post = TextPost.new
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = TextPost.new(post_params)
     @post.user_id = current_user.id
     if @post.save
       flash[:notice] = 'Post created!'
