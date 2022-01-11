@@ -1,23 +1,23 @@
 # frozen_string_literal: true
 
-# Posts controller class
-class PostsController < ApplicationController
+# TextPosts controller class
+class TextPostsController < ApplicationController
   def index
-    @viewable_posts = TextPost.order('created_at DESC').select do |p|
+    @viewable_text_posts = TextPost.order('created_at DESC').select do |p|
       p.viewable_by?(current_user)
     end
   end
 
   def new
-    @post = TextPost.new
+    @text_post = TextPost.new
   end
 
   def create
-    @post = TextPost.new(post_params)
-    @post.user_id = current_user.id
-    if @post.save
+    @text_post = TextPost.new(text_post_params)
+    @text_post.user_id = current_user.id
+    if @text_post.save
       flash[:notice] = 'Post created!'
-      redirect_to posts_path
+      redirect_to text_posts_path
     else
       flash[:notice] = 'Error - could not process post creation'
       render 'new'
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
                      else
                        'Error - could not process like'
                      end
-    redirect_to posts_path
+    redirect_to text_posts_path
   end
 
   def comment
@@ -43,12 +43,12 @@ class PostsController < ApplicationController
                      else
                        'Error - could not process comment'
                      end
-    redirect_to posts_path
+    redirect_to text_posts_path
   end
 
   private
 
-  def post_params
+  def text_post_params
     params.require(:post).permit(:body)
   end
 
