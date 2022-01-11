@@ -27,6 +27,7 @@ class TextPostsController < ApplicationController
   def like
     @like = Like.new(like_params)
     @like.user_id = current_user.id
+    @like.post = TextPost.find(like_params[:post_id])
     flash[:notice] = if @like.save
                        'You liked a post!'
                      else
@@ -38,6 +39,7 @@ class TextPostsController < ApplicationController
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
+    @comment.post = TextPost.find(comment_params[:post_id])
     flash[:notice] = if @comment.save
                        'You commented on a post!'
                      else
