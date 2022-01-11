@@ -3,5 +3,5 @@
 # Comment class
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :text_post, polymorphic: true
+  belongs_to :post, polymorphic: true
 end
