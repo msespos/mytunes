@@ -3,13 +3,15 @@
 <div class="py-8">
   <p class="font-extrabold text-6xl">
     <%= @user.name %>'s Profile<br><br>
-    <image src="<%= url_for @user.avatar %>" width="150" height=auto><br>
+    <% if @user.avatar.attached? %>
+      <image src="<%= url_for @user.avatar %>" width="150" height=auto><br>
+    <% end %>
     Project: <%= @user.project_name %><br>
     Location: <%= @user.location %><br>
     Favorite artist: <%= @user.favorite_artist %><br>
     Birthday: <%= @user.birthday %><br><br>
     Posts<br>
-    <% @user.posts.each do |p| %>
+    <% @user.text_posts.each do |p| %>
       <%= p.body %><br>
       <%= p.created_at %><br>
     <% end %><br>
