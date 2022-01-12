@@ -19,4 +19,4 @@ module Users
   end
 end
 
-# rubocop: enable Metrics/AbcSize
+# rubocop:enable Metrics/AbcSize
