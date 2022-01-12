@@ -51,7 +51,7 @@ class TextPostsController < ApplicationController
   private
 
   def text_post_params
-    params.require(:post).permit(:body)
+    params.require(:text_post).permit(:body)
   end
 
   def like_params
