@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # migration
 class AddUserForeignKeyToImagePosts < ActiveRecord::Migration[6.1]
   def change
