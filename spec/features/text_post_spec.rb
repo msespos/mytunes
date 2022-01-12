@@ -16,8 +16,8 @@ RSpec.describe 'Create a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     expect(page).to have_content('My Post')
   end
 
@@ -27,8 +27,8 @@ RSpec.describe 'Create a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     expect(page).to have_content('Post created!')
   end
 
@@ -38,8 +38,8 @@ RSpec.describe 'Create a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     expect(page).to have_content('m:ke')
   end
 end

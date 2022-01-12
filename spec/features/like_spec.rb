@@ -16,8 +16,8 @@ RSpec.describe 'Like a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     expect(page).to have_content('Like')
   end
 
@@ -27,8 +27,8 @@ RSpec.describe 'Like a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     click_on 'Like'
     expect(page).to have_content('1 Like')
   end
@@ -39,8 +39,8 @@ RSpec.describe 'Like a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     click_on 'Like'
     click_on 'All'
     click_on 'Make'

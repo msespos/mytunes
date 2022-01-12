@@ -16,8 +16,8 @@ RSpec.describe 'Comment on a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     expect(page).to have_content('Comment')
   end
 
@@ -27,8 +27,8 @@ RSpec.describe 'Comment on a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     fill_in 'comment[body]', with: 'My Comment'
     click_on 'Create Comment'
     expect(page).to have_content('My Comment')
@@ -40,8 +40,8 @@ RSpec.describe 'Comment on a post', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'New Post'
-    fill_in 'post[body]', with: 'My Post'
-    click_on 'Create Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Create Text post'
     fill_in 'comment[body]', with: 'My Second Comment'
     click_on 'Create Comment'
     click_on 'All'

@@ -12,6 +12,7 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
   scenario 'sign up' do
     visit root_path
     click_on 'Sign up'
+    fill_in 'Name', with: 'Katie'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
@@ -22,6 +23,7 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
   scenario 'sign up and update profile' do
     visit root_path
     click_on 'Sign up'
+    fill_in 'Name', with: 'Alicia'
     fill_in 'Email', with: 'alice@example.com'
     fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
