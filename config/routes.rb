@@ -23,4 +23,11 @@ Rails.application.routes.draw do
       post 'comment'
     end
   end
+
+  resources :image_posts, only: %i[new create] do
+    collection do
+      post 'like'
+      post 'comment'
+    end
+  end
 end
