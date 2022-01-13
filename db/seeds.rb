@@ -54,4 +54,54 @@ User.create!([{ name: 'm:ke', project_name: 'blanket forts',
                 birthday: '1978-29-05', email: 'alice@example.com',
                 password: '123456', password_confirmation: '123456' }])
 
-Devise::Mailer.perform_deliveries = false
+TextPost.create!([{ user_id: 1, body: 'Happy New Year!' },
+                  { user_id: 2, body: 'Basscadet rocks!' },
+                  { user_id: 3, body: 'I love Depeche Mode!' },
+                  { user_id: 1, body: 'Everybody have fun tonight' },
+                  { user_id: 2, body: "How's your app coming along Mike?" },
+                  { user_id: 3, body: "I've been using Max/MSP a lot lately" },
+                  { user_id: 4, body: 'My new album is out any month now' },
+                  { user_id: 5, body: 'Jump!' },
+                  { user_id: 6, body: "I promise I'll come out with another album soon" }])
+
+Friendship.create!([{ requesting_user_id: 1, requested_user_id: 2, confirmed: true },
+                    { requesting_user_id: 1, requested_user_id: 3, confirmed: true },
+                    { requesting_user_id: 2, requested_user_id: 3, confirmed: true },
+                    { requesting_user_id: 4, requested_user_id: 5, confirmed: true },
+                    { requesting_user_id: 5, requested_user_id: 6, confirmed: true },
+                    { requesting_user_id: 6, requested_user_id: 6, confirmed: true },
+                    { requesting_user_id: 1, requested_user_id: 4, confirmed: true },
+                    { requesting_user_id: 1, requested_user_id: 5, confirmed: true },
+                    { requesting_user_id: 1, requested_user_id: 6, confirmed: true }])
+
+Like.create!([{ post_id: 1, user_id: 2, post_type: 'TextPost' },
+              { post_id: 1, user_id: 3, post_type: 'TextPost' },
+              { post_id: 1, user_id: 4, post_type: 'TextPost' },
+              { post_id: 1, user_id: 5, post_type: 'TextPost' },
+              { post_id: 1, user_id: 6, post_type: 'TextPost' },
+              { post_id: 2, user_id: 3, post_type: 'TextPost' },
+              { post_id: 2, user_id: 1, post_type: 'TextPost' },
+              { post_id: 8, user_id: 1, post_type: 'TextPost' },
+              { post_id: 8, user_id: 5, post_type: 'TextPost' },
+              { post_id: 8, user_id: 6, post_type: 'TextPost' }])
+
+Comment.create!([{ post_id: 1, user_id: 2, post_type: 'TextPost',
+                   body: 'YAY!' },
+                 { post_id: 1, user_id: 3, post_type: 'TextPost',
+                   body: 'Hooray for 2022!' },
+                 { post_id: 1, user_id: 4, post_type: 'TextPost',
+                   body: 'Super!' },
+                 { post_id: 1, user_id: 5, post_type: 'TextPost',
+                   body: 'Jump!' },
+                 { post_id: 1, user_id: 6, post_type: 'TextPost',
+                   body: 'Fantastic!' },
+                 { post_id: 5, user_id: 1, post_type: 'TextPost',
+                   body: "You know, it's fine" },
+                 { post_id: 5, user_id: 2, post_type: 'TextPost',
+                   body: "I bet it's great!" },
+                 { post_id: 5, user_id: 3, post_type: 'TextPost',
+                   body: "Keep it up!" },
+                 { post_id: 9, user_id: 1, post_type: 'TextPost',
+                   body: 'I sure hope so!' }])
+    
+Devise::Mailer.perform_deliveries = true
