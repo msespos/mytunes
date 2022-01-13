@@ -100,8 +100,8 @@ Comment.create!([{ post_id: 1, user_id: 2, post_type: 'TextPost',
                  { post_id: 5, user_id: 2, post_type: 'TextPost',
                    body: "I bet it's great!" },
                  { post_id: 5, user_id: 3, post_type: 'TextPost',
-                   body: "Keep it up!" },
+                   body: 'Keep it up!' },
                  { post_id: 9, user_id: 1, post_type: 'TextPost',
                    body: 'I sure hope so!' }])
-    
+
 Devise::Mailer.perform_deliveries = true

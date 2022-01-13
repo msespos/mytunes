@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ImagePosts controller class
 class ImagePostsController < ApplicationController
   def new
     @image_post = ImagePost.new
