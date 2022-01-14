@@ -1,0 +1,11 @@
+<%= render 'shared/navbar' %>
+
+<%= form_with model: @image_post do |f| %>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      <%= f.label :image %><br>
+      <%= f.file_field :image %><br>
+      <%= f.submit "Post Image" %>
+    </p>
+  </div>
+<% end %>
