@@ -18,7 +18,7 @@
       <%= p.created_at %><br>
       <% if current_user.likes.where(post_id: p.id).empty? %>
         <%= link_to 'Like',
-          like_text_posts_path(
+          like_posts_path(
             like: { post_id: p.id }),
             method: :post %><br>
       <% end %>
@@ -35,7 +35,7 @@
       <% end %>
     </p>
   </div>
-  <%= form_with model: Comment.new, url: comment_text_posts_path do |f| %>
+  <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
     <div class="py-8">
       <p class="font-extrabold text-4xl">
         <%= f.hidden_field :post_id, value: p.id %>
