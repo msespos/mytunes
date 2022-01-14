@@ -10,19 +10,26 @@
   <div class="py-8">
     <p class="font-extrabold text-6xl">
       <%= p.user.name %><br>
-      <% if p.has_attribute?(:body) %>
+      <% if p.class.name == 'TextPost' %>
         <%= p.body %><br>
+        <%= p.created_at %><br>
+        <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
+          <%= link_to 'Like',
+            like_posts_path(
+              like: { post_id: p.id, post_type: "TextPost" }),
+              method: :post %><br>
+        <% end %>
+        <%= pluralize(p.number_of_text_likes, 'Like') %><br>
       <% else %>
         <image src="<%= url_for p.image %>" width="500" height=auto>
+        <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
+          <%= link_to 'Like',
+            like_posts_path(
+              like: { post_id: p.id, post_type: "ImagePost" }),
+              method: :post %><br>
+        <% end %>
+        <%= pluralize(p.number_of_image_likes, 'Like') %><br>
       <% end %>
-      <%= p.created_at %><br>
-      <% if current_user.likes.where(post_id: p.id).empty? %>
-        <%= link_to 'Like',
-          like_posts_path(
-            like: { post_id: p.id }),
-            method: :post %><br>
-      <% end %>
-      <%= pluralize(p.number_of_likes, 'Like') %><br>
     </p>
   </div>
   <div class="py-8">
