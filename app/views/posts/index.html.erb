@@ -46,6 +46,7 @@
     <div class="py-8">
       <p class="font-extrabold text-4xl">
         <%= f.hidden_field :post_id, value: p.id %>
+        <%= f.hidden_field :post_type, value: p.class.name %>
         <%= f.label :comment %><br>
         <%= f.text_area :body %>
         <%= f.submit %>
