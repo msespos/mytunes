@@ -2,12 +2,6 @@
 
 # TextPosts controller class
 class TextPostsController < ApplicationController
-  def index
-    @viewable_text_posts = TextPost.order('created_at DESC').select do |p|
-      p.viewable_by?(current_user)
-    end
-  end
-
   def new
     @text_post = TextPost.new
   end
