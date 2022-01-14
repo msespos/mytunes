@@ -17,8 +17,10 @@ class ImagePostsController < ApplicationController
       render 'new'
     end
   end
-end
 
-def image_post_params
-  params.require(:image_post).permit(:image)
+  private
+
+  def image_post_params
+    params.require(:image_post).permit(:image)
+  end
 end
