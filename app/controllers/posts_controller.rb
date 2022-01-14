@@ -9,7 +9,13 @@ class PostsController < ApplicationController
   def like
     @like = Like.new(like_params)
     @like.user_id = current_user.id
-    @like.post = TextPost.find(like_params[:post_id])
+    if like_params[:post_type] == "TextPost"
+      @like.post = TextPost.find(like_params[:post_id])
+      @like.post_type = "TextPost"
+    else
+      @like.post = ImagePost.find(like_params[:post_id])
+      @like.post_type = "ImagePost"
+    end
     flash[:notice] = if @like.save
                        'You liked a post!'
                      else
@@ -33,7 +39,7 @@ class PostsController < ApplicationController
   private
 
   def like_params
-    params.require(:like).permit(:post_id)
+    params.require(:like).permit(:post_id, :post_type)
   end
 
   def comment_params
