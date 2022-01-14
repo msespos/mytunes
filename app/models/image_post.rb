@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ImagePost class
 class ImagePost < ApplicationRecord
   belongs_to :user
   has_many :likes, as: :post
@@ -10,7 +11,7 @@ class ImagePost < ApplicationRecord
     user == current_user || current_user.friends.include?(user)
   end
 
-  def number_of_likes
-    Like.all.where(post_id: id).count
+  def number_of_image_likes
+    Like.all.where(post_id: id, post_type: "ImagePost").count
   end
 end
