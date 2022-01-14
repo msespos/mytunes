@@ -11,7 +11,7 @@ class TextPostsController < ApplicationController
     @text_post.user_id = current_user.id
     if @text_post.save
       flash[:notice] = 'Post created!'
-      redirect_to text_posts_path
+      redirect_to posts_path
     else
       flash[:notice] = 'Error - could not process post creation'
       render 'new'
@@ -27,7 +27,7 @@ class TextPostsController < ApplicationController
                      else
                        'Error - could not process like'
                      end
-    redirect_to text_posts_path
+    redirect_to posts_path
   end
 
   def comment
@@ -39,7 +39,7 @@ class TextPostsController < ApplicationController
                      else
                        'Error - could not process comment'
                      end
-    redirect_to text_posts_path
+    redirect_to posts_path
   end
 
   private
