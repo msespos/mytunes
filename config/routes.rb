@@ -17,19 +17,14 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :posts, only: :index
-
-  resources :text_posts, only: %i[new create] do
+  resources :posts, only: :index do
     collection do
       post 'like'
       post 'comment'
     end
   end
 
-  resources :image_posts, only: %i[new create] do
-    collection do
-      post 'like'
-      post 'comment'
-    end
-  end
+  resources :text_posts, only: %i[new create]
+
+  resources :image_posts, only: %i[new create]
 end
