@@ -10,7 +10,7 @@ class TextPost < ApplicationRecord
     user == current_user || current_user.friends.include?(user)
   end
 
-  def number_of_likes
-    Like.all.where(post_id: id).count
+  def number_of_text_likes
+    Like.all.where(post_id: id, post_type: "TextPost").count
   end
 end
