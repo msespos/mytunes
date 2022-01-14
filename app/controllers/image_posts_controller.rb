@@ -11,7 +11,7 @@ class ImagePostsController < ApplicationController
     @image_post.user_id = current_user.id
     if @image_post.save
       flash[:notice] = 'Post created!'
-      redirect_to image_posts_path
+      redirect_to posts_path
     else
       flash[:notice] = 'Error - could not process post creation'
       render 'new'
