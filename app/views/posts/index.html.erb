@@ -10,7 +10,11 @@
   <div class="py-8">
     <p class="font-extrabold text-6xl">
       <%= p.user.name %><br>
-      <%= p.body %><br>
+      <% if p.has_attribute?(:body) %>
+        <%= p.body %><br>
+      <% else %>
+        <image src="<%= url_for p.image %>" width="500" height=auto>
+      <% end %>
       <%= p.created_at %><br>
       <% if current_user.likes.where(post_id: p.id).empty? %>
         <%= link_to 'Like',
