@@ -17,6 +17,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :posts, only: :index
+
   resources :text_posts, only: %i[index new create] do
     collection do
       post 'like'
