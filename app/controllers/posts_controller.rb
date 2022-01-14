@@ -27,7 +27,13 @@ class PostsController < ApplicationController
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    @comment.post = TextPost.find(comment_params[:post_id])
+    if comment_params[:post_type] == "TextPost"
+      @comment.post = TextPost.find(comment_params[:post_id])
+      @comment.post_type = "TextPost"
+    else
+      @comment.post = ImagePost.find(comment_params[:post_id])
+      @comment.post_type = "ImagePost"
+    end
     flash[:notice] = if @comment.save
                        'You commented on a post!'
                      else
@@ -43,6 +49,6 @@ class PostsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:post_id, :body)
+    params.require(:comment).permit(:post_id, :post_type, :body)
   end
 end
