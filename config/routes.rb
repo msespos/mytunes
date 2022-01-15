@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   resources :text_posts, only: %i[new create]
 
   resources :image_posts, only: %i[new create]
+
+  resources :audio_posts, only: %i[new create]
 end
