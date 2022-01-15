@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Metrics/MethodLength
+
+# Posts controller class
 class PostsController < ApplicationController
   def index
     posts = TextPost.all + ImagePost.all
@@ -9,12 +15,12 @@ class PostsController < ApplicationController
   def like
     @like = Like.new(like_params)
     @like.user_id = current_user.id
-    if like_params[:post_type] == "TextPost"
+    if like_params[:post_type] == 'TextPost'
       @like.post = TextPost.find(like_params[:post_id])
-      @like.post_type = "TextPost"
+      @like.post_type = 'TextPost'
     else
       @like.post = ImagePost.find(like_params[:post_id])
-      @like.post_type = "ImagePost"
+      @like.post_type = 'ImagePost'
     end
     flash[:notice] = if @like.save
                        'You liked a post!'
@@ -27,12 +33,12 @@ class PostsController < ApplicationController
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    if comment_params[:post_type] == "TextPost"
+    if comment_params[:post_type] == 'TextPost'
       @comment.post = TextPost.find(comment_params[:post_id])
-      @comment.post_type = "TextPost"
+      @comment.post_type = 'TextPost'
     else
       @comment.post = ImagePost.find(comment_params[:post_id])
-      @comment.post_type = "ImagePost"
+      @comment.post_type = 'ImagePost'
     end
     flash[:notice] = if @comment.save
                        'You commented on a post!'
@@ -52,3 +58,6 @@ class PostsController < ApplicationController
     params.require(:comment).permit(:post_id, :post_type, :body)
   end
 end
+
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Metrics/MethodLength

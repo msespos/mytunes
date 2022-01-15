@@ -11,6 +11,6 @@ class TextPost < ApplicationRecord
   end
 
   def number_of_text_likes
-    Like.all.where(post_id: id, post_type: "TextPost").count
+    Like.all.where(post_id: id, post_type: 'TextPost').count
   end
 end

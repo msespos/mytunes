@@ -12,6 +12,6 @@ class ImagePost < ApplicationRecord
   end
 
   def number_of_image_likes
-    Like.all.where(post_id: id, post_type: "ImagePost").count
+    Like.all.where(post_id: id, post_type: 'ImagePost').count
   end
 end
