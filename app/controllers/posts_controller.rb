@@ -6,7 +6,7 @@
 # Posts controller class
 class PostsController < ApplicationController
   def index
-    posts = TextPost.all + ImagePost.all
+    posts = TextPost.all + ImagePost.all + AudioPost.all
     @viewable_posts = posts.sort { |x, y| y.created_at <=> x.created_at }.select do |p|
       p.viewable_by?(current_user)
     end
@@ -18,9 +18,12 @@ class PostsController < ApplicationController
     if like_params[:post_type] == 'TextPost'
       @like.post = TextPost.find(like_params[:post_id])
       @like.post_type = 'TextPost'
-    else
+    elsif like_params[:post_type] == 'ImagePost'
       @like.post = ImagePost.find(like_params[:post_id])
       @like.post_type = 'ImagePost'
+    else
+      @like.post = AudioPost.find(like_params[:post_id])
+      @like.post_type = 'AudioPost'
     end
     flash[:notice] = if @like.save
                        'You liked a post!'
@@ -36,9 +39,12 @@ class PostsController < ApplicationController
     if comment_params[:post_type] == 'TextPost'
       @comment.post = TextPost.find(comment_params[:post_id])
       @comment.post_type = 'TextPost'
-    else
+    elsif comment_params[:post_type] == 'ImagePost'
       @comment.post = ImagePost.find(comment_params[:post_id])
       @comment.post_type = 'ImagePost'
+    else
+      @comment.post = AudioPost.find(comment_params[:post_id])
+      @comment.post_type = 'AudioPost'
     end
     flash[:notice] = if @comment.save
                        'You commented on a post!'
