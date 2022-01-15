@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# AudioPost class
 class AudioPost < ApplicationRecord
   belongs_to :user
   has_many :likes, as: :post
