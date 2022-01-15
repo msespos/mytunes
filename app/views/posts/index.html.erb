@@ -20,7 +20,7 @@
               method: :post %><br>
         <% end %>
         <%= pluralize(p.number_of_text_likes, 'Like') %><br>
-      <% else %>
+      <% elsif p.class.name == 'ImagePost' %>
         <image src="<%= url_for p.image %>" width="500" height=auto>
         <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
           <%= link_to 'Like',
@@ -29,6 +29,15 @@
               method: :post %><br>
         <% end %>
         <%= pluralize(p.number_of_image_likes, 'Like') %><br>
+      <% else %>
+        <audio src="<%= url_for p.audio %>" controls></audio>
+        <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
+          <%= link_to 'Like',
+            like_posts_path(
+              like: { post_id: p.id, post_type: "AudioPost" }),
+              method: :post %><br>
+        <% end %>
+        <%= pluralize(p.number_of_audio_likes, 'Like') %><br>
       <% end %>
     </p>
   </div>
