@@ -1,0 +1,2 @@
+class AudioPostsController < ApplicationController
+end
