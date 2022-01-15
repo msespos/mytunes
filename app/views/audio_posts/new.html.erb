@@ -1,0 +1,11 @@
+<%= render 'shared/navbar' %>
+
+<%= form_with model: @audio_post do |f| %>
+  <div class="py-8">
+    <p class="font-extrabold text-6xl">
+      <%= f.label :audio %><br>
+      <%= f.file_field :audio %><br>
+      <%= f.submit "Post Audio" %>
+    </p>
+  </div>
+<% end %>
