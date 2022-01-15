@@ -5,7 +5,7 @@ class AudioPost < ApplicationRecord
   belongs_to :user
   has_many :likes, as: :post
   has_many :comments, as: :post
-  has_one_attached :sound
+  has_one_attached :audio
 
   def viewable_by?(current_user)
     user == current_user || current_user.friends.include?(user)
