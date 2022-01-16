@@ -19,7 +19,7 @@ class UsersController < ApplicationController
     @user.avatar.attach(params[:avatar])
     if @user.update(user_params)
       flash[:notice] = 'You updated your profile!'
-      redirect_to users_index_path
+      redirect_to user_path
     else
       flash[:notice] = 'Error - could not process profile update'
       render 'edit'
