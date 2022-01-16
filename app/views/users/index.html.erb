@@ -1,9 +1,9 @@
 <%= render 'shared/navbar' %>
 
 <div class="py-8">
-  <p class="font-extrabold text-6xl">
+  <p class="font-extrabold text-2xl">
     Logged in as <%= current_user.name %><br><br>
-    All Users<br>
+    Everybody<br>
     <% @users.each do |u| %>
       <% unless u == current_user %>
         <%= link_to u.name, user_path(u.id) %> -
