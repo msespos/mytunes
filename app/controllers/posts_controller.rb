@@ -15,10 +15,11 @@ class PostsController < ApplicationController
   def like
     @like = Like.new(like_params)
     @like.user_id = current_user.id
-    if like_params[:post_type] == 'TextPost'
+    case like_params[:post_type]
+    when 'TextPost'
       @like.post = TextPost.find(like_params[:post_id])
       @like.post_type = 'TextPost'
-    elsif like_params[:post_type] == 'ImagePost'
+    when 'ImagePost'
       @like.post = ImagePost.find(like_params[:post_id])
       @like.post_type = 'ImagePost'
     else
@@ -36,10 +37,11 @@ class PostsController < ApplicationController
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    if comment_params[:post_type] == 'TextPost'
+    case comment_params[:post_type]
+    when 'TextPost'
       @comment.post = TextPost.find(comment_params[:post_id])
       @comment.post_type = 'TextPost'
-    elsif comment_params[:post_type] == 'ImagePost'
+    when 'ImagePost'
       @comment.post = ImagePost.find(comment_params[:post_id])
       @comment.post_type = 'ImagePost'
     else
