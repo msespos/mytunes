@@ -1,43 +1,48 @@
 <body class="bg-indigo-900">
+  <div class="m-4 md:m-32 flex justify-center items-center">
+    <div class="ml-32 flex-col m-8">
 
-<%= image_tag 'logo', class: "w-36 m-4 rounded-xl" %>
+      <h2 class="my-4 md:my-16 text-yellow-200 text-4xl font-bold">Log in</h2>
 
-<h2 class="m-4 text-yellow-200 text-4xl font-bold">Log in</h2>
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <span class="text-indigo-300">Don't have an account?</span>
+        <%= link_to "Sign up", new_registration_path(resource_name), class: "text-red-500 hover:text-red-400 text-1xl" %><br />
+      <% end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <span class="ml-4 text-indigo-300">Don't have an account?</span>
-  <%= link_to "Sign up", new_registration_path(resource_name), class: "text-red-500 text-1xl font-bold" %><br />
-<% end %>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="field">
+          <%= f.label :email, class: "my-4 text-yellow-200 text-2xl font-bold" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 my-4 rounded-xl" %>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email, class: "m-4 text-yellow-200 text-2xl font-bold" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 m-4 rounded" %>
-  </div>
+        <div class="field">
+          <%= f.label :password, class: "my-4 text-yellow-200 text-2xl font-bold" %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 my-4 rounded-xl" %>
+        </div>
 
-  <div class="field">
-    <%= f.label :password, class: "m-4 text-yellow-200 text-2xl font-bold" %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 m-4 rounded" %>
-  </div>
+        <% if devise_mapping.rememberable? %>
+          <div class="field text-indigo-300">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+          </div>
+        <% end %>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <div class="actions">
+          <%= f.submit "Log in", class: "w-full bg-purple-900 hover:bg-purple-600 outline outline-black text-white font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post, class: "text-red-500 hover:text-red-400 text-1xl" %>
+      </div>
+
+      <%= render "devise/shared/links" %>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in", class: "bg-purple-900 hover:bg-purple-400 outline outline-black text-white font-bold py-2 px-4 m-4 rounded hover:cursor-pointer" %>
+    <div class="flex-col">
+      <%= image_tag 'logo', class: "ml-4 md:ml-32 w-24 md:w-96 my-4 rounded-xl" %>
+      <p class="ml-4 md:ml-32 mr-32 flex-wrap text-yellow-200 text:2xl md:text-6xl">myTunes is a revolutionary new platform that takes everything you thought you knew about social media and flips it inside out. Prepare to have your mind blown.</p>
+    </div>
+
   </div>
-<% end %>
-
-<div class="actions">
-  <div class="ml-4"></div>
-  <%= link_to "Sign in", user_google_oauth2_omniauth_authorize_path, method: :post, class: "ml-4 text-red-500 text-1xl font-bold" %>
-   with Google
-</div>
-
-<%= render "devise/shared/links" %>
-
 </body>
