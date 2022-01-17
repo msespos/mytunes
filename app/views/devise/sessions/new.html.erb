@@ -1,15 +1,22 @@
-<%= image_tag 'logo', class: "w-36 m-4" %>
+<body class="bg-indigo-900">
 
-<h2 class="m-4 text-purple-800 text-1xl font-bold">Log in:</h2>
+<%= image_tag 'logo', class: "w-36 m-4 rounded-xl" %>
+
+<h2 class="m-4 text-yellow-200 text-4xl font-bold">Log in</h2>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <span class="ml-4 text-indigo-300">Don't have an account?</span>
+  <%= link_to "Sign up", new_registration_path(resource_name), class: "text-red-500 text-1xl font-bold" %><br />
+<% end %>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
-    <%= f.label :email, class: "m-4 text-purple-800 text-2xl font-bold" %><br />
+    <%= f.label :email, class: "m-4 text-yellow-200 text-2xl font-bold" %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 m-4 rounded" %>
   </div>
 
   <div class="field">
-    <%= f.label :password, class: "m-4 text-purple-800 text-2xl font-bold" %><br />
+    <%= f.label :password, class: "m-4 text-yellow-200 text-2xl font-bold" %><br />
     <%= f.password_field :password, autocomplete: "current-password", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 m-4 rounded" %>
   </div>
 
@@ -21,14 +28,16 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in", class: "bg-purple-900 hover:bg-purple-800 text-white font-bold py-2 px-4 m-4 rounded hover:cursor-pointer" %>
+    <%= f.submit "Log in", class: "bg-purple-900 hover:bg-purple-400 outline outline-black text-white font-bold py-2 px-4 m-4 rounded hover:cursor-pointer" %>
   </div>
 <% end %>
 
 <div class="actions">
-  <div class="ml-4">or</div>
-  <%= link_to "Sign in", user_google_oauth2_omniauth_authorize_path, method: :post, class: "ml-4 text-purple-800 text-2xl font-bold" %>
+  <div class="ml-4"></div>
+  <%= link_to "Sign in", user_google_oauth2_omniauth_authorize_path, method: :post, class: "ml-4 text-red-500 text-1xl font-bold" %>
    with Google
 </div>
 
 <%= render "devise/shared/links" %>
+
+</body>
