@@ -42,7 +42,7 @@ RSpec.describe 'Like a post', type: :feature do
     fill_in 'text_post[body]', with: 'My Post'
     click_on 'Create Text post'
     click_on 'Like'
-    click_on 'All'
+    click_on 'Everybody'
     click_on 'Make'
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
@@ -50,7 +50,7 @@ RSpec.describe 'Like a post', type: :feature do
     click_on 'Log in'
     click_on 'Pending'
     click_on 'Confirm'
-    click_on 'myTunes'
+    click_on 'My Feed'
     click_on 'Like'
     expect(page).to have_content('2 Likes')
   end

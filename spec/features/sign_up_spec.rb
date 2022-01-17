@@ -30,7 +30,7 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
     click_on 'Sign up'
     fill_in 'Name', with: 'Alice'
     click_on 'Update User'
-    expect(page).to have_content('Logged in as Alice')
+    expect(page).to have_content("Alice's Profile")
   end
 
   scenario 'sign in and update profile' do
