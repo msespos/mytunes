@@ -1,8 +1,8 @@
 <body class="bg-indigo-900">
-  <div class="m-4 md:m-32 flex justify-center items-center">
-    <div class="ml-32 flex-col m-8">
+  <div class="m-4 md:m-32 flex-row md:flex justify-center items-center">
+    <div class="ml-0 md:ml-32 flex-col">
 
-      <h2 class="my-4 md:my-16 text-yellow-200 text-4xl font-bold">Log in</h2>
+      <h2 class="mt-4 md:mt-8 text-yellow-200 text-4xl font-bold">Log in</h2>
 
       <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
         <span class="text-indigo-300">Don't have an account?</span>
@@ -10,25 +10,25 @@
       <% end %>
 
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <div class="field">
-          <%= f.label :email, class: "my-4 text-yellow-200 text-2xl font-bold" %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 my-4 rounded-xl" %>
+        <div class="field mt-6">
+          <%= f.label :email, class: "text-yellow-200 text-2xl font-bold" %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-2 mb-3 rounded-xl" %>
         </div>
 
-        <div class="field">
+        <div class="field mt-6">
           <%= f.label :password, class: "my-4 text-yellow-200 text-2xl font-bold" %><br />
-          <%= f.password_field :password, autocomplete: "current-password", class: "bg-purple-300 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 my-4 rounded-xl" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-2 mb-3 rounded-xl" %>
         </div>
 
         <% if devise_mapping.rememberable? %>
-          <div class="field text-indigo-300">
+          <div class="field text-indigo-300 mt-6">
             <%= f.check_box :remember_me %>
             <%= f.label :remember_me %>
           </div>
         <% end %>
 
         <div class="actions">
-          <%= f.submit "Log in", class: "w-full bg-purple-900 hover:bg-purple-600 outline outline-black text-white font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
+          <%= f.submit "Log in", class: "w-96 bg-purple-800 hover:bg-purple-600 border-2 border-solid border-purple-900 text-white font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
         </div>
       <% end %>
 
@@ -40,8 +40,8 @@
     </div>
 
     <div class="flex-col">
-      <%= image_tag 'logo', class: "ml-4 md:ml-32 w-24 md:w-96 my-4 rounded-xl" %>
-      <p class="ml-4 md:ml-32 mr-32 flex-wrap text-yellow-200 text:2xl md:text-6xl">myTunes is a revolutionary new platform that takes everything you thought you knew about social media and flips it inside out. Prepare to have your mind blown.</p>
+      <%= image_tag 'logo', class: "ml-4 md:ml-32 w-24 md:w-96 my-4 rounded-l" %>
+      <p class="ml-4 md:ml-32 mt-16 mr-32 flex-wrap text-yellow-200 text:2xl md:text-6xl">myTunes connects musicians with musicians. Post news about your projects, share your latest sounds, or just hang out and talk shop.<br><br>By musicians, for musicians.</p>
     </div>
 
   </div>
