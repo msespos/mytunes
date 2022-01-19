@@ -1,29 +1,48 @@
 <body class="bg-indigo-900">
   <%= render 'shared/navbar' %>
-
-  <div class="ml-12 mt-12">
-    <div class="text-yellow-200 text-2xl font-bold">
-      <div class="text-xl">Logged in as <%= current_user.name %></div>
-      <div class="text-4xl font-extrabold mb-12">Everybody</div>
-      <% @users.each do |u| %>
-        <% unless u == current_user %>
-          <span class="text-4xl hover:text-purple-600"><%= link_to u.name, user_path(u.id) %></span> (
-          <%= u.project_name %> )
-          <% if current_user.can_friend_request? u %>
-            <span class="text-red-500 hover:text-red-400">
-              <%= link_to '- Make Friend Request',
-                friendships_path(
-                  friendship: { requesting_user_id: current_user.id,
-                                requested_user_id: u.id }),
-                  method: :post %>
-            </span>
-          <% elsif current_user.friend_requesting? u %>
-            - Waiting for Friend Confirmation
-          <% else %>
-            - Friends!
-          <% end %><br>
-        <% end %>
-      <% end %><br>
+  <div class="flex-col justify-center max-w-5xl mx-auto">
+    <div class="ml-8 mt-16">
+      <div class="text-yellow-200 text-2xl font-bold">
+        <div class="text-xl">Logged in as <%= current_user.name %></div>
+        <div class="text-6xl font-extrabold">Everybody</div>
+  
+        <div class="my-8">
+          <span class="italic">Friends<br></span>
+          <% @users.each do |u| %>
+            <% if current_user.friends.include? u %>
+              <span class="text-4xl hover:text-purple-600"><%= link_to u.name, user_path(u.id) %></span>
+              (<%= u.project_name %>)<br>
+            <% end %>
+          <% end %>
+        </div>
+  
+        <div class="my-8">
+          <span class="italic">Waiting for Friend Confirmation<br></span>
+          <% @users.each do |u| %>
+            <% if current_user.friend_requesting? u %>
+              <span class="text-4xl hover:text-purple-600"><%= link_to u.name, user_path(u.id) %></span>
+              (<%= u.project_name %>)<br>
+            <% end %>
+          <% end %>
+        </div>
+  
+        <div class="my-8">
+          <span class="italic">Not Friends Yet!<br></span>
+          <% @users.each do |u| %>
+            <% if current_user.can_friend_request? u %>
+              <span class="text-4xl hover:text-purple-600"><%= link_to u.name, user_path(u.id) %></span>
+              (<%= u.project_name %>)
+              <span class="text-red-500 hover:text-red-300">
+                <%= link_to '- Make Friend Request',
+                  friendships_path(
+                    friendship: { requesting_user_id: current_user.id,
+                                  requested_user_id: u.id }),
+                    method: :post %><br>
+              </span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </body>
