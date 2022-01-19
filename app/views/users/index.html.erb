@@ -1,23 +1,29 @@
-<%= render 'shared/navbar' %>
+<body class="bg-indigo-900">
+  <%= render 'shared/navbar' %>
 
-<div class="py-8">
-  <p class="font-extrabold text-2xl">
-    Logged in as <%= current_user.name %><br><br>
-    Everybody<br>
-    <% @users.each do |u| %>
-      <% unless u == current_user %>
-        <%= link_to u.name, user_path(u.id) %> -
-        <%= u.project_name %>
-        <% if current_user.can_friend_request? u %>
-          <%= link_to '- Make Friend Request',
-            friendships_path(
-              friendship: { requesting_user_id: current_user.id,
-                            requested_user_id: u.id }),
-              method: :post %>
-        <% elsif current_user.friend_requesting? u %>
-          - Waiting for Friend Confirmation
-        <% end %><br>
-      <% end %>
-    <% end %><br>
-  </p>
-</div>
+  <div class="ml-12 mt-12">
+    <div class="text-yellow-200 text-2xl font-bold">
+      <div class="text-xl">Logged in as <%= current_user.name %></div>
+      <div class="text-4xl font-extrabold mb-12">Everybody</div>
+      <% @users.each do |u| %>
+        <% unless u == current_user %>
+          <span class="text-4xl hover:text-purple-600"><%= link_to u.name, user_path(u.id) %></span> (
+          <%= u.project_name %> )
+          <% if current_user.can_friend_request? u %>
+            <span class="text-red-500 hover:text-red-400">
+              <%= link_to '- Make Friend Request',
+                friendships_path(
+                  friendship: { requesting_user_id: current_user.id,
+                                requested_user_id: u.id }),
+                  method: :post %>
+            </span>
+          <% elsif current_user.friend_requesting? u %>
+            - Waiting for Friend Confirmation
+          <% else %>
+            - Friends!
+          <% end %><br>
+        <% end %>
+      <% end %><br>
+    </div>
+  </div>
+</body>
