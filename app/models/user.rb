@@ -27,8 +27,8 @@ class User < ApplicationRecord
 
   def can_friend_request?(user)
     Friendship.where('requested_user_id = ? AND requesting_user_id = ?
-                     OR requested_user_id = ? AND requesting_user_id = ?',
-                     id, user.id, user.id, id).empty?
+                      OR requested_user_id = ? AND requesting_user_id = ?',
+                     id, user.id, user.id, id).empty? && id != user.id
   end
 
   def friend_requesting?(user)
