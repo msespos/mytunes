@@ -1,21 +1,31 @@
-<%= render 'shared/navbar' %>
+<body class="bg-indigo-900">
+  <%= render 'shared/navbar' %>
 
-<%= form_with model: @user, method: :patch do |f| %>
-  <div class="py-8">
-    <p class="font-extrabold text-6xl">
-      <%= f.label :profile_photo %><br>
-      <%= f.file_field :avatar %><br>
-      <%= f.label :name %><br>
-      <%= f.text_field :name %><br>
-      <%= f.label :project_name %><br>
-      <%= f.text_field :project_name %><br>
-      <%= f.label :location %><br>
-      <%= f.text_field :location %><br>
-      <%= f.label :favorite_artist %><br>
-      <%= f.text_field :favorite_artist %><br>
-      <%= f.label :birthday %><br>
-      <%= f.date_field :birthday %><br>
-      <%= f.submit %>
-    </p>
+  <div class="flex-row md:flex justify-center">
+    <div class="flex max-w-6xl">
+      <div class="mt-12 mr-64 text-yellow-200 text-4xl font-bold">
+        Edit Your Profile
+      <div class="mt-12 text-yellow-200 text-2xl font-bold">
+        Fill in the form to the right and click Update.
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <%= form_with model: @user, method: :patch do |f| %>
+        <%= f.label :profile_photo, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.file_field :avatar, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.label :name, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.text_field :name,  class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.label :project_name, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.text_field :project_name, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.label :location, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.text_field :location, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.label :favorite_artist, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.text_field :favorite_artist, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.label :birthday, class: "text-yellow-200 text-2xl font-bold" %><br>
+        <%= f.date_field :birthday, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-8 rounded-xl" %><br>
+        <%= f.submit "Update", class: "w-96 bg-purple-800 hover:bg-purple-600 border-2 border-solid border-purple-900 text-white font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</body>
