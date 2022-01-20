@@ -4,7 +4,9 @@
   <p class="font-extrabold text-6xl">
     <%= @user.name %>'s Profile<br><br>
     <% if @user.avatar.attached? %>
-      <image src="<%= url_for @user.avatar %>" width="150" height=auto><br>
+      <image src="<%= url_for @user.avatar%>" class="h-32" ><br>
+    <% else %>
+      <%= image_tag 'default_pfp', class: "h-32" %><br>
     <% end %>
     Project: <%= @user.project_name %><br>
     Location: <%= @user.location %><br>
