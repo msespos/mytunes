@@ -16,7 +16,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.avatar.attach(params[:avatar])
     if @user.update(user_params)
       flash[:notice] = 'You updated your profile!'
       redirect_to user_path
