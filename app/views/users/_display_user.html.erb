@@ -1,0 +1,7 @@
+<% if u.avatar.attached? %>
+  <%= link_to image_tag(u.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(u.id) %>
+<% else %>
+  <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(u.id) %>
+<% end %>
+<span class="hover:text-purple-600 inline align-middle ml-2"><%= link_to u.name, user_path(u.id) %></span>
+<span class="inline align-middle">(<%= u.project_name %>)</span>
