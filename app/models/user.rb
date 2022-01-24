@@ -20,22 +20,6 @@ class User < ApplicationRecord
 
   after_create :send_admin_mail
 
-  def pending_friend_requests
-    Friendship.includes(:requesting_user).where('requested_user_id = ?
-                                                AND confirmed = ?', id, false)
-  end
-
-  def can_friend_request?(user)
-    Friendship.where('requested_user_id = ? AND requesting_user_id = ?
-                      OR requested_user_id = ? AND requesting_user_id = ?',
-                     id, user.id, user.id, id).empty? && id != user.id
-  end
-
-  def friend_requesting?(user)
-    Friendship.where('requested_user_id = ? AND requesting_user_id = ?
-                      AND confirmed = ?', user.id, id, false).present?
-  end
-
   def friends
     friendships.map { |friendship| User.find(friend_id(friendship)) }
   end
@@ -47,6 +31,27 @@ class User < ApplicationRecord
 
   def friend_id(friendship)
     friendship.requested_user_id == id ? friendship.requesting_user_id : friendship.requested_user_id
+  end
+
+  def friend_requested
+    friend_requests.map { |friendship| User.find(friend_id(friendship))  }
+  end
+
+  def friend_requests
+    Friendship.where('(requested_user_id = ? OR requesting_user_id = ?)
+                       AND confirmed = ?', id, id, false)
+  end
+
+  def pending_friend_requests_from_others
+    Friendship.where('requested_user_id = ? AND confirmed = ?', id, false)
+  end
+
+  def pending_friend_requests_to_others
+    Friendship.where('requesting_user_id = ? AND confirmed = ?', id, false)
+  end
+
+  def neither_friends_nor_friend_requested_nor_self
+    User.all - friends - friend_requested - [ self ]
   end
 
   def self.from_omniauth(access_token)
