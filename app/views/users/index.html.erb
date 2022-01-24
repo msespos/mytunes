@@ -7,33 +7,57 @@
         <div class="text-7xl font-extrabold">Everybody</div>
   
         <div class="my-10">
-          <div class="text-4xl italic mb-3">Friends<br></div>
-          <% @users.each do |u| %>
-            <% if current_user.friends.include?(u) %>
-              <%= render partial: 'display_user', locals: { u: u } %><br>
+          <div class="text-4xl italic mb-3">Your Friends:<br></div>
+          <% if current_user.friends.empty? %>
+            <div class = "text-base italic">None</div>
+          <% else %>
+            <% current_user.friends.each do |f| %>
+              <%= render partial: 'display_user', locals: { u: f } %><br>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="my-10">
+          <div class = "text-4xl italic mb-3">People Requesting Your Friendship:<br></div>
+          <% if current_user.pending_friend_requests_from_others.empty? %>
+            <div class = "text-base italic">None</div>
+          <% else %>
+            <% current_user.pending_friend_requests_from_others.each do |p| %>
+              <%= render partial: 'display_user', locals: { u: p.requesting_user } %> -
+              <span class="text-red-500 hover:text-red-300 inline align-middle">
+                <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %>
+              </span>
+              <span class="text-yellow-200"> - </span>
+              <span class="text-red-500 hover:text-red-300 inline align-middle">
+                <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %><br>
+              </span>
             <% end %>
           <% end %>
         </div>
   
         <div class="my-10">
-          <div class="text-4xl italic mb-3">Waiting for Friend Confirmation<br></div>
-          <% @users.each do |u| %>
-            <% if current_user.friend_requesting?(u) %>
-              <%= render partial: 'display_user', locals: { u: u } %><br>
+          <div class="text-4xl italic mb-3">You've Requested Their Friendship:<br></div>
+          <% if current_user.pending_friend_requests_to_others.empty? %>
+            <div class = "text-base italic">None</div>
+          <% else %>
+            <% current_user.pending_friend_requests_to_others.each do |p| %>
+              <%= render partial: 'display_user', locals: { u: p.requested_user } %><div>
             <% end %>
           <% end %>
         </div>
   
         <div class="my-10">
-          <div class="text-4xl italic mb-3">Not Friends Yet!<br></div>
-          <% @users.each do |u| %>
-            <% if current_user.can_friend_request?(u) %>
-              <%= render partial: 'display_user', locals: { u: u } %>
+          <div class="text-4xl italic mb-3">Other People:<br></div>
+          <% if current_user.neither_friends_nor_friend_requested_nor_self.empty? %>
+            <div class = "text-base italic">None</div>
+          <% else %>
+            <% current_user.neither_friends_nor_friend_requested_nor_self.each do |n| %>
+              <%= render partial: 'display_user', locals: { u: n } %>
               <span class="text-red-500 hover:text-red-300 inline align-middle">
                 <%= link_to '- Make Friend Request',
                   friendships_path(
                     friendship: { requesting_user_id: current_user.id,
-                                  requested_user_id: u.id }),
+                                  requested_user_id: n.id }),
                     method: :post %><br>
               </span>
             <% end %>
