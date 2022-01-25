@@ -21,6 +21,6 @@ class AudioPostsController < ApplicationController
   private
 
   def audio_post_params
-    params.require(:audio_post).permit(:audio)
+    params.require(:audio_post).permit(:audio, :description)
   end
 end
