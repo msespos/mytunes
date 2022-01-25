@@ -26,7 +26,7 @@
         <div class="py-5 px-8 text-gray-700 hover:text-gray-500 font-bold">
           <%= link_to current_user.name, user_path(current_user.id) %>
         </div>
-        <div class="py-4 px-3 bg-yellow-500 hover:bg-yellow-200 text-gray-800 font-bold border-4 border-purple-900 rounded">
+        <div class="py-4 px-3 bg-yellow-500 hover:bg-yellow-200 text-gray-800 hover:text-gray-600 font-bold border-4 border-purple-900 rounded">
           <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
         </div>
       </div>
