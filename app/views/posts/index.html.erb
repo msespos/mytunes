@@ -7,22 +7,7 @@
         <% @viewable_posts.each do |p| %>
           <div class="pt-6 font-extrabold text-2xl">
             <% if p.class.name == 'TextPost' %>
-              <div class="flex">
-                <div>
-                  <% if p.user.avatar.attached? %>
-                    <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-                  <% else %>
-                    <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-                  <% end %>
-                </div>
-                <div class="flex-col ml-4 italic">
-                  <div><%= p.user.name %></div>
-                  <div class="text-lg">
-                    <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                         .strftime("%B %-d, %Y %-I:%M%P") %>
-                  </div>
-                </div>
-              </div>
+              <%= render partial: 'display_user', locals: { p: p } %>
               <div class="my-4 text-4xl text-yellow-500"><%= p.body %></div>
               <%= pluralize(p.number_of_text_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
@@ -33,16 +18,7 @@
                 </div>
               <% end %>
             <% elsif p.class.name == 'ImagePost' %>
-              <% if p.user.avatar.attached? %>
-                <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-              <% else %>
-                <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-              <% end %>
-              <div class="italic"><%= p.user.name %></div>
-              <div class="text-lg italic">
-                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                     .strftime("%B %-d, %Y %-I:%M%P") %>
-              </div>
+              <%= render partial: 'display_user', locals: { p: p } %>
               <div class="pt-4 text-4xl text-yellow-200"><%= p.caption %></div>
               <%= image_tag(p.image, class: "object-cover h-80 mt-4") %>
               <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
@@ -54,24 +30,14 @@
                 </div>
               <% end %>
             <% else %>
-              <% if p.user.avatar.attached? %>
-                <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-              <% else %>
-                <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
-              <% end %>
-              <div class="italic"><%= p.user.name %></div>
-              <div class="text-lg italic">
-                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                     .strftime("%B %-d, %Y %-I:%M%P") %>
-              </div>
+              <%= render partial: 'display_user', locals: { p: p } %>
               <div class="pt-4 text-4xl text-yellow-200"><%= p.description %></div>
               <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
               <%= pluralize(p.number_of_audio_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
                 <div class="text-red-500 hover:text-red-300">
                   <%= link_to 'Like this audio post',
-                    like_posts_path(
-                      like: { post_id: p.id, post_type: "AudioPost" }),
+                    like_posts_path(like: { post_id: p.id, post_type: "AudioPost" }),
                       method: :post %>
                 </div>
               <% end %>

@@ -1,0 +1,16 @@
+<div class="flex">
+  <div>
+    <% if p.user.avatar.attached? %>
+      <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+    <% else %>
+      <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+    <% end %>
+  </div>
+  <div class="flex-col ml-4 italic">
+    <div><%= p.user.name %></div>
+    <div class="text-lg">
+      <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+           .strftime("%B %-d, %Y %-I:%M%P") %>
+    </div>
+  </div>
+</div>
