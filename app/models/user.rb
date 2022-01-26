@@ -51,7 +51,7 @@ class User < ApplicationRecord
   end
 
   def neither_friends_nor_friend_requested_nor_self
-    User.all - friends - friend_requested - [ self ]
+    User.all - friends - friend_requested - [self]
   end
 
   def self.from_omniauth(access_token)

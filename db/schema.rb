@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+# rubocop:disable Metrics/BlockLength
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,111 +14,113 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_25_231419) do
-
+ActiveRecord::Schema.define(version: 20_220_125_231_419) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "active_storage_attachments", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
-    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
-    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  create_table 'active_storage_attachments', force: :cascade do |t|
+    t.string 'name', null: false
+    t.string 'record_type', null: false
+    t.bigint 'record_id', null: false
+    t.bigint 'blob_id', null: false
+    t.datetime 'created_at', null: false
+    t.index ['blob_id'], name: 'index_active_storage_attachments_on_blob_id'
+    t.index %w[record_type record_id name blob_id], name: 'index_active_storage_attachments_uniqueness',
+                                                    unique: true
   end
 
-  create_table "active_storage_blobs", force: :cascade do |t|
-    t.string "key", null: false
-    t.string "filename", null: false
-    t.string "content_type"
-    t.text "metadata"
-    t.string "service_name", null: false
-    t.bigint "byte_size", null: false
-    t.string "checksum", null: false
-    t.datetime "created_at", null: false
-    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  create_table 'active_storage_blobs', force: :cascade do |t|
+    t.string 'key', null: false
+    t.string 'filename', null: false
+    t.string 'content_type'
+    t.text 'metadata'
+    t.string 'service_name', null: false
+    t.bigint 'byte_size', null: false
+    t.string 'checksum', null: false
+    t.datetime 'created_at', null: false
+    t.index ['key'], name: 'index_active_storage_blobs_on_key', unique: true
   end
 
-  create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
-    t.string "variation_digest", null: false
-    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  create_table 'active_storage_variant_records', force: :cascade do |t|
+    t.bigint 'blob_id', null: false
+    t.string 'variation_digest', null: false
+    t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
-  create_table "audio_posts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "description"
+  create_table 'audio_posts', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'description'
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.bigint "post_id"
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.text "body"
-    t.string "post_type"
+  create_table 'comments', force: :cascade do |t|
+    t.bigint 'post_id'
+    t.bigint 'user_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.text 'body'
+    t.string 'post_type'
   end
 
-  create_table "friendships", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "requesting_user_id"
-    t.bigint "requested_user_id"
-    t.boolean "confirmed"
+  create_table 'friendships', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'requesting_user_id'
+    t.bigint 'requested_user_id'
+    t.boolean 'confirmed'
   end
 
-  create_table "image_posts", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "caption"
+  create_table 'image_posts', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'caption'
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "post_id"
-    t.bigint "user_id"
-    t.string "post_type"
+  create_table 'likes', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'post_id'
+    t.bigint 'user_id'
+    t.string 'post_type'
   end
 
-  create_table "text_posts", force: :cascade do |t|
-    t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
+  create_table 'text_posts', force: :cascade do |t|
+    t.text 'body'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.bigint 'user_id'
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.string "project_name"
-    t.string "location"
-    t.string "favorite_artist"
-    t.date "birthday"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  create_table 'users', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'name'
+    t.string 'project_name'
+    t.string 'location'
+    t.string 'favorite_artist'
+    t.date 'birthday'
+    t.index ['email'], name: 'index_users_on_email', unique: true
+    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "audio_posts", "users"
-  add_foreign_key "comments", "text_posts", column: "post_id"
-  add_foreign_key "comments", "users"
-  add_foreign_key "friendships", "users", column: "requested_user_id"
-  add_foreign_key "friendships", "users", column: "requesting_user_id"
-  add_foreign_key "image_posts", "users"
-  add_foreign_key "likes", "text_posts", column: "post_id"
-  add_foreign_key "likes", "users"
-  add_foreign_key "text_posts", "users"
+  add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'audio_posts', 'users'
+  add_foreign_key 'comments', 'text_posts', column: 'post_id'
+  add_foreign_key 'comments', 'users'
+  add_foreign_key 'friendships', 'users', column: 'requested_user_id'
+  add_foreign_key 'friendships', 'users', column: 'requesting_user_id'
+  add_foreign_key 'image_posts', 'users'
+  add_foreign_key 'likes', 'text_posts', column: 'post_id'
+  add_foreign_key 'likes', 'users'
+  add_foreign_key 'text_posts', 'users'
 end
+
+# rubocop:enable Metrics/BlockLength
