@@ -1,65 +1,80 @@
+<body class="bg-indigo-900">
 <%= render 'shared/navbar' %>
-
-<div class="py-8">
-  <p class="font-extrabold text-2xl">
-    Logged in as <%= current_user.name %><br><br>
-    Your Feed:
-  </p>
-</div>
-<% @viewable_posts.each do |p| %>
-  <div class="py-8">
-    <p class="font-extrabold text-2xl">
-      <%= p.user.name %><br>
-      <% if p.class.name == 'TextPost' %>
-        <%= p.body %><br>
-        <%= p.created_at %><br>
-        <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
-          <%= link_to 'Like',
-            like_posts_path(
-              like: { post_id: p.id, post_type: "TextPost" }),
-              method: :post %><br>
+  <div class="flex-col justify-center max-w-5xl mx-auto">
+    <div class="ml-8 mt-16">
+      <div class="text-yellow-200 text-4xl font-extrabold">
+        <div class="text-6xl font-extrabold">Your Feed</div>
+        <% @viewable_posts.each do |p| %>
+          <div class="py-8 font-extrabold text-4xl">
+            <% if p.class.name == 'TextPost' %>
+              <%= p.body %><br>
+              <div class="italic text-2xl">Posted by <%= p.user.name %></div>
+              <div class="text-lg">
+                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                                .strftime("%B %-d, %Y %H:%M:%S") %>
+              </div>
+              <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
+                <div class="text-2xl text-red-500 hover:text-red-300">
+                  <%= link_to 'Like this post',
+                    like_posts_path(like: { post_id: p.id, post_type: "TextPost" }),
+                      method: :post %><br>
+                </div>
+              <% end %>
+              <%= pluralize(p.number_of_text_likes, 'Like') %><br>
+            <% elsif p.class.name == 'ImagePost' %>
+              <%= p.caption %><br>
+              <%= image_tag(p.image, class: "object-cover h-80") %><br>
+              <div class="italic text-2xl">Image posted by <%= p.user.name %></div>
+              <div class="text-lg">
+                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                                .strftime("%B %-d, %Y %H:%M:%S") %>
+              </div>
+              <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
+                <div class="text-red-500 hover:text-red-300">
+                  <%= link_to 'Like this image post',
+                    like_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
+                      method: :post %><br>
+                </div>
+              <% end %>
+              <%= pluralize(p.number_of_image_likes, 'Like') %><br>
+            <% else %>
+              <%= p.description %><br>
+              <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
+              <div class="italic text-2xl">Audio posted by <%= p.user.name %></div>
+              <div class="text-lg">
+                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                                .strftime("%B %-d, %Y %H:%M:%S") %>
+              </div>
+              <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
+                <div class="text-red-500 hover:text-red-300">
+                  <%= link_to 'Like this audio post',
+                    like_posts_path(
+                      like: { post_id: p.id, post_type: "AudioPost" }),
+                      method: :post %><br>
+                </div>
+              <% end %>
+                <%= pluralize(p.number_of_audio_likes, 'Like') %><br>
+            <% end %>
+          </div>
+          <div class="py-8 font-extrabold text-1xl">
+            Comments<br>
+            <% p.comments.includes(:user).each do |c| %>
+              <%= c.user.name %><br>
+              <%= c.body %><br>
+              <%= c.created_at %><br><br>
+            <% end %>
+          </div>
+          <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
+            <div class="p-8 font-extrabold text-4xl">
+              <%= f.hidden_field :post_id, value: p.id %>
+              <%= f.hidden_field :post_type, value: p.class.name %>
+              <%= f.label :comment %><br>
+              <%= f.text_area :body %>
+              <%= f.submit %>
+            </div>
+          <% end %>
         <% end %>
-        <%= pluralize(p.number_of_text_likes, 'Like') %><br>
-      <% elsif p.class.name == 'ImagePost' %>
-        <image src="<%= url_for p.image %>" width="500" height=auto>
-        <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
-          <%= link_to 'Like',
-            like_posts_path(
-              like: { post_id: p.id, post_type: "ImagePost" }),
-              method: :post %><br>
-        <% end %>
-        <%= pluralize(p.number_of_image_likes, 'Like') %><br>
-      <% else %>
-        <audio src="<%= url_for p.audio %>" controls></audio>
-        <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
-          <%= link_to 'Like',
-            like_posts_path(
-              like: { post_id: p.id, post_type: "AudioPost" }),
-              method: :post %><br>
-        <% end %>
-        <%= pluralize(p.number_of_audio_likes, 'Like') %><br>
-      <% end %>
-    </p>
-  </div>
-  <div class="py-8">
-    <p class="font-extrabold text-1xl">
-      Comments<br>
-      <% p.comments.includes(:user).each do |c| %>
-        <%= c.user.name %><br>
-        <%= c.body %><br>
-        <%= c.created_at %><br><br>
-      <% end %>
-    </p>
-  </div>
-  <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
-    <div class="py-8">
-      <p class="font-extrabold text-4xl">
-        <%= f.hidden_field :post_id, value: p.id %>
-        <%= f.hidden_field :post_type, value: p.class.name %>
-        <%= f.label :comment %><br>
-        <%= f.text_area :body %>
-        <%= f.submit %>
-      </p>
+      </div>
     </div>
-  <% end %>
-<% end %>
+  </div>
+</body>
