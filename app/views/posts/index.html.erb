@@ -7,14 +7,23 @@
         <% @viewable_posts.each do |p| %>
           <div class="pt-6 font-extrabold text-2xl">
             <% if p.class.name == 'TextPost' %>
-              <div class="italic text-xl">Posted by <%= p.user.name %></div>
-              <div class="text-lg">
-                <div class="italic">
-                  <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                                  .strftime("%B %-d, %Y %H:%M:%S") %>
+              <div class="flex">
+                <div>
+                  <% if p.user.avatar.attached? %>
+                    <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+                  <% else %>
+                    <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+                  <% end %>
+                </div>
+                <div class="flex-col ml-4 italic">
+                  <div><%= p.user.name %></div>
+                  <div class="text-lg">
+                    <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                         .strftime("%B %-d, %Y %-I:%M%P") %>
+                  </div>
                 </div>
               </div>
-              <div class="py-4 text-4xl text-yellow-500"><%= p.body %></div>
+              <div class="my-4 text-4xl text-yellow-500"><%= p.body %></div>
               <%= pluralize(p.number_of_text_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
                 <div class="text-red-500 hover:text-red-300">
@@ -24,32 +33,40 @@
                 </div>
               <% end %>
             <% elsif p.class.name == 'ImagePost' %>
-              <div class="italic text-xl">Image posted by <%= p.user.name %></div>
-              <div class="text-lg">
-                <div class="italic">
-                  <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                                  .strftime("%B %-d, %Y %H:%M:%S") %>
-                </div>
+              <% if p.user.avatar.attached? %>
+                <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+              <% else %>
+                <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+              <% end %>
+              <div class="italic"><%= p.user.name %></div>
+              <div class="text-lg italic">
+                <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                     .strftime("%B %-d, %Y %-I:%M%P") %>
               </div>
               <div class="pt-4 text-4xl text-yellow-200"><%= p.caption %></div>
-              <%= image_tag(p.image, class: "object-cover h-80 mt-4") %><br>
-              <%= pluralize(p.number_of_image_likes, 'Like') %><br>
+              <%= image_tag(p.image, class: "object-cover h-80 mt-4") %>
+              <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
               <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
                 <div class="text-red-500 hover:text-red-300">
                   <%= link_to 'Like this image post',
                     like_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
-                      method: :post %><br>
+                      method: :post %>
                 </div>
               <% end %>
             <% else %>
-              <div class="italic text-xl">Audio posted by <%= p.user.name %></div>
-              <div class="text-lg">
+              <% if p.user.avatar.attached? %>
+                <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+              <% else %>
+                <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline align-middle my-2"), user_path(p.user.id) %>
+              <% end %>
+              <div class="italic"><%= p.user.name %></div>
+              <div class="text-lg italic">
                 <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                                .strftime("%B %-d, %Y %H:%M:%S") %>
+                     .strftime("%B %-d, %Y %-I:%M%P") %>
               </div>
               <div class="pt-4 text-4xl text-yellow-200"><%= p.description %></div>
               <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
-              <%= pluralize(p.number_of_audio_likes, 'Like') %><br>
+              <%= pluralize(p.number_of_audio_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
                 <div class="text-red-500 hover:text-red-300">
                   <%= link_to 'Like this audio post',
@@ -60,21 +77,20 @@
               <% end %>
             <% end %>
           </div>
-          <div class="py-4 font-extrabold text-lg">
-            <div class="ml-8 my-4 text-2xl">Comments</div>
+          <div class="font-extrabold text-lg">
             <% p.comments.includes(:user).each do |c| %>
               <div class="my-4">
                 <div class="ml-8"><%= c.user.name %></div>
                 <div class="ml-8 text-2xl"><%= c.body %></div>
                 <div class="ml-8 italic">
                   <%= c.created_at.in_time_zone("Pacific Time (US & Canada)")
-                                  .strftime("%B %-d, %Y %H:%M:%S") %>
+                       .strftime("%B %-d, %Y %-I:%M%P") %>
                 </div>
               </div>
             <% end %>
           </div>
           <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
-            <div class="ml-8 font-extrabold text-lg">
+            <div class="mt-4 ml-8 font-extrabold text-lg">
               <%= f.hidden_field :post_id, value: p.id %>
               <%= f.hidden_field :post_type, value: p.class.name %>
               <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
