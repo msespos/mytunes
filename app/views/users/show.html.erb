@@ -17,9 +17,10 @@
           </div>
           <div class="mb-4">Posts</div>
           <% @user.text_posts.each do |p| %>
-            <div class="text-lg"><%= p.created_at
-                                      .in_time_zone("Pacific Time (US & Canada)")
-                                      .strftime("%B %-d, %Y %H:%M:%S") %></div>
+            <div class="text-lg">
+              <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                              .strftime("%B %-d, %Y %H:%M:%S") %>
+            </div>
             <div class="mb-4"><%= p.body %></div>
           <% end %>
         </div>
