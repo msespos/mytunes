@@ -1,11 +1,17 @@
-<div class="sticky top-0"><%= render 'shared/navbar' %></div>
-
-<%= form_with model: @text_post do |f| %>
-  <div class="py-8">
-    <p class="font-extrabold text-6xl">
-      <%= f.label :text_post %><br>
-      <%= f.text_area :body %><br>
-      <%= f.submit %>
-    </p>
+<body class="bg-indigo-900">
+  <div class="sticky top-0"><%= render 'shared/navbar' %></div>
+  
+  <div class="flex-col justify-center max-w-5xl mx-auto">
+    <div class="ml-8 my-16 text-yellow-200 text-2xl font-extrabold">
+      <div class="my-6 text-6xl font-extrabold">Create a Text Post</div>
+      <%= form_with model: @text_post do |f| %>
+        <div class="py-8 font-extrabold text-4xl">
+          <%= f.text_area :body, class: "w-128 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
+          <div><%= f.submit "Submit", class: "w-48 bg-purple-800 hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200 font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %></div>
+        </div>
+      <% end %>
+      <div class="my-4 text-red-500 hover:text-red-300"><%= link_to 'Create an image post instead', new_image_post_url %></div>
+      <div class="my-4 text-red-500 hover:text-red-300"><%= link_to 'Create an audio post instead', new_audio_post_url %></div>
+    </div>
   </div>
-<% end %>
+</body>
