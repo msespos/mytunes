@@ -1,13 +1,20 @@
-<div class="sticky top-0"><%= render 'shared/navbar' %></div>
-
-<%= form_with model: @audio_post do |f| %>
-  <div class="py-8">
-    <p class="font-extrabold text-6xl">
-      <%= f.label :audio %><br>
-      <%= f.file_field :audio %><br>
-      <%= f.label :description%><br>
-      <%= f.text_field :description %><br>
-      <%= f.submit "Post Audio" %>
-    </p>
+<body class="bg-indigo-900">
+  <div class="sticky top-0"><%= render 'shared/navbar' %></div>
+  <div class="flex-col justify-center max-w-5xl mx-auto">
+    <div class="ml-8 my-16 text-yellow-200 text-2xl font-extrabold">
+      <div class="my-2 text-6xl font-extrabold">Create an Audio Post</div>
+        <%= form_with model: @audio_post do |f| %>
+          <div class="mt-8 font-extrabold text-4xl">
+            <div><%= f.label :audio %></div>
+            <div class="mt-4 mb-8"><%= f.file_field :audio %></div>
+            <div class="mt-4 mb-2"><%= f.label :description %></div>
+            <%= f.text_field :description, class: "w-128 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
+            <div><%= f.submit "Submit", class: "w-48 bg-purple-800 hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200 font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %></div>
+          </div>
+        <% end %>
+        <div class="my-2 text-red-500 hover:text-red-300"><%= link_to 'Create a text post instead', new_text_post_url %></div>
+        <div class="my-2 text-red-500 hover:text-red-300"><%= link_to 'Create an audio post instead', new_audio_post_url %></div>
+      </div>
+    </div>
   </div>
-<% end %>
+</body>
