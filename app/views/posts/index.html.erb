@@ -43,14 +43,23 @@
               <% end %>
             <% end %>
           </div>
-          <div class="font-extrabold text-lg">
+          <div class="font-extrabold text-lg my-8">
             <% p.comments.includes(:user).each do |c| %>
-              <div class="my-4">
-                <div class="ml-8"><%= c.user.name %></div>
-                <div class="ml-8 text-2xl"><%= c.body %></div>
-                <div class="ml-8 italic">
-                  <%= c.created_at.in_time_zone("Pacific Time (US & Canada)")
-                       .strftime("%B %-d, %Y %-I:%M%P") %>
+              <div class="ml-8 text-2xl"><%= c.body %></div>
+              <div class="flex ml-8 mb-4">
+                <div>
+                  <% if c.user.avatar.attached? %>
+                    <%= link_to image_tag(c.user.avatar, class: "object-cover w-9 h-9 inline align-middle my-2"), user_path(c.user.id) %>
+                  <% else %>
+                    <%= link_to image_tag('default_pfp', class: "object-cover w-9 h-9 inline align-middle my-2"), user_path(c.user.id) %>
+                  <% end %>
+                </div>
+                <div class="flex-col ml-4 italic">
+                  <div><%= c.user.name %></div>
+                  <div class="italic text-base">
+                    <%= c.created_at.in_time_zone("Pacific Time (US & Canada)")
+                         .strftime("%B %-d, %Y %-I:%M%P") %>
+                  </div>
                 </div>
               </div>
             <% end %>
