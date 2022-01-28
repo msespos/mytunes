@@ -19,7 +19,7 @@
               <% end %>
             <% elsif p.class.name == 'ImagePost' %>
               <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl text-yellow-500"><%= p.caption %></div>
+              <div class="pt-4 text-4xl"><%= p.caption %></div>
               <%= image_tag(p.image, class: "object-cover h-80 mt-4") %>
               <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
               <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
@@ -31,7 +31,7 @@
               <% end %>
             <% else %>
               <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl text-yellow-500"><%= p.description %></div>
+              <div class="pt-4 text-4xl"><%= p.description %></div>
               <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
               <%= pluralize(p.number_of_audio_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
