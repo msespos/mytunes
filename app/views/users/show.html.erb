@@ -18,10 +18,7 @@
           <div class="mt-8">Posts</div>
             <% @viewable_posts.each do |p| %>
               <div class="pt-4 font-extrabold text-2xl">
-                <div class="text-sm">
-                  <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                        .strftime("%B %-d, %Y %-I:%M%P") %>
-                </div>
+                <div class="text-sm"><%= time_ago_in_words(p.created_at) %> ago</div>
                 <% if p.class.name == 'TextPost' %>
                   <div class="text-2xl text-yellow-500"><%= p.body %></div>
                 <% elsif p.class.name == 'ImagePost' %>

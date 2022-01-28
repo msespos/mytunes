@@ -10,9 +10,6 @@
   </div>
   <div class="flex-col ml-4 italic">
     <div><%= p.user.name %></div>
-    <div class="text-lg">
-      <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-           .strftime("%B %-d, %Y %-I:%M%P") %>
-    </div>
+    <div class="text-lg"><%= time_ago_in_words(p.created_at) %> ago</div>
   </div>
 </div>
