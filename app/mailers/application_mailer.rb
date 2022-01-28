@@ -7,7 +7,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    @url  = 'https://protected-river-06788.herokuapp.com/'
+    mail(to: @user.email, subject: 'Welcome to myTunes')
   end
 end
