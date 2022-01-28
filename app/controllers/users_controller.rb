@@ -8,6 +8,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    posts = TextPost.all + ImagePost.all + AudioPost.all
+    @viewable_posts = posts.sort { |x, y| y.created_at <=> x.created_at }.select do |p|
+      p.user == current_user
+    end
   end
 
   def edit

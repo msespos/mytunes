@@ -1,7 +1,7 @@
 <body class="bg-indigo-900">
   <div class="sticky top-0"><%= render 'shared/navbar' %></div>
   <div class="flex-col justify-center max-w-5xl mx-auto">
-    <div class="ml-8 mt-16">
+    <div class="ml-8 my-16">
       <div class="text-yellow-200 text-3xl font-bold">
         <div class="mb-8 font-extrabold"><%= @user.name %>'s Profile</div>
           <% if @user.avatar.attached? %>
@@ -16,13 +16,24 @@
             Birthday: <%= @user.birthday.strftime("%B %-d, %Y") %><br>
           </div>
           <div class="mb-4">Posts</div>
-          <% @user.text_posts.each do |p| %>
-            <div class="text-lg">
-              <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
-                              .strftime("%B %-d, %Y %H:%M:%S") %>
-            </div>
-            <div class="mb-4"><%= p.body %></div>
-          <% end %>
+            <% @viewable_posts.each do |p| %>
+              <div class="pt-6 font-extrabold text-2xl">
+                <% if p.class.name == 'TextPost' %>
+                  <div class="my-4 text-2xl text-yellow-500"><%= p.body %></div>
+                <% elsif p.class.name == 'ImagePost' %>
+                  <div class="pt-4 text-2xl text-yellow-200"><%= p.caption %></div>
+                  <%= image_tag(p.image, class: "object-cover h-80 mt-4") %>
+                <% else %>
+                  <div class="pt-4 text-2xl text-yellow-200"><%= p.description %></div>
+                  <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
+                <% end %>
+                <div class="text-base">
+                  <%= p.created_at.in_time_zone("Pacific Time (US & Canada)")
+                        .strftime("%B %-d, %Y %-I:%M%P") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
