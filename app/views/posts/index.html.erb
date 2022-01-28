@@ -19,7 +19,7 @@
               <% end %>
             <% elsif p.class.name == 'ImagePost' %>
               <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl text-yellow-200"><%= p.caption %></div>
+              <div class="pt-4 text-4xl text-yellow-500"><%= p.caption %></div>
               <%= image_tag(p.image, class: "object-cover h-80 mt-4") %>
               <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
               <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
@@ -31,7 +31,7 @@
               <% end %>
             <% else %>
               <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl text-yellow-200"><%= p.description %></div>
+              <div class="pt-4 text-4xl text-yellow-500"><%= p.description %></div>
               <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
               <%= pluralize(p.number_of_audio_likes, 'Like') %>
               <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
@@ -45,8 +45,8 @@
           </div>
           <div class="font-extrabold text-lg my-8">
             <% p.comments.includes(:user).each do |c| %>
-              <div class="ml-8 text-2xl"><%= c.body %></div>
-              <div class="flex ml-8 mb-4">
+              <div class="ml-12 text-2xl"><%= c.body %></div>
+              <div class="flex ml-12 mb-4">
                 <div>
                   <% if c.user.avatar.attached? %>
                     <%= link_to image_tag(c.user.avatar, class: "object-cover w-9 h-9 inline align-middle my-2"), user_path(c.user.id) %>
@@ -65,7 +65,7 @@
             <% end %>
           </div>
           <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
-            <div class="mt-4 ml-8 font-extrabold text-lg">
+            <div class="mt-4 ml-12 font-extrabold text-lg">
               <%= f.hidden_field :post_id, value: p.id %>
               <%= f.hidden_field :post_type, value: p.class.name %>
               <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
