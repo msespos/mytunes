@@ -26,11 +26,11 @@ class PostsController < ApplicationController
       @like.post = AudioPost.find(like_params[:post_id])
       @like.post_type = 'AudioPost'
     end
-    flash[:notice] = if @like.save
-                       'You liked a post!'
-                     else
-                       'Error - could not process like'
-                     end
+    if @like.save
+      flash[:notice] = 'You liked a post!'
+    else
+      flash[:alert] = 'Error - could not process like'
+    end
     redirect_to posts_path
   end
 
@@ -48,11 +48,11 @@ class PostsController < ApplicationController
       @comment.post = AudioPost.find(comment_params[:post_id])
       @comment.post_type = 'AudioPost'
     end
-    flash[:notice] = if @comment.save
-                       'You commented on a post!'
-                     else
-                       'Error - could not process comment'
-                     end
+    if @comment.save
+      flash[:notice] = 'You commented on a post!'
+    else
+      flash[:alert] = 'Error - could not process comment'
+    end
     redirect_to posts_path
   end
 

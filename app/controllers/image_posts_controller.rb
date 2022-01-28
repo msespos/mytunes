@@ -13,7 +13,7 @@ class ImagePostsController < ApplicationController
       flash[:notice] = 'Post created!'
       redirect_to posts_path
     else
-      flash[:notice] = 'Error - could not process post creation'
+      flash[:alert] = 'Error - could not process post creation'
       render 'new'
     end
   end

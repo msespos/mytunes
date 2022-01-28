@@ -7,11 +7,11 @@ class FriendshipsController < ApplicationController
   end
 
   def create
-    flash[:notice] = if Friendship.request_friendship(friendship_params)
-                       'You made a friendship request!'
-                     else
-                       'Error - could not process friend request'
-                     end
+    if Friendship.request_friendship(friendship_params)
+      flash[:notice] = 'You made a friendship request!'
+    else
+      flash[:alert] = 'Error - could not process friend request'
+    end
     redirect_to users_index_path
   end
 
@@ -21,7 +21,7 @@ class FriendshipsController < ApplicationController
       flash[:notice] = 'You denied the friendship request!'
       redirect_to users_index_path
     else
-      flash[:notice] = 'Error - could not process friend denial'
+      flash[:alert] = 'Error - could not process friend denial'
       render 'index'
     end
   end
@@ -35,7 +35,7 @@ class FriendshipsController < ApplicationController
       flash[:notice] = 'You confirmed the friendship!'
       redirect_to users_index_path
     else
-      flash[:notice] = 'Error - could not process confirmation'
+      flash[:alert] = 'Error - could not process confirmation'
       render 'index'
     end
   end
