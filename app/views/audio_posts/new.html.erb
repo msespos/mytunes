@@ -8,12 +8,21 @@
             <div><%= f.label :audio %></div>
             <div class="mt-4 mb-8"><%= f.file_field :audio %></div>
             <div class="mt-4 mb-2"><%= f.label :description %></div>
-            <%= f.text_field :description, class: "w-128 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
-            <div><%= f.submit "Submit", class: "w-48 bg-purple-800 hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200 font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %></div>
+            <%= f.text_field :description, class: "w-128 bg-purple-100 text-purple-800
+                border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
+            <div>
+              <%= f.submit "Submit", class: "w-48 bg-purple-800 hover:bg-purple-700
+                  border-2 border-solid border-purple-900 text-yellow-200 font-bold py-2
+                  px-4 my-4 rounded-xl hover:cursor-pointer" %>
+            </div>
           </div>
         <% end %>
-        <div class="my-2 text-red-500 hover:text-red-300"><%= link_to 'Create a text post instead', new_text_post_url %></div>
-        <div class="my-2 text-red-500 hover:text-red-300"><%= link_to 'Create an image post instead', new_image_post_url %></div>
+        <div class="my-2 text-red-500 hover:text-red-300">
+          <%= link_to 'Create a text post instead', new_text_post_url %>
+        </div>
+        <div class="my-2 text-red-500 hover:text-red-300">
+          <%= link_to 'Create an image post instead', new_image_post_url %>
+        </div>
       </div>
     </div>
   </div>

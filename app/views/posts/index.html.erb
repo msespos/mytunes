@@ -49,9 +49,11 @@
               <div class="flex ml-12 mb-4">
                 <div>
                   <% if c.user.avatar.attached? %>
-                    <%= link_to image_tag(c.user.avatar, class: "object-cover w-9 h-9 inline align-middle my-2"), user_path(c.user.id) %>
+                    <%= link_to image_tag(c.user.avatar, class: "object-cover w-9
+                        h-9 inline align-middle my-2"), user_path(c.user.id) %>
                   <% else %>
-                    <%= link_to image_tag('default_pfp', class: "object-cover w-9 h-9 inline align-middle my-2"), user_path(c.user.id) %>
+                    <%= link_to image_tag('default_pfp', class: "object-cover w-9 h-9
+                        inline align-middle my-2"), user_path(c.user.id) %>
                   <% end %>
                 </div>
                 <div class="flex-col ml-4 italic">
@@ -68,8 +70,13 @@
             <div class="mt-4 ml-12 font-extrabold text-lg">
               <%= f.hidden_field :post_id, value: p.id %>
               <%= f.hidden_field :post_type, value: p.class.name %>
-              <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
-              <div><%= f.submit "Post a comment", class: "w-48 bg-purple-800 hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200 font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %></div>
+              <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4
+                  border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
+              <div>
+                <%= f.submit "Post a comment", class: "w-48 bg-purple-800
+                    hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200
+                    font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
+              </div>
             </div>
           <% end %>
         <% end %>
