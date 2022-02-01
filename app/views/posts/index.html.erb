@@ -4,79 +4,83 @@
     <div class="ml-8 my-16">
       <div class="text-yellow-200 text-2xl font-extrabold">
         <div class="my-6 text-6xl font-extrabold">Your Feed</div>
-        <% @viewable_posts.each do |p| %>
-          <div class="pt-6 font-extrabold text-2xl">
-            <% if p.class.name == 'TextPost' %>
-              <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="my-4 text-4xl text-yellow-500"><%= p.body %></div>
-              <%= pluralize(p.number_of_text_likes, 'Like') %>
-              <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
-                <div class="text-red-500 hover:text-red-300">
-                  <%= link_to 'Like this post',
-                    like_posts_path(like: { post_id: p.id, post_type: "TextPost" }),
-                      method: :post %>
-                </div>
+        <% if @viewable_posts.empty? %>
+          <div class="font-bold italic text-xl">No posts yet. Make some new friends!</div>
+        <% else %>
+          <% @viewable_posts.each do |p| %>
+            <div class="pt-6 font-extrabold text-2xl">
+              <% if p.class.name == 'TextPost' %>
+                <%= render partial: 'display_user', locals: { p: p } %>
+                <div class="my-4 text-4xl text-yellow-500"><%= p.body %></div>
+                <%= pluralize(p.number_of_text_likes, 'Like') %>
+                <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
+                  <div class="text-red-500 hover:text-red-300">
+                    <%= link_to 'Like this post',
+                      like_posts_path(like: { post_id: p.id, post_type: "TextPost" }),
+                        method: :post %>
+                  </div>
+                <% end %>
+              <% elsif p.class.name == 'ImagePost' %>
+                <%= render partial: 'display_user', locals: { p: p } %>
+                <div class="pt-4 text-4xl"><%= p.caption %></div>
+                <%= image_tag(p.image, class: "object-cover h-80 max-w-5xl mt-4") %>
+                <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
+                <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
+                  <div class="text-red-500 hover:text-red-300">
+                    <%= link_to 'Like this image post',
+                      like_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
+                        method: :post %>
+                  </div>
+                <% end %>
+              <% else %>
+                <%= render partial: 'display_user', locals: { p: p } %>
+                <div class="pt-4 text-4xl"><%= p.description %></div>
+                <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
+                <%= pluralize(p.number_of_audio_likes, 'Like') %>
+                <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
+                  <div class="text-red-500 hover:text-red-300">
+                    <%= link_to 'Like this audio post',
+                      like_posts_path(like: { post_id: p.id, post_type: "AudioPost" }),
+                        method: :post %>
+                  </div>
+                <% end %>
               <% end %>
-            <% elsif p.class.name == 'ImagePost' %>
-              <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl"><%= p.caption %></div>
-              <%= image_tag(p.image, class: "object-cover h-80 max-w-5xl mt-4") %>
-              <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
-              <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
-                <div class="text-red-500 hover:text-red-300">
-                  <%= link_to 'Like this image post',
-                    like_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
-                      method: :post %>
-                </div>
-              <% end %>
-            <% else %>
-              <%= render partial: 'display_user', locals: { p: p } %>
-              <div class="pt-4 text-4xl"><%= p.description %></div>
-              <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
-              <%= pluralize(p.number_of_audio_likes, 'Like') %>
-              <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
-                <div class="text-red-500 hover:text-red-300">
-                  <%= link_to 'Like this audio post',
-                    like_posts_path(like: { post_id: p.id, post_type: "AudioPost" }),
-                      method: :post %>
-                </div>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="font-extrabold text-lg my-8">
-            <% p.comments.includes(:user).each do |c| %>
-              <div class="ml-12 text-2xl"><%= c.body %></div>
-              <div class="flex ml-12 mb-4">
-                <div>
-                  <% if c.user.avatar.attached? %>
-                    <%= link_to image_tag(c.user.avatar, class: "object-cover w-9
-                        h-9 inline align-middle my-2"), user_path(c.user.id) %>
-                  <% else %>
-                    <%= link_to image_tag('default_pfp', class: "object-cover w-9 h-9
-                        inline align-middle my-2"), user_path(c.user.id) %>
-                  <% end %>
-                </div>
-                <div class="flex-col ml-4 italic">
-                  <div><%= c.user.name %></div>
-                  <div class="italic text-base">
-                    <%= time_ago_in_words(c.created_at) %> ago
+            </div>
+            <div class="font-extrabold text-lg my-8">
+              <% p.comments.includes(:user).each do |c| %>
+                <div class="ml-12 text-2xl"><%= c.body %></div>
+                <div class="flex ml-12 mb-4">
+                  <div>
+                    <% if c.user.avatar.attached? %>
+                      <%= link_to image_tag(c.user.avatar, class: "object-cover w-9
+                          h-9 inline align-middle my-2"), user_path(c.user.id) %>
+                    <% else %>
+                      <%= link_to image_tag('default_pfp', class: "object-cover w-9 h-9
+                          inline align-middle my-2"), user_path(c.user.id) %>
+                    <% end %>
+                  </div>
+                  <div class="flex-col ml-4 italic">
+                    <div><%= c.user.name %></div>
+                    <div class="italic text-base">
+                      <%= time_ago_in_words(c.created_at) %> ago
+                    </div>
                   </div>
                 </div>
+              <% end %>
+            </div>
+            <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
+              <div class="mt-4 ml-12 font-extrabold text-lg">
+                <%= f.hidden_field :post_id, value: p.id %>
+                <%= f.hidden_field :post_type, value: p.class.name %>
+                <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4
+                    border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
+                <div>
+                  <%= f.submit "Post a comment", class: "w-48 bg-purple-800
+                      hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200
+                      font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
+                </div>
               </div>
             <% end %>
-          </div>
-          <%= form_with model: Comment.new, url: comment_posts_path do |f| %>
-            <div class="mt-4 ml-12 font-extrabold text-lg">
-              <%= f.hidden_field :post_id, value: p.id %>
-              <%= f.hidden_field :post_type, value: p.class.name %>
-              <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4
-                  border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
-              <div>
-                <%= f.submit "Post a comment", class: "w-48 bg-purple-800
-                    hover:bg-purple-700 border-2 border-solid border-purple-900 text-yellow-200
-                    font-bold py-2 px-4 my-4 rounded-xl hover:cursor-pointer" %>
-              </div>
-            </div>
           <% end %>
         <% end %>
       </div>
