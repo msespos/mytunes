@@ -9,7 +9,7 @@
     <% end %>
   </div>
   <div class="flex-col ml-4 italic">
-    <div><%= p.user.name %></div>
+    <div><%= link_to p.user.name, user_path(p.user.id) %></div>
     <div class="text-lg"><%= time_ago_in_words(p.created_at) %> ago</div>
   </div>
 </div>
