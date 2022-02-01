@@ -15,9 +15,6 @@
           <div class="py-5 px-3 text-gray-700 hover:text-gray-500 text-xl font-bold">
             <%= link_to 'New Post', new_text_post_path %>
           </div>
-          <div class="py-5 px-3 text-gray-700 hover:text-gray-500 text-xl font-bold">
-            <%= link_to 'Edit Profile', edit_user_path(current_user.id) %>
-          </div>
           <% unless current_user.pending_friend_requests_from_others.empty? %>
             <div class="py-5 px-3 bg-red-500 hover:bg-red-400
                         text-black-700 hover:text-black-500 text-xl font-bold">

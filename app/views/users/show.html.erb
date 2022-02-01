@@ -15,6 +15,11 @@
             Favorite artist: <%= @user.favorite_artist %><br>
             Birthday: <%= @user.birthday.strftime("%B %-d, %Y") %><br>
           </div>
+          <% if @user == current_user %>
+            <div class="text-2xl font-extrabold text-red-500 hover:text-red-300 inline align-middle">
+              <%= link_to 'Edit Your Profile', edit_user_path(current_user.id) %>
+            </div>
+          <% end %>
           <div class="mt-8">Posts</div>
             <% @viewable_posts.each do |p| %>
               <div class="pt-4 font-extrabold text-2xl">
