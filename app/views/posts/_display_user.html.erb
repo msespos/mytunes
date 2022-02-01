@@ -4,7 +4,7 @@
       <%= link_to image_tag(p.user.avatar, class: "object-cover w-12 h-12 inline
           align-middle my-2"), user_path(p.user.id) %>
     <% else %>
-      <%= link_to image_tag('default_pfp', class: "object-cover w-12 h-12 inline
+      <%= link_to image_tag('default_pfp.jpg', class: "object-cover w-12 h-12 inline
           align-middle my-2"), user_path(p.user.id) %>
     <% end %>
   </div>
