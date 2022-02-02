@@ -14,8 +14,11 @@
           </div>
           <div class="flex-col">
             <% unless current_user.pending_friend_requests_from_others.empty? %>
-              <div class="rounded-full px-2 bg-red-500 text-white text-sm font-bold
-                          border-white border-2">!</div>
+              <div class="rounded-full px-2 bg-red-500 hover:bg-red-400 text-white
+                          text-sm font-bold border-white border-2">
+                <%= link_to current_user.pending_friend_requests_from_others.size,
+                    users_index_path %>
+              </div>
             <% end %>
             <div class="py-3"></div>
           </div>
