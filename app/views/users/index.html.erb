@@ -1,41 +1,44 @@
 <body class="bg-indigo-900">
   <div class="sticky top-0"><%= render 'shared/navbar' %></div>
   <div class="flex-col justify-center max-w-5xl mx-auto">
-    <div class="ml-8 mt-16">
+    <div class="ml-8 mt-8">
       <div class="text-yellow-200 text-3xl font-bold">
-        <div class="text-7xl font-extrabold">Everybody</div>
+        <div class="text-4xl sm:text-7xl font-extrabold">Everybody</div>
   
-        <div class="my-10">
-          <div class="text-4xl italic mb-3">Your Friends:<br></div>
+        <div class="my-4 sm:my-10">
+          <div class="text-2xl sm:text-4xl italic mb-3">Your Friends:</div>
           <% if current_user.friends.empty? %>
             <div class = "text-base italic">None</div>
           <% else %>
             <% current_user.friends.each do |f| %>
-              <%= render partial: 'display_user', locals: { u: f } %><br>
+              <div><%= render partial: 'display_user', locals: { u: f } %></div>
             <% end %>
           <% end %>
         </div>
 
         <div class="my-10">
-          <div class = "text-4xl italic mb-3">People Requesting Your Friendship:<br></div>
+          <div class = "text-2xl sm:text-4xl italic mb-3">People Requesting Your Friendship:</div>
           <% if current_user.pending_friend_requests_from_others.empty? %>
             <div class = "text-base italic">None</div>
           <% else %>
             <% current_user.pending_friend_requests_from_others.each do |p| %>
-              <%= render partial: 'display_user', locals: { u: p.requesting_user } %> -
-              <span class="text-red-500 hover:text-red-300 inline align-middle">
-                <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %>
-              </span>
-              <span class="text-yellow-200"> - </span>
-              <span class="text-red-500 hover:text-red-300 inline align-middle">
-                <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %><br>
-              </span>
+              <div>
+                <%= render partial: 'display_user', locals: { u: p.requesting_user } %>              
+                <span class="ml-0 sm:ml-1 text-base sm:text-3xl text-red-500 hover:text-red-300
+                             inline align-middle">
+                  <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %>
+                </span>              
+                <span class="ml-0 sm:ml-1 text-base sm:text-3xl text-red-500 hover:text-red-300
+                             inline align-middle">
+                  <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %>
+                </span>
+              </div>
             <% end %>
           <% end %>
         </div>
   
         <div class="my-10">
-          <div class="text-4xl italic mb-3">You've Requested Their Friendship:<br></div>
+          <div class="text-2xl sm:text-4xl italic mb-3">You've Requested Their Friendship:</div>
           <% if current_user.pending_friend_requests_to_others.empty? %>
             <div class = "text-base italic">None</div>
           <% else %>
@@ -46,19 +49,22 @@
         </div>
   
         <div class="my-10">
-          <div class="text-4xl italic mb-3">Other People:<br></div>
+          <div class="text-2xl sm:text-4xl italic mb-3">Other People:</div>
           <% if current_user.neither_friends_nor_friend_requested_nor_self.empty? %>
             <div class = "text-base italic">None</div>
           <% else %>
             <% current_user.neither_friends_nor_friend_requested_nor_self.each do |n| %>
-              <%= render partial: 'display_user', locals: { u: n } %>
-              <span class="text-red-500 hover:text-red-300 inline align-middle">
-                <%= link_to '- Make Friend Request',
-                  friendships_path(
-                    friendship: { requesting_user_id: current_user.id,
-                                  requested_user_id: n.id }),
-                    method: :post %><br>
-              </span>
+              <div>
+                <%= render partial: 'display_user', locals: { u: n } %>
+                <span class="ml-1 sm:ml-2 text-base sm:text-3xl text-red-500 hover:text-red-300
+                             inline align-middle">
+                  <%= link_to '+Friend',
+                    friendships_path(
+                      friendship: { requesting_user_id: current_user.id,
+                                    requested_user_id: n.id }),
+                      method: :post %>
+                </span>
+              </div>
             <% end %>
           <% end %>
         </div>
