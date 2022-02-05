@@ -8,8 +8,8 @@
           align-middle my-2"), user_path(p.user.id) %>
     <% end %>
   </div>
-  <div class="flex-col ml-4 italic">
+  <div class="flex-col text-base md:text-lg ml-4 italic">
     <div><%= link_to p.user.name, user_path(p.user.id) %></div>
-    <div class="text-lg"><%= time_ago_in_words(p.created_at) %> ago</div>
+    <div class="text-sm md:text-lg"><%= time_ago_in_words(p.created_at) %> ago</div>
   </div>
 </div>
