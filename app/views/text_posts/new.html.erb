@@ -6,7 +6,7 @@
       <div class="my-2 md:my-6 text-4xl md:text-6xl font-extrabold">Create a Text Post</div>
       <%= form_with model: @text_post do |f| %>
         <div class="py-8 font-extrabold text-lg md:text-4xl">
-          <%= f.text_area :body, class: "w-72 md:w-3/4 bg-purple-100 text-purple-800 border-4
+          <%= f.text_area :body, class: "w64 md:w-3/4 bg-purple-100 text-purple-800 border-4
                 border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
           <div>
             <%= f.submit "Submit", class: "w-48 bg-purple-800 hover:bg-purple-700
