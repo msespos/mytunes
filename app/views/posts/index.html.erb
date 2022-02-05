@@ -23,7 +23,7 @@
               <% elsif p.class.name == 'ImagePost' %>
                 <%= render partial: 'display_user', locals: { p: p } %>
                 <div class="pt-4 text-2xl md:text-4xl"><%= p.caption %></div>
-                <%= image_tag(p.image, class: "object-cover h-60 md:h-80
+                <%= image_tag(p.image, class: "object-cover h-40 md:h-80
                                                max-w-xs md:max-w-2xl lg:max-w-4xl mt-4") %>
                 <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
