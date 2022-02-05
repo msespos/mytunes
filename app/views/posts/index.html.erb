@@ -1,9 +1,9 @@
 <body class="bg-indigo-900">
   <div class="sticky top-0"><%= render 'shared/navbar' %></div>
   <div class="flex-col justify-center max-w-5xl mx-auto">
-    <div class="ml-8 my-16">
+    <div class="mx-8 my-8 lg:my-16">
       <div class="text-yellow-200 text-2xl font-extrabold">
-        <div class="my-6 text-6xl font-extrabold">Your Feed</div>
+        <div class="my-6 text-3xl sm:text-4xl lg:text-6xl font-extrabold">Your Feed</div>
         <% if @viewable_posts.empty? %>
           <div class="font-bold italic text-xl">No posts yet. Make some new friends!</div>
         <% else %>
@@ -23,7 +23,8 @@
               <% elsif p.class.name == 'ImagePost' %>
                 <%= render partial: 'display_user', locals: { p: p } %>
                 <div class="pt-4 text-4xl"><%= p.caption %></div>
-                <%= image_tag(p.image, class: "object-cover h-80 max-w-4xl mt-4") %>
+                <%= image_tag(p.image, class: "object-cover h-60 sm:h-80
+                                               max-w-xs sm:max-w-2xl lg:max-w-4xl mt-4") %>
                 <div class="mt-4"><%= pluralize(p.number_of_image_likes, 'Like') %></div>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
                   <div class="text-red-500 hover:text-red-300">
@@ -72,7 +73,7 @@
               <div class="mt-4 ml-12 font-extrabold text-lg">
                 <%= f.hidden_field :post_id, value: p.id %>
                 <%= f.hidden_field :post_type, value: p.class.name %>
-                <%= f.text_area :body, class: "w-96 bg-purple-100 text-purple-800 border-4
+                <%= f.text_area :body, class: "w-64 md:w-96 bg-purple-100 text-purple-800 border-4
                     border-purple-900 border-rounded font-bold py-2 px-4 rounded-xl" %>
                 <div>
                   <%= f.submit "Post a comment", class: "w-48 bg-purple-800
