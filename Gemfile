@@ -17,6 +17,9 @@ gem 'figaro'
 
 gem 'sendgrid-ruby'
 
+gem 'aws-sdk-rails', '~> 3'
+gem 'aws-sdk-s3', '~> 1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # Use PostgreSQL as the database for Active Record
