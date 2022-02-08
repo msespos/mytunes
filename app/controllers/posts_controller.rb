@@ -34,6 +34,20 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def unlike
+    Rails.logger.debug "PARAMS = #{params}"
+    @like = Like.find_by(post_id: like_params[:post_id],
+                         post_type: like_params[:post_type],
+                         user_id: current_user)
+    Rails.logger.debug "@like = #{@like}"
+    if @like.destroy
+      flash[:notice] = 'You unliked the post!'
+    else
+      flash[:alert] = 'Error - could not process unlike'
+    end
+    redirect_to posts_path
+  end
+
   def comment
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id

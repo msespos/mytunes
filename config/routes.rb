@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :posts, only: :index do
     collection do
       post 'like'
+      delete 'unlike'
       post 'comment'
     end
   end
