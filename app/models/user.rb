@@ -16,7 +16,7 @@ class User < ApplicationRecord
   has_many :comments
   has_one_attached :avatar
 
-  validates :name, presence: true
+  validates :name, presence: { message: "can't be blank" }
 
   after_create :send_admin_mail
 

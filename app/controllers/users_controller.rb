@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'You updated your profile!'
       redirect_to user_path
     else
-      flash[:alert] = 'Error - could not process profile update'
+      flash[:alert] = @user.errors.full_messages[0]
       render 'edit'
     end
   end
