@@ -13,7 +13,8 @@
             Project: <%= @user.project_name %><br>
             Location: <%= @user.location %><br>
             Favorite artist: <%= @user.favorite_artist %><br>
-            Birthday: <%= @user.birthday.strftime("%B %-d, %Y") %><br>
+            Birthday:
+            <%= @user.birthday.strftime("%B %-d, %Y") if @user.birthday %><br>
           </div>
           <% if @user == current_user %>
             <div class="text-xl sm:text-2xl font-extrabold text-red-500 hover:text-red-300
