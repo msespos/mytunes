@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :name, presence: { message: "can't be blank" }
+  validates :name, uniqueness: { message: "must be unique" }
 
   after_create :send_admin_mail
 
