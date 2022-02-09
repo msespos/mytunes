@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     posts = TextPost.all + ImagePost.all + AudioPost.all
     @viewable_posts = posts.sort { |x, y| y.created_at <=> x.created_at }.select do |p|
-      p.user == current_user
+      p.user == @user
     end
   end
 
