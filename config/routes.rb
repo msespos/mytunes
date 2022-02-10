@@ -7,6 +7,7 @@ Rails.application.routes.draw do
                                     omniauth_callbacks: 'users/omniauth_callbacks' }
   devise_scope :user do
     root to: 'devise/sessions#new'
+    get '/users', to: 'devise/registrations#new'
   end
 
   resources :users, only: %i[show edit update]
