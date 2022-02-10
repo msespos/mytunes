@@ -17,7 +17,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   validates :name, presence: { message: "can't be blank" }
-  validates_confirmation_of :password, message: 'should match confirmation'
 
   after_create :send_admin_mail
 
