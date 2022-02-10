@@ -82,7 +82,7 @@ Friendship.create!([{ requesting_user_id: 1, requested_user_id: 2, confirmed: tr
                     { requesting_user_id: 1, requested_user_id: 8, confirmed: false },
                     { requesting_user_id: 1, requested_user_id: 9, confirmed: false },
                     { requesting_user_id: 1, requested_user_id: 10, confirmed: false },
-                    { requesting_user_id: 1, requested_user_id: 11, confirmed: false }])                    
+                    { requesting_user_id: 1, requested_user_id: 11, confirmed: false }])
 
 Like.create!([{ post_id: 1, user_id: 2, post_type: 'TextPost' },
               { post_id: 1, user_id: 3, post_type: 'TextPost' },
