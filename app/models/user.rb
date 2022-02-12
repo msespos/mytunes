@@ -50,7 +50,7 @@ class User < ApplicationRecord
     Friendship.where('requesting_user_id = ? AND confirmed = ?', id, false)
   end
 
-  def neither_friends_nor_friend_requested_nor_self
+  def others_without_any_connection
     User.all - friends - friend_requested - [self]
   end
 
