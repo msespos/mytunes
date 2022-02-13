@@ -8,6 +8,6 @@ FactoryBot.define do
     project_name { 'blanket forts' }
     location { 'Lomita, CA' }
     favorite_artist { 'Autechre' }
-    birthday { '07/08/1975' }
+    birthday { '1975-08-07' }
   end
 end
