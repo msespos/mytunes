@@ -12,7 +12,7 @@
               <% if p.class.name == 'TextPost' %>
                 <%= render partial: 'display_user', locals: { p: p } %>
                 <div class="my-4 text-2xl md:text-4xl text-yellow-500"><%= p.body %></div>
-                <%= pluralize(p.number_of_likes('TextPost'), 'Like') %>
+                <%= pluralize(p.number_of_likes, 'Like') %>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
                   <div class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this post',
@@ -31,7 +31,7 @@
                 <div class="pt-4 text-2xl md:text-4xl"><%= p.caption %></div>
                 <%= image_tag(p.image, class: "object-cover h-40 md:h-80
                                                max-w-xs md:max-w-2xl lg:max-w-4xl mt-4") %>
-                <div class="mt-4"><%= pluralize(p.number_of_likes('ImagePost'), 'Like') %></div>
+                <div class="mt-4"><%= pluralize(p.number_of_likes, 'Like') %></div>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
                   <div class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this image post',
@@ -49,7 +49,7 @@
                 <%= render partial: 'display_user', locals: { p: p } %>
                 <div class="pt-4 text-2xl md:text-4xl"><%= p.description %></div>
                 <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
-                <%= pluralize(p.number_of_likes('AudioPost'), 'Like') %>
+                <%= pluralize(p.number_of_likes, 'Like') %>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
                   <div class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this audio post',
