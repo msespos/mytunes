@@ -74,6 +74,7 @@ end
 
 group :test do
   gem 'selenium-webdriver'
+  gem 'pry'
   # Easy installation and use of web drivers to run system tests with browsers
 end
 
