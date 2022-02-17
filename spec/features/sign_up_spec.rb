@@ -4,12 +4,12 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Sign up and edit profile', type: :feature do
+RSpec.describe 'Signing up and editing profile', type: :feature do
   before(:all) do
     @mike = create(:user)
   end
 
-  scenario 'sign up' do
+  scenario 'successful signup' do
     visit root_path
     click_on 'Sign up'
     fill_in 'Name', with: 'Katie'
@@ -20,7 +20,7 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
     expect(page).to have_content('Welcome! You have signed up successfully.')
   end
 
-  scenario 'sign up and update profile' do
+  scenario 'successful signup and profile edit' do
     visit root_path
     click_on 'Sign up'
     fill_in 'Name', with: 'Alicia'
@@ -29,19 +29,19 @@ RSpec.describe 'Sign up and edit profile', type: :feature do
     fill_in 'Password confirmation', with: '123456'
     click_on 'Sign up'
     fill_in 'Name', with: 'Alice'
-    click_on 'Update User'
+    click_on 'Update'
     expect(page).to have_content("Alice's Profile")
   end
 
-  scenario 'sign in and update profile' do
+  scenario 'successful login and profile edit' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
-    click_on 'Edit Profile'
+    click_on 'm:ke'
+    click_on 'Edit Your Profile'
     fill_in 'Favorite artist', with: 'Nirvana'
-    click_on 'Update User'
-    click_on 'View Profile'
+    click_on 'Update'
     expect(page).to have_content('Favorite artist: Nirvana')
   end
 end
