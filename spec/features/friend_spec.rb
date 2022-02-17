@@ -10,7 +10,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
-  scenario 'successful log in' do
+  scenario 'successful login' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -18,7 +18,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('m:ke')
   end
 
-  scenario 'successful log in and friendship request' do
+  scenario 'successful login and friendship request' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -28,7 +28,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('You made a friendship request!')
   end
 
-  scenario 'successful log in and friendship request and confirmation as other user' do
+  scenario 'successful login and friendship request and confirmation as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -44,7 +44,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('You confirmed the friendship!')
   end
 
-  scenario 'successful log in and friendship request and confirmation as other user' do
+  scenario 'successful login and friendship request and confirmation as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -60,7 +60,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to_not have_content('+Friend')
   end
 
-  scenario 'successful log in and friendship request and denial as other user' do
+  scenario 'successful login and friendship request and denial as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -76,7 +76,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('You denied the friendship request!')
   end
 
-  scenario 'successful log in and friendship creation as other user' do
+  scenario 'successful login and friendship creation as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'

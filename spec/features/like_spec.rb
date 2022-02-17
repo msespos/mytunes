@@ -10,7 +10,7 @@ RSpec.describe 'Liking a post', type: :feature do
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
-  scenario 'successful log in and post creation and post liking' do
+  scenario 'successful login and post creation and post liking' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -22,7 +22,7 @@ RSpec.describe 'Liking a post', type: :feature do
     expect(page).to have_content('1 Like')
   end
 
-  scenario 'successful log in and post creation and post liking as two different users' do
+  scenario 'successful login and post creation and post liking as two different users' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
