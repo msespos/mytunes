@@ -10,7 +10,7 @@ RSpec.describe 'Creating a post', type: :feature do
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
-  scenario 'successful login and post creation' do
+  scenario 'successful post creation' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -21,7 +21,7 @@ RSpec.describe 'Creating a post', type: :feature do
     expect(page).to have_content('My Post')
   end
 
-  scenario 'successful login and post creation' do
+  scenario 'successful post creation' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -32,7 +32,7 @@ RSpec.describe 'Creating a post', type: :feature do
     expect(page).to have_content('Post created!')
   end
 
-  scenario 'successful login and post creation' do
+  scenario 'successful post creation' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'

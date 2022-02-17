@@ -18,7 +18,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('m:ke')
   end
 
-  scenario 'successful login and friendship request' do
+  scenario 'successful friendship request' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -28,7 +28,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('You made a friendship request!')
   end
 
-  scenario 'successful login and friendship request and confirmation as other user' do
+  scenario 'successful friendship request and confirmation as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -44,7 +44,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content('You confirmed the friendship!')
   end
 
-  scenario 'successful login and friendship request and confirmation as other user' do
+  scenario 'successful friendship request and confirmation as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -60,7 +60,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to_not have_content('+Friend')
   end
 
-  scenario 'successful login and friendship request and denial as other user' do
+  scenario 'successful friendship request and denial as other user' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
