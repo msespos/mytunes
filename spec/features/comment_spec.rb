@@ -4,58 +4,45 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Comment on a post', type: :feature do
+RSpec.describe 'Commenting on a post', type: :feature do
   before(:all) do
     @mike = create(:user)
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
-  scenario 'log in and create a post and comment on that post' do
+  scenario 'successful comment' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
-    click_on 'New Text Post'
+    click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
-    click_on 'Create Text post'
-    expect(page).to have_content('Comment')
-  end
-
-  scenario 'log in and create a post and comment on that post' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    click_on 'New Text Post'
-    fill_in 'text_post[body]', with: 'My Post'
-    click_on 'Create Text post'
+    click_on 'Submit'
     fill_in 'comment[body]', with: 'My Comment'
-    click_on 'Create Comment'
+    click_on 'Post a comment'
     expect(page).to have_content('My Comment')
   end
 
-  scenario 'log in and create a post and comment on it and log in as a friend and comment on it' do
+  scenario 'successful comment as friend of poster' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
-    click_on 'New Text Post'
+    click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
-    click_on 'Create Text post'
-    fill_in 'comment[body]', with: 'My Second Comment'
-    click_on 'Create Comment'
+    click_on 'Submit'
     click_on 'Everybody'
-    click_on 'Make'
+    click_on '+Friend'
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
-    click_on 'Pending'
+    click_on 'Everybody'
     click_on 'Confirm'
-    click_on 'My Feed'
-    fill_in 'comment[body]', with: 'My Second Comment'
-    click_on 'Create Comment'
-    expect(page).to have_content('My Second Comment')
+    first(:xpath, "//a[contains(@href, '/posts')]").click
+    fill_in 'comment_body', with: 'My Comment'
+    click_on 'Post a comment'
+    expect(page).to have_content('My Comment')
   end
 end
 
