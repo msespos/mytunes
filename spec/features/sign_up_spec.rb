@@ -4,12 +4,19 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Signing up and editing profile', type: :feature do
+RSpec.describe 'Signing up', type: :feature do
   before(:all) do
     @mike = create(:user)
   end
 
-  scenario 'successful signup' do
+  scenario 'failed signup with no fields filled in displays sign up page' do
+    visit root_path
+    click_on 'Sign up'
+    click_on 'Sign up'
+    expect(page).to have_content("Sign Up")
+  end
+
+  scenario 'successful signup displays user page' do
     visit root_path
     click_on 'Sign up'
     fill_in 'Name', with: 'Katie'
@@ -17,32 +24,7 @@ RSpec.describe 'Signing up and editing profile', type: :feature do
     fill_in 'Password', with: '123456'
     fill_in 'Password confirmation', with: '123456'
     click_on 'Sign up'
-    expect(page).to have_content('Welcome! You have signed up successfully.')
-  end
-
-  scenario 'successful signup and profile edit' do
-    visit root_path
-    click_on 'Sign up'
-    fill_in 'Name', with: 'Alicia'
-    fill_in 'Email', with: 'alice@example.com'
-    fill_in 'Password', with: '123456'
-    fill_in 'Password confirmation', with: '123456'
-    click_on 'Sign up'
-    fill_in 'Name', with: 'Alice'
-    click_on 'Update'
-    expect(page).to have_content("Alice's Profile")
-  end
-
-  scenario 'successful login and profile edit' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    click_on 'm:ke'
-    click_on 'Edit Your Profile'
-    fill_in 'Favorite artist', with: 'Nirvana'
-    click_on 'Update'
-    expect(page).to have_content('Favorite artist: Nirvana')
+    expect(page).to have_content('Katie')
   end
 end
 

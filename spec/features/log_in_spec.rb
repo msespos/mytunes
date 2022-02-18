@@ -18,54 +18,6 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Log in')
   end
 
-  scenario 'failed login with no email or password displays invalid email or passsword flash' do
-    visit root_path
-    fill_in 'Email', with: ''
-    fill_in 'Password', with: ''
-    click_on 'Log in'
-    expect(page).to have_content('Invalid Email or password.')
-  end
-
-  scenario 'failed login with no email displays invalid email or passsword flash' do
-    visit root_path
-    fill_in 'Email', with: ''
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    expect(page).to have_content('Invalid Email or password.')
-  end
-
-  scenario 'failed login with no password displays invalid email or passsword flash' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: ''
-    click_on 'Log in'
-    expect(page).to have_content('Invalid Email or password.')
-  end
-
-  scenario 'failed login with incorrect email displays invalid email or passsword flash' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.co'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    expect(page).to have_content('Invalid Email or password.')
-  end
-
-  scenario 'failed login with incorrect password displays invalid email or passsword flash' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '12345'
-    click_on 'Log in'
-    expect(page).to have_content('Invalid Email or password.')
-  end
-
-  scenario 'successful login displays confirmation flash' do
-    visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    expect(page).to have_content('Signed in successfully.')
-  end
-
   scenario 'successful login displays user home page' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
