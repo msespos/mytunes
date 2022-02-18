@@ -18,7 +18,7 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Log in')
   end
 
-  scenario 'failed login with no email or password displays correct flash' do
+  scenario 'failed login with no email or password displays invalid email or passsword flash' do
     visit root_path
     fill_in 'Email', with: ''
     fill_in 'Password', with: ''
@@ -26,7 +26,7 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Invalid Email or password.')
   end
 
-  scenario 'failed login with no email displays correct flash' do
+  scenario 'failed login with no email displays invalid email or passsword flash' do
     visit root_path
     fill_in 'Email', with: ''
     fill_in 'Password', with: '123456'
@@ -34,7 +34,7 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Invalid Email or password.')
   end
 
-  scenario 'failed login with no password displays correct flash' do
+  scenario 'failed login with no password displays invalid email or passsword flash' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: ''
@@ -42,7 +42,7 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Invalid Email or password.')
   end
 
-  scenario 'failed login with incorrect email displays correct flash' do
+  scenario 'failed login with incorrect email displays invalid email or passsword flash' do
     visit root_path
     fill_in 'Email', with: 'mike@example.co'
     fill_in 'Password', with: '123456'
@@ -50,7 +50,7 @@ RSpec.describe 'Logging in', type: :feature do
     expect(page).to have_content('Invalid Email or password.')
   end
 
-  scenario 'failed login with incorrect password displays correct flash' do
+  scenario 'failed login with incorrect password displays invalid email or passsword flash' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '12345'
