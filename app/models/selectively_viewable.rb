@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Selectively Viewable module
 module SelectivelyViewable
   def viewable_by?(current_user)
     user == current_user || current_user.friends.include?(user)
