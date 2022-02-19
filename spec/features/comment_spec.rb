@@ -10,7 +10,7 @@ RSpec.describe 'Commenting on a post', type: :feature do
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
-  scenario 'successful comment' do
+  scenario 'successful comment on a post displays the comment' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
@@ -23,7 +23,7 @@ RSpec.describe 'Commenting on a post', type: :feature do
     expect(page).to have_content('My Comment')
   end
 
-  scenario 'successful comment as friend of poster' do
+  scenario 'successful comment by a friend of original poster displays comment' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'
