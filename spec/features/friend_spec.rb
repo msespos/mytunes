@@ -77,6 +77,39 @@ RSpec.describe 'Creating a friendship', type: :feature do
     expect(page).to have_content("Your Friends:\nm:ke")
   end
 
+  scenario "successful friendship request by two users displays users' names to requested user" do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    first('#potential_friend').click
+    first('#potential_friend').click
+    click_on 'Sign out'
+    fill_in 'Email', with: 'katie@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    first('#potential_friend').click
+    click_on 'Sign out'
+    fill_in 'Email', with: 'alice@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    expect(page).to have_content("People Requesting Your Friendship:\nm:ke (blanket forts) Confirm Deny\nKatie")
+  end
+
+  scenario 'successful friendship request of two other users displays them in order' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    first('#potential_friend').click
+    first('#potential_friend').click
+    expect(page).to have_content("You've Requested Their Friendship:\nKatie (Xena)\nAlice (Xena)")
+  end
+
   scenario "successful creation of two friendships displays both friends' names in order" do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
