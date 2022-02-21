@@ -25,7 +25,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
     expect(page).to have_content('You made a friendship request!')
   end
 
@@ -35,7 +35,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
@@ -51,7 +51,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
@@ -67,7 +67,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
@@ -83,14 +83,14 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'alice@example.com'
     fill_in 'Password', with: '123456'
@@ -105,8 +105,8 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
+    first(class: 'potential-friend').click
     expect(page).to have_content("You've Requested Their Friendship:\nKatie (Xena)\nAlice (Xena)")
   end
 
@@ -116,8 +116,8 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    first('#potential_friend').click
-    first('#potential_friend').click
+    first(class: 'potential-friend').click
+    first(class: 'potential-friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
