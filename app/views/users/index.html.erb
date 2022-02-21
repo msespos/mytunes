@@ -53,16 +53,17 @@
           <% if current_user.others_without_any_connection.empty? %>
             <div class = "text-base italic">None</div>
           <% else %>
-            <% current_user.others_without_any_connection.each do |n| %>
+            <% current_user.others_without_any_connection.each do |u| %>
               <div>
-                <%= render partial: 'display_user', locals: { u: n } %>
+                <%= render partial: 'display_user', locals: { u: u } %>
                 <span class="ml-1 sm:ml-2 text-base sm:text-3xl text-red-500 hover:text-red-300
                              inline align-middle">
                   <%= link_to '+Friend',
                     friendships_path(
                       friendship: { requesting_user_id: current_user.id,
-                                    requested_user_id: n.id }),
-                      method: :post %>
+                                    requested_user_id: u.id }),
+                    id: "potential_friend",
+                    method: :post %>
                 </span>
               </div>
             <% end %>
