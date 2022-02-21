@@ -7,7 +7,8 @@ require 'rails_helper'
 RSpec.describe 'Creating a friendship', type: :feature do
   before(:all) do
     @mike = create(:user)
-    @katie = create(:user, name: 'Katie', email: 'katie@example.com')
+    @katie = create(:user, name: 'Katie', email: 'katie@example.com', project_name: 'Xena')
+    @alice = create(:user, name: 'Alice', email: 'alice@example.com', project_name: 'Xena')
   end
 
   scenario 'successful login displays username' do
@@ -24,7 +25,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    click_on '+Friend'
+    first('#potential_friend').click
     expect(page).to have_content('You made a friendship request!')
   end
 
@@ -34,7 +35,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    click_on '+Friend'
+    first('#potential_friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
@@ -50,7 +51,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    click_on '+Friend'
+    first('#potential_friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
@@ -66,14 +67,42 @@ RSpec.describe 'Creating a friendship', type: :feature do
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
-    click_on '+Friend'
+    first('#potential_friend').click
     click_on 'Sign out'
     fill_in 'Email', with: 'katie@example.com'
     fill_in 'Password', with: '123456'
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
-    expect(page).to have_content("m:ke")
+    expect(page).to have_content("Your Friends:\nm:ke")
+  end
+
+  scenario "successful creation of two friendships displays both friends' names in order" do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    first('#potential_friend').click
+    first('#potential_friend').click
+    click_on 'Sign out'
+    fill_in 'Email', with: 'katie@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    click_on 'Confirm'
+    click_on 'Sign out'
+    fill_in 'Email', with: 'alice@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    click_on 'Confirm'
+    click_on 'Sign out'
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'Everybody'
+    expect(page).to have_content("Your Friends:\nKatie (Xena)\nAlice (Xena)")
   end
 end
 
