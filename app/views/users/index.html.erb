@@ -59,11 +59,8 @@
                 <span class="ml-1 sm:ml-2 text-base sm:text-3xl text-red-500 hover:text-red-300
                              inline align-middle">
                   <%= link_to '+Friend',
-                    friendships_path(
-                      friendship: { requesting_user_id: current_user.id,
-                                    requested_user_id: u.id }),
-                    class: "potential-friend",
-                    method: :post %>
+                    friendships_path(friendship: { requested_user_id: u.id }),
+                    class: "potential-friend", method: :post %>
                 </span>
               </div>
             <% end %>
