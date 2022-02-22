@@ -43,6 +43,19 @@ RSpec.describe 'Liking a post', type: :feature do
     click_on 'Like this post'
     expect(page).to have_content('2 Likes')
   end
+
+  scenario 'successful post liking and unliking displays zero likes' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    fill_in 'text_post[body]', with: 'My Post'
+    click_on 'Submit'
+    click_on 'Like this post'
+    click_on 'Unlike this post'
+    expect(page).to have_content('0 Likes')
+  end
 end
 
 # rubocop:enable Metrics/BlockLength
