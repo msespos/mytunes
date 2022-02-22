@@ -32,7 +32,7 @@ class FriendshipsController < ApplicationController
     @friendship.confirmed = true
     @friendship.requested_user_id = current_user.id
     if @friendship.save
-      flash[:notice] = 'You confirmed the friendship!'
+      flash[:notice] = "You are now friends with #{@friendship.requesting_user.name}!"
       redirect_to users_index_path
     else
       flash[:alert] = 'Error - could not process confirmation'

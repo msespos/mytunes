@@ -42,7 +42,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
-    expect(page).to have_content('You confirmed the friendship!')
+    expect(page).to have_content('You are now friends with m:ke!')
   end
 
   scenario 'successful friendship denial displays denial flash' do
