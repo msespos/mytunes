@@ -39,7 +39,6 @@ class PostsController < ApplicationController
     @like = Like.find_by(post_id: like_params[:post_id],
                          post_type: like_params[:post_type],
                          user_id: current_user)
-    Rails.logger.debug "@like = #{@like}"
     if @like.destroy
       flash[:notice] = 'You unliked the post!'
     else
