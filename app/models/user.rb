@@ -54,6 +54,13 @@ class User < ApplicationRecord
     User.all - friends - friend_requested - [self]
   end
 
+  def request_friendship_with(friendship_params)
+    @friendship = Friendship.new(friendship_params)
+    @friendship.confirmed = false
+    @friendship.requesting_user_id = self.id
+    @friendship.save
+  end
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
