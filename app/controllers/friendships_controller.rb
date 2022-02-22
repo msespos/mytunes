@@ -17,6 +17,7 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friendship = Friendship.find(params[:id])
+    @friendship.requested_user_id = current_user.id
     if @friendship.destroy
       flash[:notice] = 'You denied the friendship request!'
       redirect_to users_index_path
@@ -29,8 +30,7 @@ class FriendshipsController < ApplicationController
   def confirm
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
-    return unless current_user.id == @friendship.requested_user_id
-
+    @friendship.requested_user_id = current_user.id
     if @friendship.save
       flash[:notice] = 'You confirmed the friendship!'
       redirect_to users_index_path
