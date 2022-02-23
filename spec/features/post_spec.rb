@@ -10,6 +10,15 @@ RSpec.describe 'Creating a post', type: :feature do
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
+  scenario 'successful navigation to text post from navbar displays text post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    expect(page).to have_content "Sign out\nCreate a Text Post"
+  end
+
   scenario 'successful text post creation displays post' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
@@ -41,6 +50,70 @@ RSpec.describe 'Creating a post', type: :feature do
     fill_in 'text_post[body]', with: 'My Post'
     click_on 'Submit'
     expect(page).to have_content('m:ke')
+  end
+
+  scenario 'successful navigation to image post from text post displays image post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an image post instead'
+    expect(page).to have_content "Sign out\nCreate an Image Post"
+  end
+
+  scenario 'successful navigation to audio post from text post displays audio post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an audio post instead'
+    expect(page).to have_content "Sign out\nCreate an Audio Post"
+  end
+
+  scenario 'successful navigation to text post from image post displays text post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an image post instead'
+    click_on 'Create a text post instead'
+    expect(page).to have_content "Sign out\nCreate a Text Post"
+  end
+
+  scenario 'successful navigation to audio post from image post displays audio post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an image post instead'
+    click_on 'Create an audio post instead'
+    expect(page).to have_content "Sign out\nCreate an Audio Post"
+  end
+
+  scenario 'successful navigation to text post from audio post displays text post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an audio post instead'
+    click_on 'Create a text post instead'
+    expect(page).to have_content "Sign out\nCreate a Text Post"
+  end
+
+  scenario 'successful navigation to image post from audio post displays image post' do
+    visit root_path
+    fill_in 'Email', with: 'mike@example.com'
+    fill_in 'Password', with: '123456'
+    click_on 'Log in'
+    click_on 'New Post'
+    click_on 'Create an audio post instead'
+    click_on 'Create an image post instead'
+    expect(page).to have_content "Sign out\nCreate an Image Post"
   end
 end
 
