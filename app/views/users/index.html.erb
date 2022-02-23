@@ -24,14 +24,12 @@
             <% current_user.pending_friend_requests_from_others.each do |p| %>
               <div>
                 <%= render partial: 'display_user', locals: { u: p.requesting_user } %>
-                <span class="ml-0 sm:ml-1 text-base sm:text-3xl text-red-500 hover:text-red-300
-                             inline align-middle">
-                  <%= link_to 'Confirm', confirm_friendships_path(id: p.id), method: :post %>
-                </span>
-                <span class="ml-0 sm:ml-1 text-base sm:text-3xl text-red-500 hover:text-red-300
-                             inline align-middle">
-                  <%= link_to 'Deny', friendship_path(id: p.id), method: :delete %>
-                </span>
+                <%= render partial: 'confirm_or_deny_link', locals: {
+                  confirm_or_deny: 'Confirm', path: confirm_friendships_path(id: p.id),
+                  method: :post } %>
+                <%= render partial: 'confirm_or_deny_link', locals: {
+                  confirm_or_deny: 'Deny', path: friendship_path(id: p.id),
+                  method: :delete } %>
               </div>
             <% end %>
           <% end %>
