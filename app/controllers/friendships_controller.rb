@@ -17,8 +17,11 @@ class FriendshipsController < ApplicationController
 
   def destroy
     @friendship = Friendship.find(params[:id])
-    @friendship.requested_user_id = current_user.id
-    if @friendship.destroy
+    if current_user.id != @friendship.requested_user_id
+      flash[:alert] = "Error - could not process confirmation"
+      Rails.logger.debug "Warning - Hack attempt - User tried to destroy a friendship that isn't theirs"
+      redirect_to users_index_path
+    elsif @friendship.destroy
       flash[:notice] = 'You denied the friendship request!'
       redirect_to users_index_path
     else
@@ -30,8 +33,11 @@ class FriendshipsController < ApplicationController
   def confirm
     @friendship = Friendship.find(params[:id])
     @friendship.confirmed = true
-    @friendship.requested_user_id = current_user.id
-    if @friendship.save
+    if current_user.id != @friendship.requested_user_id
+      flash[:alert] = "Error - could not process confirmation"
+      Rails.logger.debug "Warning - Hack attempt - User tried to hijack friendship"
+      redirect_to users_index_path
+    elsif @friendship.save
       flash[:notice] = "You are now friends with #{@friendship.requesting_user.name}!"
       redirect_to users_index_path
     else
