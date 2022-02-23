@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   resources :users, only: %i[show edit update]
 
+  get 'edit_profile', to: 'users#edit'
+
   resources :friendships, only: %i[index show create destroy] do
     collection do
       post 'confirm'
