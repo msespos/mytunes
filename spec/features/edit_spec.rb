@@ -32,7 +32,7 @@ RSpec.describe 'Editing profile', type: :feature do
     expect(page).to have_content("Edit Your Profile\nFill in the form and click Update")
   end
 
-  scenario "unsuccessful profile edit with blank name displays profile edit page" do
+  scenario 'unsuccessful profile edit with blank name displays profile edit page' do
     visit root_path
     fill_in 'Email', with: 'mike@example.com'
     fill_in 'Password', with: '123456'

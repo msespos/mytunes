@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
-
 require 'rails_helper'
 
 RSpec.describe 'Signing up', type: :feature do
@@ -13,7 +11,7 @@ RSpec.describe 'Signing up', type: :feature do
     visit root_path
     click_on 'Sign up'
     click_on 'Sign up'
-    expect(page).to have_content("Sign Up")
+    expect(page).to have_content('Sign Up')
   end
 
   scenario 'successful signup displays user page' do
@@ -27,5 +25,3 @@ RSpec.describe 'Signing up', type: :feature do
     expect(page).to have_content('Katie')
   end
 end
-
-# rubocop:enable Metrics/BlockLength

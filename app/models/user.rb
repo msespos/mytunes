@@ -57,7 +57,7 @@ class User < ApplicationRecord
   def request_friendship_with(friendship_params)
     @friendship = Friendship.new(friendship_params)
     @friendship.confirmed = false
-    @friendship.requesting_user_id = self.id
+    @friendship.requesting_user_id = id
     @friendship.save
   end
 
