@@ -3,68 +3,68 @@
   <div class="flex-col justify-center max-w-5xl mx-auto">
     <div class="mx-8 my-8 lg:my-16">
       <div class="text-yellow-200 text-2xl font-extrabold">
-        <div class="my-6 text-3xl md:text-4xl lg:text-6xl font-extrabold">Your Feed</div>
+        <h1 class="my-6 text-3xl md:text-4xl lg:text-6xl font-extrabold">Your Feed</h1>
         <% if @viewable_posts.empty? %>
-          <div class="font-bold italic text-xl">No posts yet. Make some new friends!</div>
+          <h3 class="font-bold italic text-xl">No posts yet. Make some new friends!</h3>
         <% else %>
           <% @viewable_posts.each do |p| %>
-            <div class="pt-6 font-extrabold text-2xl">
+            <p class="pt-6 font-extrabold text-2xl">
               <% if p.class.name == 'TextPost' %>
                 <%= render partial: 'display_user', locals: { p: p } %>
-                <div class="my-4 text-2xl md:text-4xl text-yellow-500"><%= p.body %></div>
+                <h2 class="my-4 text-2xl md:text-4xl text-yellow-500"><%= p.body %></h2>
                 <%= pluralize(p.number_of_likes, 'Like') %>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'TextPost').empty? %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this post',
                       like_posts_path(like: { post_id: p.id, post_type: "TextPost" }),
                         method: :post %>
-                  </div>
+                  </p>
                 <% else %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Unlike this post',
                       unlike_posts_path(like: { post_id: p.id, post_type: "TextPost" }),
                         method: :delete %>
-                  </div>
+                  </p>
                 <% end %>
               <% elsif p.class.name == 'ImagePost' %>
                 <%= render partial: 'display_user', locals: { p: p } %>
-                <div class="pt-4 text-2xl md:text-4xl"><%= p.caption %></div>
+                <h4 class="pt-4 text-2xl md:text-4xl"><%= p.caption %></h4>
                 <%= image_tag(p.image, class: "object-cover h-40 md:h-80
                                                max-w-xs md:max-w-2xl lg:max-w-4xl mt-4") %>
-                <div class="mt-4"><%= pluralize(p.number_of_likes, 'Like') %></div>
+                <p class="mt-4"><%= pluralize(p.number_of_likes, 'Like') %></p>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'ImagePost').empty? %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this image post',
                       like_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
                         method: :post %>
-                  </div>
+                  </p>
                 <% else %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Unlike this image post',
                       unlike_posts_path(like: { post_id: p.id, post_type: "ImagePost" }),
                         method: :delete %>
-                  </div>
+                  </p>
                 <% end %>
               <% else %>
                 <%= render partial: 'display_user', locals: { p: p } %>
-                <div class="pt-4 text-2xl md:text-4xl"><%= p.description %></div>
+                <h4 class="pt-4 text-2xl md:text-4xl"><%= p.description %></h4>
                 <div class="my-4"><audio src="<%= url_for p.audio %>" controls></audio></div>
                 <%= pluralize(p.number_of_likes, 'Like') %>
                 <% if current_user.likes.where(post_id: p.id, post_type: 'AudioPost').empty? %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Like this audio post',
                       like_posts_path(like: { post_id: p.id, post_type: "AudioPost" }),
                         method: :post %>
-                  </div>
+                  </p>
                 <% else %>
-                  <div class="text-red-500 hover:text-red-300">
+                  <p class="text-red-500 hover:text-red-300">
                     <%= link_to 'Unlike this audio post',
                       unlike_posts_path(like: { post_id: p.id, post_type: "AudioPost" }),
                         method: :delete %>
-                  </div>
+                  </p>
                 <% end %>
               <% end %>
-            </div>
+            </p>
             <div class="font-extrabold text-lg my-8">
               <% p.comments.includes(:user).each do |c| %>
                 <div class="ml-12 text-xl md:text-2xl"><%= c.body %></div>
