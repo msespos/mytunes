@@ -1,6 +1,5 @@
 <body class="bg-indigo-900">
   <div class="sticky top-0"><%= render 'shared/navbar' %></div>
-
   <div class="flex flex-col md:flex-row justify-center mx-8 md:mx-16 lg:m-0">
     <div class="flex-col max-w-sm md:mr-24 lg:mr-48">
       <div class="mt-8 md:mt-12 text-yellow-200 text-2xl md:text-4xl font-bold">
@@ -10,34 +9,30 @@
         Fill in the form and click Update to make changes.
       </div>
     </div>
-
     <div class="mt-6 md:mt-12">
       <%= form_with model: @user, method: :patch do |f| %>
-        <%= f.label :profile_photo, class: "text-yellow-200 text-xl md:text-2xl
-                                            font-bold" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :profile_photo } %><br>
         <%= f.file_field :avatar, class: "w-64 md:w-96 bg-purple-100 text-purple-800
-            border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4
-            md:mb-8 rounded-xl" %><br>
-        <%= f.label :name, class: "text-yellow-200 text-xl md:text-2xl font-bold" %>
+            border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
+            rounded-xl" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :name } %>
         <span class="text-yellow-200 text-xl md:text-2xl font-bold">*</span><br>
         <%= f.text_field :name,  class: "w-64 md:w-96 bg-purple-100 text-purple-800
             border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
             rounded-xl" %><br>
-        <%= f.label :project_name, class: "text-yellow-200 text-xl md:text-2xl
-                                           font-bold" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :project_name } %><br>
         <%= f.text_field :project_name, class: "w-64 md:w-96 bg-purple-100 text-purple-800
             border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
             rounded-xl" %><br>
-        <%= f.label :location, class: "text-yellow-200 text-xl md:text-2xl font-bold" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :location } %><br>
         <%= f.text_field :location, class: "w-64 md:w-96 bg-purple-100 text-purple-800
             border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
             rounded-xl" %><br>
-        <%= f.label :favorite_artist, class: "text-yellow-200 text-xl md:text-2xl
-                                              font-bold" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :favorite_artist } %><br>
         <%= f.text_field :favorite_artist, class: "w-64 md:w-96 bg-purple-100 text-purple-800
             border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
             rounded-xl" %><br>
-        <%= f.label :birthday, class: "text-yellow-200 text-xl md:text-2xl font-bold" %><br>
+        <%= render partial: 'edit_label', locals: { f: f, label: :birthday } %><br>
         <%= f.date_field :birthday, class: "w-64 md:w-96 bg-purple-100 text-purple-800
             border-4 border-purple-900 border-rounded font-bold py-2 px-4 mt-1 mb-4 md:mb-8
             rounded-xl" %><br>
