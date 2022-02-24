@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Liking a post', type: :feature do
   before(:all) do
@@ -12,8 +13,7 @@ RSpec.describe 'Liking a post', type: :feature do
 
   scenario 'successful post liking displays one like' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -24,8 +24,7 @@ RSpec.describe 'Liking a post', type: :feature do
 
   scenario 'successful post liking by two different users displays two likes' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -34,8 +33,7 @@ RSpec.describe 'Liking a post', type: :feature do
     click_on 'Everybody'
     click_on '+Friend'
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
@@ -46,8 +44,7 @@ RSpec.describe 'Liking a post', type: :feature do
 
   scenario 'successful post liking and unliking displays zero likes' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'

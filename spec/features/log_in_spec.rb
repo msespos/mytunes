@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Logging in', type: :feature do
   before(:all) do

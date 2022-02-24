@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Editing profile', type: :feature do
   before(:all) do
@@ -24,8 +25,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'successful login and navigation to profile edit displays profile edit page' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -34,8 +34,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'unsuccessful profile edit with blank name displays profile edit page' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -46,8 +45,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario "unsuccessful profile edit with blank name displays name can't be blank flash" do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -58,8 +56,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'successful profile edit of project name displays new project name' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -70,8 +67,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'successful profile edit of location displays new location' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -82,8 +78,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'successful profile edit of favorite artist displays new favorite artist' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'
@@ -94,8 +89,7 @@ RSpec.describe 'Editing profile', type: :feature do
 
   scenario 'successful profile edit of birthday displays new birthday' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'm:ke'
     click_on 'Edit Your Profile'

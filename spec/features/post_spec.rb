@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Creating a post', type: :feature do
   before(:all) do
@@ -12,8 +13,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to text post from navbar displays text post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     expect(page).to have_content "Sign out\nCreate a Text Post"
@@ -21,8 +21,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful text post creation displays post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -32,8 +31,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful text post creation displays confirmation flash' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -43,8 +41,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario "successful text post creation displays post creator's name" do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -54,8 +51,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to image post from text post displays image post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an image post instead'
@@ -64,8 +60,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to audio post from text post displays audio post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an audio post instead'
@@ -74,8 +69,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to text post from image post displays text post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an image post instead'
@@ -85,8 +79,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to audio post from image post displays audio post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an image post instead'
@@ -96,8 +89,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to text post from audio post displays text post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an audio post instead'
@@ -107,8 +99,7 @@ RSpec.describe 'Creating a post', type: :feature do
 
   scenario 'successful navigation to image post from audio post displays image post' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     click_on 'Create an audio post instead'

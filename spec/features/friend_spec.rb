@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Creating a friendship', type: :feature do
   before(:all) do
@@ -13,16 +14,14 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario 'successful login displays username' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     expect(page).to have_content('m:ke')
   end
 
   scenario 'successful friendship request displays confirmation flash' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
@@ -31,14 +30,12 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario 'successful friendship confirmation displays confirmation flash' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
@@ -47,14 +44,12 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario 'successful friendship denial displays denial flash' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Deny'
@@ -63,14 +58,12 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario "successful friendship creation displays new friend's name" do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
@@ -79,21 +72,18 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario "successful friendship request by two users displays users' names to requested user" do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'alice@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@alice, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     expect(page).to have_content("People Requesting Your Friendship:\nm:ke (blanket forts) Confirm Deny\nKatie")
@@ -101,8 +91,7 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario 'successful friendship request of two other users displays them in order' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
@@ -112,27 +101,23 @@ RSpec.describe 'Creating a friendship', type: :feature do
 
   scenario "successful creation of two friendships displays both friends' names in order" do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     first(class: 'potential-friend').click
     first(class: 'potential-friend').click
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
     click_on 'Sign out'
-    fill_in 'Email', with: 'alice@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@alice, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
     click_on 'Sign out'
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     expect(page).to have_content("Your Friends:\nKatie (Xena)\nAlice (Xena)")

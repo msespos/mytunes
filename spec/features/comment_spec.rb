@@ -3,17 +3,17 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
+include Warden::Test::Helpers
 
 RSpec.describe 'Commenting on a post', type: :feature do
   before(:all) do
     @mike = create(:user)
-    @katie = create(:user, name: 'Katie', email: 'katie@example.com')
+    @katie = create(:user, name: 'Katie', email: 'katie@example.com')    
   end
 
   scenario 'successful comment on a post displays the comment' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -25,8 +25,7 @@ RSpec.describe 'Commenting on a post', type: :feature do
 
   scenario 'successful comment by a friend of original poster displays comment' do
     visit root_path
-    fill_in 'Email', with: 'mike@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@mike, scope: :user)
     click_on 'Log in'
     click_on 'New Post'
     fill_in 'text_post[body]', with: 'My Post'
@@ -34,8 +33,7 @@ RSpec.describe 'Commenting on a post', type: :feature do
     click_on 'Everybody'
     click_on '+Friend'
     click_on 'Sign out'
-    fill_in 'Email', with: 'katie@example.com'
-    fill_in 'Password', with: '123456'
+    login_as(@katie, scope: :user)
     click_on 'Log in'
     click_on 'Everybody'
     click_on 'Confirm'
