@@ -3,12 +3,12 @@
   <div class="flex-col justify-center max-w-5xl mx-auto">
     <div class="ml-8 mt-8">
       <div class="text-yellow-200 text-3xl font-bold">
-        <div class="text-4xl sm:text-7xl font-extrabold">Everybody</div>
+        <h1 class="text-4xl sm:text-7xl font-extrabold">Everybody</h1>
   
         <div class="my-4 sm:my-10">
-          <div class="text-2xl sm:text-4xl italic mb-3">Your Friends:</div>
+          <h2 class="text-2xl sm:text-4xl italic mb-3">Your Friends:</h2>
           <% if current_user.friends.empty? %>
-            <div class = "text-base italic">None</div>
+            <h3 class="text-base italic">None</h3>
           <% else %>
             <% current_user.friends.each do |f| %>
               <div><%= render partial: 'display_user', locals: { u: f } %></div>
@@ -17,9 +17,9 @@
         </div>
 
         <div class="my-10">
-          <div class = "text-2xl sm:text-4xl italic mb-3">People Requesting Your Friendship:</div>
+          <h2 class = "text-2xl sm:text-4xl italic mb-3">People Requesting Your Friendship:</h2>
           <% if current_user.pending_friend_requests_from_others.empty? %>
-            <div class = "text-base italic">None</div>
+            <h3 class="text-base italic">None</h3>
           <% else %>
             <% current_user.pending_friend_requests_from_others.each do |p| %>
               <div>
@@ -36,9 +36,9 @@
         </div>
 
         <div class="my-10">
-          <div class="text-2xl sm:text-4xl italic mb-3">You've Requested Their Friendship:</div>
+          <h2 class="text-2xl sm:text-4xl italic mb-3">You've Requested Their Friendship:</h2>
           <% if current_user.pending_friend_requests_to_others.empty? %>
-            <div class = "text-base italic">None</div>
+            <h3 class="text-base italic">None</h3>
           <% else %>
             <% current_user.pending_friend_requests_to_others.each do |p| %>
               <%= render partial: 'display_user', locals: { u: p.requested_user } %><div>
@@ -47,9 +47,9 @@
         </div>
 
         <div class="my-10">
-          <div class="text-2xl sm:text-4xl italic mb-3">Other People:</div>
+          <h2 class="text-2xl sm:text-4xl italic mb-3">Other People:</h2>
           <% if current_user.others_without_any_connection.empty? %>
-            <div class = "text-base italic">None</div>
+            <h3 class = "text-base italic">None</h3>
           <% else %>
             <% current_user.others_without_any_connection.each do |u| %>
               <div>
