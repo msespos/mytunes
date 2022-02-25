@@ -27,6 +27,14 @@ class User < ApplicationRecord
       .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
+  def get_recent_posts_for_feed(n)
+    (TextPost.order(:created_at).last(n) +
+      ImagePost.order(:created_at).last(n) +
+      AudioPost.order(:created_at).last(n))
+      .select { |p| p.viewable_by?(self) }
+      .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+  end
+
   def friends
     friendships.map { |friendship| User.find(friend_id(friendship)) }
   end
