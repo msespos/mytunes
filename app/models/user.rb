@@ -21,9 +21,9 @@ class User < ApplicationRecord
   after_create :send_admin_mail
 
   def get_recent_posts(n)
-    (TextPost.where("user_id = ?", self.id).order(:created_at).last(n).reverse +
-      ImagePost.where("user_id = ?", self.id).order(:created_at).last(n).reverse +
-      AudioPost.where("user_id = ?", self.id).order(:created_at).last(n).reverse)
+    (TextPost.where("user_id = ?", self.id).order(:created_at).last(n) +
+      ImagePost.where("user_id = ?", self.id).order(:created_at).last(n) +
+      AudioPost.where("user_id = ?", self.id).order(:created_at).last(n))
       .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
