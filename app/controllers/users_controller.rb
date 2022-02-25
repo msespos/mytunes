@@ -10,12 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    posts = TextPost.includes(:user).all +
-            ImagePost.includes(:user).all +
-            AudioPost.includes(:user).all
-    @viewable_posts = posts.sort { |x, y| y.created_at <=> x.created_at }.select do |p|
-      p.user == @user
-    end
+    @viewable_posts = @user.get_recent_posts(10)
   end
 
   def edit

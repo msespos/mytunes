@@ -20,6 +20,13 @@ class User < ApplicationRecord
 
   after_create :send_admin_mail
 
+  def get_recent_posts(n)
+    (TextPost.where("user_id = ?", self.id).order(:created_at).last(n).reverse +
+      ImagePost.where("user_id = ?", self.id).order(:created_at).last(n).reverse +
+      AudioPost.where("user_id = ?", self.id).order(:created_at).last(n).reverse)
+      .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+  end
+
   def friends
     friendships.map { |friendship| User.find(friend_id(friendship)) }
   end
