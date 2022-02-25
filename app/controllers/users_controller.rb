@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @viewable_posts = @user.get_recent_posts(10)
+    @viewable_posts = @user.get_recent_posts_for_profile(10)
   end
 
   def edit

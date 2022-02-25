@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   after_create :send_admin_mail
 
-  def get_recent_posts(n)
+  def get_recent_posts_for_profile(n)
     (TextPost.where("user_id = ?", self.id).order(:created_at).last(n) +
       ImagePost.where("user_id = ?", self.id).order(:created_at).last(n) +
       AudioPost.where("user_id = ?", self.id).order(:created_at).last(n))
