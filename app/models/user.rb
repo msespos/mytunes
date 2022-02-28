@@ -22,9 +22,11 @@ class User < ApplicationRecord
 
   def get_recent_posts_for_profile(n)
     (TextPost.where("user_id = ?", self.id).order(:created_at).last(n) +
-      ImagePost.where("user_id = ?", self.id).order(:created_at).last(n) +
-      AudioPost.where("user_id = ?", self.id).order(:created_at).last(n))
-      .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+     ImagePost.includes([image_attachment: :blob])
+       .where("user_id = ?", self.id).order(:created_at).last(n) +
+     AudioPost.includes([audio_attachment: :blob])
+       .where("user_id = ?", self.id).order(:created_at).last(n))
+     .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
   def get_recent_posts_for_feed(n)
