@@ -27,6 +27,16 @@ RSpec.describe User, type: :model do
     end
   end
   describe '#request_friendship_with' do
+    context 'when a user requests a friendship with another user' do
+      it "creates the friendship using the other user's id" do
+        @mike.request_friendship_with({ requested_user_id: @katie.id })
+        friendship = Friendship.where(requesting_user_id: @mike.id).first
+        other_users_id = @katie.id
+        expect(friendship.requested_user_id).to eq(other_users_id)
+      end
+    end
+  end
+  describe '#request_friendship_with' do
     context 'when a user requests a friendship with themselves' do
       it 'does not create the friendship' do
         saved = @mike.request_friendship_with({ requested_user_id: @mike.id })
