@@ -6,7 +6,6 @@
 # Posts controller class
 class PostsController < ApplicationController
   def index
-    posts = TextPost.all + ImagePost.all + AudioPost.all
     @viewable_posts = current_user.get_recent_posts_for_feed(20)
   end
 
