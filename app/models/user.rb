@@ -28,10 +28,13 @@ class User < ApplicationRecord
   end
 
   def get_recent_posts_for_feed(n)
-    (TextPost.order(:created_at).select { |p| p.viewable_by?(self) }.last(n) +
-      ImagePost.order(:created_at).select { |p| p.viewable_by?(self) }.last(n) +
-      AudioPost.order(:created_at).select { |p| p.viewable_by?(self) }.last(n))
-      .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+    (TextPost.includes([:user])
+       .order(:created_at).select { |p| p.viewable_by?(self) }.last(n) +
+     ImagePost.includes([:user]).includes([image_attachment: :blob])
+       .order(:created_at).select { |p| p.viewable_by?(self) }.last(n) +
+     AudioPost.includes([:user]).includes([audio_attachment: :blob])
+       .order(:created_at).select { |p| p.viewable_by?(self) }.last(n))
+     .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
   def friends
