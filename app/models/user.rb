@@ -66,11 +66,12 @@ class User < ApplicationRecord
   end
 
   def pending_friend_requests_to_others
-    Friendship.where('requesting_user_id = ? AND confirmed = ?', id, false)
+    Friendship.includes([:requested_user])
+              .where('requesting_user_id = ? AND confirmed = ?', id, false)
   end
 
   def others_without_any_connection
-    User.all - friends - friend_requested - [self]
+    User.includes([:avatar_attachment]).all - friends - friend_requested - [self]
   end
 
   def request_friendship_with(friendship_params)
