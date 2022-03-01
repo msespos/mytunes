@@ -6,8 +6,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before(:all) do
-    @mike = User.create(name: "m:ke", email: "mike@example.com", password: "123456", id: 1)
-    @katie = User.create(name: "katie", email: "katie@example.com", password: "123456", id: 2)
+    @mike = User.create(name: 'm:ke', email: 'mike@example.com', password: '123456', id: 1)
+    @katie = User.create(name: 'katie', email: 'katie@example.com', password: '123456', id: 2)
   end
   describe '#request_friendship_with' do
     context 'when a user requests a friendship with another user' do

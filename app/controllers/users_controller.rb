@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop: disable Metrics/AbcSize
-
 # Users Controller class
 class UsersController < ApplicationController
   def index
@@ -33,5 +31,3 @@ class UsersController < ApplicationController
                                  :favorite_artist, :birthday, :avatar)
   end
 end
-
-# rubocop: enable Metrics/AbcSize

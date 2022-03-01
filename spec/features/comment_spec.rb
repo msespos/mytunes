@@ -8,7 +8,7 @@ include Warden::Test::Helpers
 RSpec.describe 'Commenting on a post', type: :feature do
   before(:all) do
     @mike = create(:user)
-    @katie = create(:user, name: 'Katie', email: 'katie@example.com')    
+    @katie = create(:user, name: 'Katie', email: 'katie@example.com')
   end
 
   scenario 'successful comment on a post displays the comment' do

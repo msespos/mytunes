@@ -21,12 +21,12 @@ class User < ApplicationRecord
   after_create :send_admin_mail
 
   def get_recent_posts_for_profile(n)
-    (TextPost.where("user_id = ?", self.id).order(:created_at).last(n) +
+    (TextPost.where('user_id = ?', id).order(:created_at).last(n) +
      ImagePost.includes([image_attachment: :blob])
-       .where("user_id = ?", self.id).order(:created_at).last(n) +
+       .where('user_id = ?', id).order(:created_at).last(n) +
      AudioPost.includes([audio_attachment: :blob])
-       .where("user_id = ?", self.id).order(:created_at).last(n))
-     .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+       .where('user_id = ?', id).order(:created_at).last(n))
+      .sort { |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
   def get_recent_posts_for_feed(n)
@@ -36,7 +36,7 @@ class User < ApplicationRecord
        .order(:created_at).select { |p| p.viewable_by?(self) }.last(n) +
      AudioPost.includes([:user]).includes([audio_attachment: :blob])
        .order(:created_at).select { |p| p.viewable_by?(self) }.last(n))
-     .sort{ |a, b| b.created_at <=> a.created_at }.first(n)
+      .sort { |a, b| b.created_at <=> a.created_at }.first(n)
   end
 
   def friends
