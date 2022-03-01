@@ -77,7 +77,11 @@ class User < ApplicationRecord
     @friendship = Friendship.new(friendship_params)
     @friendship.confirmed = false
     @friendship.requesting_user_id = id
-    @friendship.save unless id == friendship_params[:requested_user_id]
+    if id == friendship_params[:requested_user_id]
+      @friendship.save
+    else
+      false # to avoid returning nil
+    end
   end
 
   def self.from_omniauth(access_token)
