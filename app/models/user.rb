@@ -77,7 +77,7 @@ class User < ApplicationRecord
     @friendship = Friendship.new(friendship_params)
     @friendship.confirmed = false
     @friendship.requesting_user_id = id
-    if id == friendship_params[:requested_user_id]
+    if id != friendship_params[:requested_user_id]
       @friendship.save
     else
       false # to avoid returning nil
