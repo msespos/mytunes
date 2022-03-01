@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
     context 'when a user requests a friendship with themselves' do
       it 'does not create the friendship' do
         saved = @mike.request_friendship_with({ requested_user_id: @mike.id })
-        expect(saved).not_to eq(true)
+        expect(saved).to eq(false)
       end
     end
   end
