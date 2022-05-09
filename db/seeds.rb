@@ -69,7 +69,6 @@ Friendship.create!([{ requesting_user_id: 1, requested_user_id: 2, confirmed: tr
                     { requesting_user_id: 2, requested_user_id: 3, confirmed: true },
                     { requesting_user_id: 4, requested_user_id: 5, confirmed: true },
                     { requesting_user_id: 5, requested_user_id: 6, confirmed: true },
-                    { requesting_user_id: 6, requested_user_id: 6, confirmed: true },
                     { requesting_user_id: 1, requested_user_id: 4, confirmed: true },
                     { requesting_user_id: 1, requested_user_id: 5, confirmed: true },
                     { requesting_user_id: 1, requested_user_id: 6, confirmed: true },
