@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-include Warden::Test::Helpers
 
 RSpec.describe 'Signing up', type: :feature do
+  include Warden::Test::Helpers
+
   before(:all) do
     @mike = create(:user)
   end

@@ -3,9 +3,10 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
-include Warden::Test::Helpers
 
 RSpec.describe 'Editing profile', type: :feature do
+  include Warden::Test::Helpers
+
   before(:all) do
     @mike = create(:user)
   end

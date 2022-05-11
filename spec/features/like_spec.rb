@@ -3,9 +3,10 @@
 # rubocop:disable Metrics/BlockLength
 
 require 'rails_helper'
-include Warden::Test::Helpers
 
 RSpec.describe 'Liking a post', type: :feature do
+  include Warden::Test::Helpers
+
   before(:all) do
     @mike = create(:user)
     @katie = create(:user, name: 'Katie', email: 'katie@example.com')
