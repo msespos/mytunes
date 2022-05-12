@@ -32,7 +32,6 @@ class PostsController < ApplicationController
   end
 
   def unlike
-    Rails.logger.debug "PARAMS = #{params}"
     @like = Like.find_by(post_id: like_params[:post_id],
                          post_type: like_params[:post_type],
                          user_id: current_user)
