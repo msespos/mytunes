@@ -1,7 +1,18 @@
-This is the final project for the Odin Project Ruby on Rails course.
+# myTunes
 
-The project is a social media site called myTunes, which is a networking site for musicians.
+## A social networking site for musicians
 
-Find it [here](https://protected-river-06788.herokuapp.com/).
+<img src="https://msespos.github.io/portfolio/imgs/mytunes%20screenshot.png" alt="Screenshot of the myTunes app" width="500"/>
 
-To try out the site, feel free to create an account, or several. You can also log in with Google.
+This web application is a social networking site geared towards musicians for sharing thoughts, images, and audio related to their creative work.
+Users can friend each other, make text, image, and audio posts, and like and comment on each other's posts.
+
+The app was built in Ruby on Rails and Postgres, styled with Tailwind, and tested with RSpec and Capybara.
+
+To try it out, visit the following link:
+
+https://protected-river-06788.herokuapp.com/
+
+For best results, create several user accounts. You can then request and confirm user friendships, and once those friendships have been created, you can share posts and likes and comments among your users.
+
+You can also log in with Google if you'd prefer.
