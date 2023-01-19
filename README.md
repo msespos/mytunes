@@ -18,3 +18,5 @@ Please allow a small wait time (typically less than 30 seconds) for Heroku's dyn
 For best results, create several user accounts. You can then request and confirm user friendships, and once those friendships have been created, you can share posts and likes and comments among your users.
 
 You can also log in with Google if you'd prefer.
+
+***Massive thanks to AA for mentoring and support with this project.***
